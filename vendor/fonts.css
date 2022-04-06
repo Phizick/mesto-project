@@ -19,4 +19,11 @@
     font-display: swap;
     font-style: "normal";
   }
+  @font-face {
+    src: url(../fonts/inter_500.woff), url(../fonts/inter_500.woff2);
+    font-family: "Inter";
+    font-weight: 500;
+    font-display: swap;
+    font-style: "normal";
+  }
  
