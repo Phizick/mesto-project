@@ -99,6 +99,7 @@ margin: 0 auto;
 @media screen and (max-width: 715px) {
     .bio__about {
         margin: 0 auto;
+        padding-top: 22px;
     }
     
 }
@@ -108,11 +109,24 @@ margin: 0 auto;
     display: flex;
     justify-content: space-between;
 }
+
+
+
 .bio__title-text {
     font-size: 42px;
     font-weight: 500;
     line-height: 48px;
     margin-right: 18px;
+}
+
+@media screen and (max-width: 715px) {
+    .bio__title-text {
+       
+      
+        font-size: 27px;
+        line-height: 33px;
+    }
+    
 }
 .bio__subtitle {
     font-size: 18px;
@@ -123,6 +137,8 @@ margin: 0 auto;
     .bio__subtitle {
         margin: 0 auto;
         align-self: center;
+        font-size: 14px;
+        line-height: 17px;
     }
     
 }
@@ -156,19 +172,6 @@ margin: 0 auto;
   }
 }
   
-
-
-  /*.photo__grid-item {
-      list-style-type: none;
-      max-width: 282px;
-      min-height: 361px;
-      display: flex;
-      background-color: #ffffff;
-      justify-content: space-between;
-     flex-direction: column;
-    border-radius: 10px;
-    row-gap: 25px;
-  }*/
 
   .photo__grid-item {
     display: grid;
@@ -212,14 +215,17 @@ margin: 0 auto;
 
   .photo__grid-like {
       display: flex;
-      align-items: center;
-      
-  }
-
-  .photo__grid-heart {
-    width: 22px;
+      width: 22px;
     height: 19px;
+      align-items: center;     
+      background-image: url(./images/heart__disable.svg);   
+      transition: linear 0.5s;   
   }
+.photo__grid-like:hover {
+    opacity: 0.5;
+}
+
+
 
   .footer__copyryght {
       font-size: 18px;
@@ -229,11 +235,12 @@ margin: 0 auto;
       margin-top: 67px;
   }
 
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 715px) {
       .footer__copyryght {
           margin-top: 48px;
           line-height: 17px;
           font-size: 14px;
+          margin-left: 19px;
       }
       
   }
@@ -246,8 +253,20 @@ margin: 0 auto;
       border-radius: 2px;
       display: flex;
       align-items: center;
+      transition: linear 0.5s;
   }
 
+  .content__add-button:hover {
+      opacity: 0.6;
+  }
+  
+  @media screen and (max-width: 715px) {
+      .content__add-button {
+          min-width: 282px;
+          margin-top: 36px;
+      }
+      
+  }
   .add-button__plus {
       color: #ffffff;
       margin: 0 auto;
@@ -262,6 +281,11 @@ margin: 0 auto;
       box-sizing: border-box;
       margin: 0;
       align-self: center;
+      transition: linear 0.5s;
+  }
+
+  .bio__title-edit:hover {
+      opacity: 0.6;
   }
   .bio__title-edit-icon {
       margin: 0 auto;
