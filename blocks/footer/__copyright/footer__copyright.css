@@ -1,0 +1,17 @@
+.footer__copyryght {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    color:#545454;
+    margin-top: 67px;
+}
+
+@media screen and (max-width: 715px) {
+    .footer__copyryght {
+        margin-top: 48px;
+        line-height: 17px;
+        font-size: 14px;
+        margin-left: 19px;
+    }
+    
+}

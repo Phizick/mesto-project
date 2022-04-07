@@ -1,0 +1,11 @@
+.gallery__grid-name {
+    color:#000000;
+    margin: 0;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 75%;
+    white-space: nowrap;
+}
