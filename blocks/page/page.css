@@ -6,13 +6,10 @@
     color: white;
     font-family: Inter, Arial, sans-serif;
     padding: 0 28px 0 28px;
-  }
-  
+}
 
-
-  @media screen and (max-width: 715px) {
+@media screen and (max-width: 715px) {
     .page {
         padding: 0;
     }
-    
 }

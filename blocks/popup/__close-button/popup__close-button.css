@@ -2,7 +2,7 @@
     position: absolute;
     left: 862px;
     top: 225px;
-    transition: linear 0.5s;    
+    transition: linear 0.5s;
 }
 
 .popup__close-button:hover {
@@ -15,5 +15,4 @@
         left: 280px;
         top: 235px;
     }
-
 }

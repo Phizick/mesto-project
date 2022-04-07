@@ -1,17 +1,13 @@
 .gallery__grid-like {
     display: flex;
     width: 22px;
-  height: 19px;
-    align-items: center;     
-    background-image: url(../../../images/heart__disable.svg);   
-    transition: linear 0.5s;   
+    height: 19px;
+    align-items: center;
+    background-image: url(../../../images/heart__disable.svg);
+    transition: linear 0.5s;
     background-color: transparent;
 }
+
 .gallery__grid-like:hover {
-  opacity: 0.5;
+    opacity: 0.5;
 }
-
-.gallery__grid-like_active {
-    background-image: url(../../../images/heart__active.svg);
-}
-

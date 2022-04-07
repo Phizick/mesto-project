@@ -4,6 +4,7 @@
     max-width: 358px;
     margin: 0 auto;
 }
+
 @media screen and (max-width: 465px) {
     .popup__profile-edit {
         max-width: 238px;

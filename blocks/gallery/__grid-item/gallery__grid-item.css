@@ -1,11 +1,9 @@
-
-  .gallery__grid-item {
-    display: grid; 
+.gallery__grid-item {
+    display: grid;
     background-color: #ffffff;
-    border-radius: 10px;  
+    border-radius: 10px;
     grid-template-rows: 282px 1fr;
     width: 282px;
     overflow: hidden;
     list-style-type: none;
-  
-  }
+}
