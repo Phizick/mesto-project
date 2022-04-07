@@ -2,82 +2,79 @@
 <html lang="ru">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
         <link rel="stylesheet" href="./style.css" type="text/css" />
         <title>Место</title>
     </head>
     <body class="page">
         <header class="header">
-            <img src="./images/Vector__logo.svg" alt="логотип проекта Место" class="header__logo">
-            <div class="header__line"></div>
+            <img src="./images/Vector__logo.svg" alt="логотип проекта Место" class="header__logo" />
+            <div class="header__border-line"></div>
         </header>
         <main class="page__content">
-            <section class="content__about" aria-label="смысловой блок о профиле составителя галерии">
-                <div class="content__bio"> 
-                    <div class="bio__info">                   
-                    <div class="bio__image">
-                        <img src="./images/imageb.jpg" alt="" class="content__bio-image">
-                    </div>
-                    <div class="bio__about">
-                        <div class="bio__title">
-                            <div class="bio__title-text">Жак-Ив Кусто</div>
-                            <div class="bio__title-edit"><img src="./images/pensil.svg" alt="" class="bio__title-edit-icon"></div>
+            <section class="content__profile" aria-label="смысловой блок о профиле составителя галерии">                
+                    <div class="profile__info">
+                        <div class="profile__avatar">
+                            <img src="./images/imageb.jpg" alt="" class="content__bio-image" />
                         </div>
-                        <div class="bio__subtitle">Исследователь океана</div>
-                    </div>  
-                </div>              
+                        <div class="profile__about">
+                            <div class="profile__name">
+                                <h1 class="profile__name-text">Жак-Ив Кусто</h1>
+                                <div class="profile__name-edit"><img src="./images/pensil.svg" alt="" class="profile__edit-icon" /></div>
+                            </div>
+                            <h2 class="profile__bio">Исследователь океана</h2>
+                        </div>
+                    </div>
                     <div class="content__add-button">
-                        <img src="./images/plus.svg" alt="" class="add-button__plus">
+                        <img src="./images/plus.svg" alt="" class="add-button__icon" />
                     </div>
-                </div>
-
+                
             </section>
-            <section class="photo">
-                <ul class="photo__grid">
-                    <li class="photo__grid-item">
-                        <img src="./images/original-1lmv.jpg" alt="" class="photo__grid-image">
-                        <div class="photo__grid-info">
-                            <p class="photo__grid-name">Санкт-Петербург</p>
-                            <div class="photo__grid-like"><!--<img src="./images/heart__disable.svg" alt="" class="photo__grid-heart">--></div>
+            <section class="gallery">
+                <ul class="gallery__grid">
+                    <li class="gallery__grid-item">
+                        <img src="./images/original-1lmv.jpg" alt="" class="gallery__grid-image" />
+                        <div class="gallery__grid-info">
+                            <p class="gallery__grid-name">Санкт-Петербург</p>
+                            <div class="gallery__grid-like"></div>
                         </div>
                     </li>
-                    <li class="photo__grid-item">
-                        <img src="./images/image_2.jpg" alt="" class="photo__grid-image">
-                        <div class="photo__grid-info">
-                            <p class="photo__grid-name">Хельсинки</p>
-                            <div class="photo__grid-like"><img src="./images/heart__disable.svg" alt="" class="photo__grid-heart"></div>
+                    <li class="gallery__grid-item">
+                        <img src="./images/image_2.jpg" alt="" class="gallery__grid-image" />
+                        <div class="gallery__grid-info">
+                            <p class="gallery__grid-name">Хельсинки</p>
+                            <div class="gallery__grid-like"></div>
                         </div>
                     </li>
-                    <li class="photo__grid-item">
-                        <img src="./images/image_3.jpg" alt="" class="photo__grid-image">
-                        <div class="photo__grid-info">
-                            <p class="photo__grid-name">Стамбул</p>
-                            <div class="photo__grid-like"><img src="./images/heart__disable.svg" alt="" class="photo__grid-heart"></div>
+                    <li class="gallery__grid-item">
+                        <img src="./images/image_3.jpg" alt="" class="gallery__grid-image" />
+                        <div class="gallery__grid-info">
+                            <p class="gallery__grid-name">Стамбул</p>
+                            <div class="gallery__grid-like"></div>
                         </div>
                     </li>
-                    <li class="photo__grid-item">
-                        <img src="./images/image_4.jpg" alt="" class="photo__grid-image">
-                        <div class="photo__grid-info">
-                            <p class="photo__grid-name">Осло</p>
-                            <div class="photo__grid-like"><img src="./images/heart__disable.svg" alt="" class="photo__grid-heart"></div>
+                    <li class="gallery__grid-item">
+                        <img src="./images/image_4.jpg" alt="" class="gallery__grid-image" />
+                        <div class="gallery__grid-info">
+                            <p class="gallery__grid-name">Осло</p>
+                            <div class="gallery__grid-like"></div>
                         </div>
                     </li>
-                    <li class="photo__grid-item">
-                        <img src="./images/image_5.jpg" alt="" class="photo__grid-image">
-                        <div class="photo__grid-info">
-                            <p class="photo__grid-name">Стокгольм</p>
-                            <div class="photo__grid-like"><img src="./images/heart__disable.svg" alt="" class="photo__grid-heart"></div>
+                    <li class="gallery__grid-item">
+                        <img src="./images/image_5.jpg" alt="" class="gallery__grid-image" />
+                        <div class="gallery__grid-info">
+                            <p class="gallery__grid-name">Стокгольм</p>
+                            <div class="gallery__grid-like"></div>
                         </div>
                     </li>
-                    <li class="photo__grid-item">
-                        <img src="./images/image_6.jpg" alt="" class="photo__grid-image">
-                        <div class="photo__grid-info">
-                            <p class="photo__grid-name">Архангельск</p>
-                            <div class="photo__grid-like"><img src="./images/heart__disable.svg" alt="" class="photo__grid-heart"></div>
+                    <li class="gallery__grid-item">
+                        <img src="./images/image_6.jpg" alt="" class="gallery__grid-image" />
+                        <div class="gallery__grid-info">
+                            <p class="gallery__grid-name">Архангельск</p>
+                            <div class="gallery__grid-like"></div>
                         </div>
                     </li>
                 </ul>
-                
             </section>
             <!--<div class="popup">
                 <div class="popup__container">
@@ -95,12 +92,9 @@
                
                 <div class="popup__button"><img src="./images/Close Icon.svg" alt="" class="close__button"></div>
             </div>-->
-
-           
         </main>
         <footer class="footer">
             <p class="footer__copyryght">&copy; 2020 Mesto Russia</p>
-
         </footer>
     </body>
 </html>
