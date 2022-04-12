@@ -1,8 +1,8 @@
-.popup__subname {
+.popup__input {
     font-size: 14px;
     font-weight: 400;
     line-height: 17px;
-    margin-bottom: 30px;
+    margin-bottom: 17px;
     outline: none;
     border: 0;
     opacity: 0.2;
@@ -10,6 +10,10 @@
     padding: 0 0 13px 0;
 }
 
-.popup__subname:focus {
+.popup__input:focus {
     opacity: 1;
+}
+
+.popup__input:last-of-type {
+    margin-bottom: 0px;
 }

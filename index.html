@@ -3,88 +3,83 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-        <link rel="stylesheet" href="pages/index.css" type="text/css" />        
+        <link rel="stylesheet" href="pages/index.css" type="text/css" />
         <title>Место</title>
     </head>
     <body class="page">
         <header class="header">
             <img src="./images/Vector__logo.svg" alt="логотип проекта Место" class="header__logo" />
-            <div class="header__border-line"></div>
         </header>
         <main class="page__content">
             <section class="profile" aria-label="смысловой блок о профиле составителя галерии">
                 <div class="profile__info">
-                    <div class="profile__avatar">
-                        <img src="./images/imageb.jpg" alt="аватар профиля" class="profile__avatar-image" />
-                    </div>
+                    <img src="./images/imageb.jpg" alt="аватар профиля" class="profile__avatar-image" />
                     <div class="profile__about">
                         <div class="profile__name">
                             <h1 class="profile__name-text">Жак-Ив Кусто</h1>
-                            <div class="profile__name-edit"><img src="./images/pensil.svg" alt="иконка редактирования профиля" class="profile__edit-icon" /></div>
+                            <button class="profile__name-edit" type="button"></button>
                         </div>
-                        <h2 class="profile__bio">Исследователь океана</h2>
+                        <p class="profile__bio">Исследователь океана</p>
                     </div>
                 </div>
-                <div class="profile__add-button">
-                    <img src="./images/plus.svg" alt="иконка добавления изображения в галерею" class="profile__add-icon" />
-                </div>
+                <button class="profile__add-button" type="button"></button>
             </section>
             <section class="gallery">
                 <ul class="gallery__grid">
                     <li class="gallery__grid-item">
                         <img src="./images/original-1lmv.jpg" alt="фотография Санкт-Петербурга" class="gallery__grid-image" />
                         <div class="gallery__grid-info">
-                            <p class="gallery__grid-name">Санкт-Петербург</p>
-                            <div class="gallery__grid-like gallery__grid-like_active"></div>
+                            <h2 class="gallery__grid-name">Санкт-Петербург</h2>
+                            <button class="gallery__grid-like gallery__grid-like_active" type="button"></button>
                         </div>
                     </li>
                     <li class="gallery__grid-item">
                         <img src="./images/image_2.jpg" alt="фотография Хельсинки" class="gallery__grid-image" />
                         <div class="gallery__grid-info">
-                            <p class="gallery__grid-name">Хельсинки</p>
-                            <div class="gallery__grid-like"></div>
+                            <h2 class="gallery__grid-name">Хельсинки</h2>
+                            <button class="gallery__grid-like" type="button"></button>
                         </div>
                     </li>
                     <li class="gallery__grid-item">
                         <img src="./images/image_3.jpg" alt="фотография Стамбула" class="gallery__grid-image" />
                         <div class="gallery__grid-info">
-                            <p class="gallery__grid-name">Стамбул</p>
-                            <div class="gallery__grid-like"></div>
+                            <h2 class="gallery__grid-name">Стамбул</h2>
+                            <button class="gallery__grid-like" type="button"></button>
                         </div>
                     </li>
                     <li class="gallery__grid-item">
                         <img src="./images/image_4.jpg" alt="фотография пригородов Осло" class="gallery__grid-image" />
                         <div class="gallery__grid-info">
-                            <p class="gallery__grid-name">Осло</p>
-                            <div class="gallery__grid-like"></div>
+                            <h2 class="gallery__grid-name">Осло</h2>
+                            <button class="gallery__grid-like" type="button"></button>
                         </div>
                     </li>
                     <li class="gallery__grid-item">
                         <img src="./images/image_5.jpg" alt="фотография улиц Стокгольма" class="gallery__grid-image" />
                         <div class="gallery__grid-info">
-                            <p class="gallery__grid-name">Стокгольм</p>
-                            <div class="gallery__grid-like"></div>
+                            <h2 class="gallery__grid-name">Стокгольм</h2>
+                            <button class="gallery__grid-like" type="button"></button>
                         </div>
                     </li>
                     <li class="gallery__grid-item">
                         <img src="./images/image_6.jpg" alt="понорама Архангельска" class="gallery__grid-image" />
                         <div class="gallery__grid-info">
-                            <p class="gallery__grid-name">Архангельск</p>
-                            <div class="gallery__grid-like"></div>
+                            <h2 class="gallery__grid-name">Архангельск</h2>
+                            <button class="gallery__grid-like" type="button"></button>
                         </div>
                     </li>
                 </ul>
             </section>
-            <div class="popup">
+            <div class="popup popup_opened">
                 <div class="popup__container">
-                    <div class="popup__profile-edit">
+                    <form class="popup__form" name="popupForm">
                         <h2 class="popup__title">Редактировать профиль</h2>
-                        <input class="popup__name" type="text" />
-                        <input class="popup__subname" type="text" />
-                        <button class="popup__button">Сохранить</button>
-                    </div>
+                        <input class="popup__input popup__input_data_name" type="text" name="userName" required placeholder="Ваше имя" />
+                        <input class="popup__input popup__input_data_about" type="text" name="userAbout" required placeholder="Ваш род занятий" />
+                        <button class="popup__save-button" type="submit">Сохранить</button>
+                    </form>
+                    <button class="popup__close-button" type="button"></button>
                 </div>
-                <img src="./images/Close_Icon.svg" alt="иконка закрытия модального окна" class="popup__close-button"/>
             </div>
         </main>
         <footer class="footer">

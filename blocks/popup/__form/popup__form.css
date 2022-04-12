@@ -1,12 +1,12 @@
-.popup__profile-edit {
+.popup__form {
     display: flex;
     flex-direction: column;
     max-width: 358px;
     margin: 0 auto;
 }
 
-@media screen and (max-width: 465px) {
-    .popup__profile-edit {
+@media screen and (max-width: 610px) {
+    .popup__form {
         max-width: 238px;
     }
 }

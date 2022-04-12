@@ -7,8 +7,7 @@
 }
 
 @media screen and (max-width: 715px) {
-    .profile__about {
-        margin: 0 auto;
+    .profile__about {        
         padding-top: 22px;
     }
 }

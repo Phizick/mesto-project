@@ -7,6 +7,12 @@
     display: flex;
     align-items: center;
     transition: linear 0.5s;
+    background-color: transparent;
+    background-image: url(../../../images/plus.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    padding: 0;
 }
 
 .profile__add-button:hover {
@@ -17,5 +23,6 @@
     .profile__add-button {
         min-width: 282px;
         margin-top: 36px;
+        background-image: url(../../../images/plus_320w.png);
     }    
 }

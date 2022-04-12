@@ -8,8 +8,20 @@
     margin: 0;
     align-self: center;
     transition: linear 0.5s;
+    background-color: transparent;
+    background-image: url(../../../images/pensil.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
 }
 
 .profile__name-edit:hover {
     opacity: 0.6;
+}
+
+@media screen and (max-width: 615px) {
+    .profile__name-edit {
+        width: 18px;
+        height: 18px;
+    }
 }
