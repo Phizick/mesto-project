@@ -11,10 +11,11 @@
 
 @media screen and (max-width: 715px) {
     .profile__bio {
-        margin-right: 30px;
         align-self: center;
         font-size: 14px;
         line-height: 17px;
         max-width: 280px;
+        padding-right: 30px;
+        box-sizing: border-box;
     }
 }

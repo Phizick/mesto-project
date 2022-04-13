@@ -5,13 +5,9 @@
     margin-bottom: 17px;
     outline: none;
     border: 0;
-    opacity: 0.2;
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid;
+    border-color: rgba(0, 0, 0, 0.2) ;
     padding: 0 0 13px 0;
-}
-
-.popup__input:focus {
-    opacity: 1;
 }
 
 .popup__input:last-of-type {

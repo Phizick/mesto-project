@@ -23,6 +23,6 @@
     .profile__add-button {
         min-width: 282px;
         margin-top: 36px;
-        background-image: url(../../../images/plus_320w.png);
+        background-image: url(../../../images/plus_320w.svg);
     }    
 }
