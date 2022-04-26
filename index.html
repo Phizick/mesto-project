@@ -26,50 +26,18 @@
             </section>
             <section class="gallery">
                 <ul class="gallery__grid">
-                    <li class="gallery__grid-item">
-                        <img src="https://images.unsplash.com/photo-1630772063386-f363836989cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80" alt="фотография Санкт-Петербурга" class="gallery__grid-image" />
-                        <div class="gallery__grid-info">
-                            <h2 class="gallery__grid-name">Санкт-Петербург</h2>
-                            <button class="gallery__grid-like gallery__grid-like_active" type="button" aria-label="кнопка состояния карточки с изображением. нравится - не нравится."></button>
-                        </div>
-                    </li>
-                    <li class="gallery__grid-item">
-                        <img src="./images/image_2.jpg" alt="фотография Хельсинки" class="gallery__grid-image" />
-                        <div class="gallery__grid-info">
-                            <h2 class="gallery__grid-name">Хельсинки</h2>
-                            <button class="gallery__grid-like" type="button" aria-label="кнопка состояния карточки с изображением. нравится - не нравится."></button>
-                        </div>
-                    </li>
-                    <li class="gallery__grid-item">
-                        <img src="./images/image_3.jpg" alt="фотография Стамбула" class="gallery__grid-image" />
-                        <div class="gallery__grid-info">
-                            <h2 class="gallery__grid-name">Стамбул</h2>
-                            <button class="gallery__grid-like" type="button" aria-label="кнопка состояния карточки с изображением. нравится - не нравится."></button>
-                        </div>
-                    </li>
-                    <li class="gallery__grid-item">
-                        <img src="./images/image_4.jpg" alt="фотография пригородов Осло" class="gallery__grid-image" />
-                        <div class="gallery__grid-info">
-                            <h2 class="gallery__grid-name">Осло</h2>
-                            <button class="gallery__grid-like" type="button" aria-label="кнопка состояния карточки с изображением. нравится - не нравится."></button>
-                        </div>
-                    </li>
-                    <li class="gallery__grid-item">
-                        <img src="./images/image_5.jpg" alt="фотография улиц Стокгольма" class="gallery__grid-image" />
-                        <div class="gallery__grid-info">
-                            <h2 class="gallery__grid-name">Стокгольм</h2>
-                            <button class="gallery__grid-like" type="button" aria-label="кнопка состояния карточки с изображением. нравится - не нравится."></button>
-                        </div>
-                    </li>
-                    <li class="gallery__grid-item">
-                        <img src="./images/image_6.jpg" alt="понорама Архангельска" class="gallery__grid-image" />
-                        <div class="gallery__grid-info">
-                            <h2 class="gallery__grid-name">Архангельск</h2>
-                            <button class="gallery__grid-like" type="button" aria-label="кнопка состояния карточки с изображением. нравится - не нравится."></button>
-                        </div>
-                    </li>
+                    <template class="gallery__template">
+                        <li class="gallery__grid-item">
+                            <img src alt class="gallery__grid-image"/>
+                            <button type="button" class="img__del"></button>
+                            <div class="gallery__grid-info">
+                                <h2 class="gallery__grid-name"></h2>
+                                <button class="gallery__grid-like gallery__grid-like_active" type="button" aria-label="кнопка состояния карточки с изображением. нравится - не нравится."></button>
+                            </div>
+                        </li>  
+                    </template>                  
                 </ul>
-            </section>
+            </section>     
             <div class="popup">
                 <div class="popup__container">
                     <form class="popup__form" name="popupAddUser">
@@ -85,6 +53,6 @@
         <footer class="footer">
             <p class="footer__copyryght">&copy; 2020 Mesto Russia</p>
         </footer>
-        <script src="/script.js"></script>
+        <script src="/script.js" defer></script>
     </body>
 </html>

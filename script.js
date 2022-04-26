@@ -7,8 +7,8 @@ const jobInput = document.querySelector(".popup__input_data_about");
 const profileName = document.querySelector(".profile__name-text");
 const profileAbout = document.querySelector(".profile__bio");
 const addImgForm = document.querySelector(".profile__add-button");
-let formTitle = document.querySelector(".popup__title");
-let likeBtn = document.querySelectorAll(".gallery__grid-like");
+const formTitle = document.querySelector(".popup__title");
+
 
 function showClick() {
     popupForm.classList.add("popup_opened"); //открытие попапа
@@ -18,7 +18,7 @@ function hiddenClick() {
     popupForm.classList.remove("popup_opened"); //закрытие по close-btn
 }
 
-popupCloseBtn.addEventListener("click", hiddenClick);
+popupCloseBtn.addEventListener('click', hiddenClick);
 
 function profileAdded() {
     //попап редактирования профиля
@@ -26,10 +26,7 @@ function profileAdded() {
     formTitle.textContent = "Редактировать профиль";
     formElement.textContent = "Сохранить";
     nameInput.placeholder = profileName.textContent;
-    jobInput.placeholder = profileAbout.textContent;
-  
-
- 
+    jobInput.placeholder = profileAbout.textContent; 
 }
 
 profileEdit.addEventListener("click", profileAdded);
@@ -39,7 +36,6 @@ function formSubmitHandler (evt) {  //добавление информации 
     profileName.textContent = nameInput.value;
     profileAbout.textContent = jobInput.value;
     hiddenClick();
-
 }
 
 formElement.addEventListener('click', formSubmitHandler);
@@ -55,7 +51,6 @@ function addedImg() {
     nameInput.placeholder = "Название";
     jobInput.placeholder = "Ссылка на картинку";
 }
-
 
 
 const initialCards = [
@@ -84,3 +79,39 @@ const initialCards = [
       link: 'https://images.unsplash.com/photo-1566297558982-b511b3690b94?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
     }
     ];
+
+    let galleryItem = document.querySelector('.gallery__grid-item');
+    let galleryList = document.querySelector('.gallery__grid');
+    let galleryTemplate = document.querySelector('.gallery__template').content;
+    let likeBtn = document.querySelectorAll(".gallery__grid-like");
+
+
+    initialCards.forEach((item) => {
+        let element = createNewItem(item.name, item.link);
+        createItem(element, galleryList);
+    });
+
+
+function createItem(element, galleryList) {
+    galleryList.prepend(element);
+};
+
+function createNewItem(itemName, itemUrl) {
+    let items = galleryTemplate.cloneNode(true);  
+    items.querySelector('.gallery__grid-image').src = itemUrl;
+    items.querySelector('.gallery__grid-image').textContent = itemName;
+    let image = items.querySelector('.gallery__grid-image');   
+};
+    
+
+
+
+
+
+
+
+
+
+
+    //добавление карточки
+
