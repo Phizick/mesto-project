@@ -88,7 +88,8 @@ const initialCards = [
 
     initialCards.forEach((item) => {
         let element = createNewItem(item.name, item.link);
-        createItem(element, galleryList);
+        createItem(item);
+        console.log(item, galleryList);
     });
 
 
@@ -96,11 +97,12 @@ function createItem(element, galleryList) {
     galleryList.prepend(element);
 };
 
-function createNewItem(itemName, itemUrl) {
+function createNewItem(elementName, elementUrl) {
     let items = galleryTemplate.cloneNode(true);  
-    items.querySelector('.gallery__grid-image').src = itemUrl;
-    items.querySelector('.gallery__grid-image').textContent = itemName;
-    let image = items.querySelector('.gallery__grid-image');   
+    items.querySelector('.gallery__grid-image').src = elementUrl;
+    items.querySelector('.gallery__grid-name').textContent = elementName;
+    items.querySelector('.gallery__grid-image').alt = elementName;
+      
 };
     
 
