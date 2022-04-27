@@ -80,30 +80,47 @@ const initialCards = [
     }
     ];
 
-    let galleryItem = document.querySelector('.gallery__grid-item');
+  let galleryItem = document.querySelector('.gallery__grid-item');
     let galleryList = document.querySelector('.gallery__grid');
-    let galleryTemplate = document.querySelector('.gallery__template').content;
-    let likeBtn = document.querySelectorAll(".gallery__grid-like");
+  let galleryTemplate = document.querySelector('.gallery__template').content;
+   let likeBtn = document.querySelectorAll(".gallery__grid-like");
+
+   let items = galleryTemplate.querySelector('.gallery__grid-item').cloneNode(true);
+   items.querySelector('.gallery__grid-image').src = 'https://images.unsplash.com/photo-1566297558982-b511b3690b94?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80';
+   items.querySelector('.gallery__grid-name').textContent = 'Дюк Корморант';
+
+galleryList.append(items);
 
 
-    initialCards.forEach((item) => {
-        let element = createNewItem(item.name, item.link);
-        createItem(item);
-        console.log(item, galleryList);
-    });
 
 
-function createItem(element, galleryList) {
-    galleryList.prepend(element);
-};
+ // let {name: elementName, link: elementUrl} = initialCards[0];  
+  
+  
+ //  let items = galleryTemplate.cloneNode(true);
+ //  let itemsImg = items.querySelector('.gallery__grid-image');
+ //  itemsImg.src = elementUrl;
+ //  console.log(itemsImg);
 
-function createNewItem(elementName, elementUrl) {
-    let items = galleryTemplate.cloneNode(true);  
-    items.querySelector('.gallery__grid-image').src = elementUrl;
-    items.querySelector('.gallery__grid-name').textContent = elementName;
-    items.querySelector('.gallery__grid-image').alt = elementName;
+   
+ //   initialCards.forEach((item) => {
+ //       let element = createNewItem(item.name, item.link);
+ //       createItem(item, galleryList);
+ //       console.log(item, galleryList);
+ //   });
+
+
+//function createItem(element, galleryList) {
+//    galleryList.prepend(element);
+//};
+
+//function createNewItem(elementName, elementUrl) {
+ //   let items = galleryTemplate.cloneNode(true);  
+ //   items.querySelector('.gallery__grid-image').src = elementUrl;
+//    items.querySelector('.gallery__grid-name').textContent = elementName;
+//    items.querySelector('.gallery__grid-image').alt = elementName;
       
-};
+//};
     
 
 
@@ -115,5 +132,5 @@ function createNewItem(elementName, elementUrl) {
 
 
 
-    //добавление карточки
+  
 
