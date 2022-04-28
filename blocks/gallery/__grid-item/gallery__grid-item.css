@@ -6,4 +6,5 @@
     width: 282px;
     overflow: hidden;
     list-style-type: none;
+    position: relative;
 }

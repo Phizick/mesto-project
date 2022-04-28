@@ -1,0 +1,23 @@
+.container__image {
+    max-width: 75vw;
+    max-height: 75vh;
+}
+
+.popup__image-container {
+    position: relative;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.10);
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.image-opened__title {
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FFFFFF;
+    padding-top: 10px;
+    padding-left: 0px;
+    margin: 0px;
+}

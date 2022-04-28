@@ -1,53 +1,63 @@
 const profileEdit = document.querySelector(".profile__name-edit");
 const popupForm = document.querySelector(".popup");
 const popupCloseBtn = document.querySelector(".popup__close-button");
-const formElement = document.querySelector(".popup__save-button");
+const formProfileSaveBtn = document.querySelector(".popup__profile-save-button");
 const nameInput = document.querySelector(".popup__input_data_name");
 const jobInput = document.querySelector(".popup__input_data_about");
 const profileName = document.querySelector(".profile__name-text");
 const profileAbout = document.querySelector(".profile__bio");
 const addImgForm = document.querySelector(".profile__add-button");
 const formTitle = document.querySelector(".popup__title");
+const imgAddForm = document.querySelector('.popup__img');
+const newCardAdd = document.querySelector('.popup__card-save-button');
+const imgLinkInput = imgAddForm.querySelector(".popup__input_data_imgUrl");
+const imgNameInput = imgAddForm.querySelector(".popup__input_data_imgName");
+
+
+
+profileEdit.addEventListener("click", profileAdded);
+
+formProfileSaveBtn.addEventListener('click', formSubmitHandler);
+
+popupCloseBtn.addEventListener('click', hiddenClick);
 
 
 function showClick() {
     popupForm.classList.add("popup_opened"); //открытие попапа
-}
-
-function hiddenClick() {
-    popupForm.classList.remove("popup_opened"); //закрытие по close-btn
-}
-
-popupCloseBtn.addEventListener('click', hiddenClick);
+};
 
 function profileAdded() {
     //попап редактирования профиля
     showClick();
-    formTitle.textContent = "Редактировать профиль";
-    formElement.textContent = "Сохранить";
     nameInput.placeholder = profileName.textContent;
     jobInput.placeholder = profileAbout.textContent; 
-}
+};
 
-profileEdit.addEventListener("click", profileAdded);
 
-function formSubmitHandler (evt) {  //добавление информации о себе
+function hiddenClick() {
+    imgAddForm.classList.remove("popup_opened"); //закрытие по close-btn
+};
+
+
+
+function formSubmitHandler(evt) {  //добавление информации о себе
     evt.preventDefault(); 
     profileName.textContent = nameInput.value;
     profileAbout.textContent = jobInput.value;
     hiddenClick();
-}
-
-formElement.addEventListener('click', formSubmitHandler);
+};
 
 
 addImgForm.addEventListener("click", addedImg);
 
+function showClickImg() {
+    imgAddForm.classList.add("popup_opened"); //открытие попапа
+};
+
+
 function addedImg() {
     //попап добавления карточки
-    showClick();
-    formTitle.textContent = "Новое место";
-    formElement.textContent = "Создать";
+    showClickImg();
     nameInput.placeholder = "Название";
     jobInput.placeholder = "Ссылка на картинку";
 }
@@ -80,57 +90,53 @@ const initialCards = [
     }
     ];
 
-  let galleryItem = document.querySelector('.gallery__grid-item');
-    let galleryList = document.querySelector('.gallery__grid');
-  let galleryTemplate = document.querySelector('.gallery__template').content;
-   let likeBtn = document.querySelectorAll(".gallery__grid-like");
 
-   let items = galleryTemplate.querySelector('.gallery__grid-item').cloneNode(true);
-   items.querySelector('.gallery__grid-image').src = 'https://images.unsplash.com/photo-1566297558982-b511b3690b94?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80';
-   items.querySelector('.gallery__grid-name').textContent = 'Дюк Корморант';
 
-galleryList.append(items);
+    //переменныее галлереи
+const galleryItem = document.querySelector('.gallery__grid-item');
+const galleryList = document.querySelector('.gallery__grid');
+const galleryTemplate = document.querySelector('.gallery__template').content;
 
 
 
 
- // let {name: elementName, link: elementUrl} = initialCards[0];  
+//перебор массива
+initialCards.forEach(function (item) {
+    createNewCard(item.name, item.link);  
+});
+
+//создание новой карточки
+function createNewCard(cardName, cardLink) {
+    const cards = galleryTemplate.querySelector('.gallery__grid-item').cloneNode(true);
+    cards.querySelector('.gallery__grid-image').src = cardLink;
+   cards.querySelector('.gallery__grid-name').textContent = cardName;
+   cards.querySelector('.gallery__grid-image').alt = cardName;
+   galleryList.prepend(cards);
+   const delItem = document.querySelector('.gallery__delete-img-button');
+   delItem.addEventListener ('click', () => {
+   const listItem = delItem.closest('.gallery__grid-item');
+ listItem.remove();
+ //let likeBtn = cards.querySelectorAll(".gallery__grid-like");
+// likeBtn.addEventListener('click', () => {
+//    likeBtn.classList.add('gallery__grid-like_active');
+// });
+ 
+ });
+};
+
+
+
+
+
+
+
+
+
+//добавление новой картинки в карточку
+  function addNewCard(evt) {
+    evt.preventDefault();
+    createNewCard(imgNameInput.value, imgLinkInput.value);    
+  };
   
-  
- //  let items = galleryTemplate.cloneNode(true);
- //  let itemsImg = items.querySelector('.gallery__grid-image');
- //  itemsImg.src = elementUrl;
- //  console.log(itemsImg);
-
-   
- //   initialCards.forEach((item) => {
- //       let element = createNewItem(item.name, item.link);
- //       createItem(item, galleryList);
- //       console.log(item, galleryList);
- //   });
-
-
-//function createItem(element, galleryList) {
-//    galleryList.prepend(element);
-//};
-
-//function createNewItem(elementName, elementUrl) {
- //   let items = galleryTemplate.cloneNode(true);  
- //   items.querySelector('.gallery__grid-image').src = elementUrl;
-//    items.querySelector('.gallery__grid-name').textContent = elementName;
-//    items.querySelector('.gallery__grid-image').alt = elementName;
-      
-//};
-    
-
-
-
-
-
-
-
-
-
-
-  
+  imgAddForm.addEventListener('submit', addNewCard);
 
