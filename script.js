@@ -77,17 +77,13 @@ closeBtns.forEach((button) => {
 
 function showClick() {
     popupForm.classList.add("popup_opened"); //открытие попапа
-}
+};
 
 function hiddenClick() {
     popupForm.classList.remove("popup_opened"); //закрытие по close-btn
     imgAddForm.classList.remove("popup_opened");
     openedImg.classList.remove("popup_opened");
-}
-
-
-
-
+};
 
 
 //перебор массива
@@ -122,7 +118,7 @@ function createNewCard(cardName, cardLink) {
         imageContainer.querySelector(".image-opened__title").textContent = image.alt;
         openedImg.classList.add("popup_opened");
     });
-}
+};
 
 imgAddForm.addEventListener("submit", (evt) => {
     evt.preventDefault();

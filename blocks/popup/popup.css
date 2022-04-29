@@ -26,8 +26,9 @@
         background-position: center;
         background-size: contain;
         cursor: pointer;
+        transition: .5s linear;
     }
     
     .gallery__delete-img-button:hover {
-        opacity: 0.6;
+        opacity: .5;
     }
