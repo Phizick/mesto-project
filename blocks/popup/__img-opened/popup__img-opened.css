@@ -1,11 +1,12 @@
-.container__image {
+
+.image__opened {
     max-width: 75vw;
     max-height: 75vh;
 }
 
-.popup__image-container {
+.container__image {
     position: relative;
-    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.10);
+    box-shadow: 0px 0px 50px rgba(218, 195, 195, 0.1);
     display: inline-block;
     vertical-align: middle;
 }

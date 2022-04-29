@@ -1,6 +1,5 @@
 const profileEdit = document.querySelector(".profile__name-edit");
 const popupForm = document.querySelector(".popup");
-
 const formProfileSaveBtn = document.querySelector(".popup__profile-save-button");
 const nameInput = document.querySelector(".popup__input_data_name");
 const jobInput = document.querySelector(".popup__input_data_about");
@@ -12,53 +11,14 @@ const imgAddForm = document.querySelector(".popup__img");
 const newCardAdd = document.querySelector(".popup__card-save-button");
 const imgLinkInput = imgAddForm.querySelector(".popup__input_data_imgUrl");
 const imgNameInput = imgAddForm.querySelector(".popup__input_data_imgName");
-
 const closeBtns = document.querySelectorAll(".popup__close-button");
+//переменныее галлереи
+const galleryItem = document.querySelector(".gallery__grid-item");
+const galleryList = document.querySelector(".gallery__grid");
+const galleryTemplate = document.querySelector(".gallery__template").content;
+const openedImg = document.querySelector(".popup__img-opened"); //img container
 
-profileEdit.addEventListener("click", profileAdded);
 
-addImgForm.addEventListener("click", addedImg);
-
-formProfileSaveBtn.addEventListener("click", formSubmitHandler);
-
-closeBtns.forEach((button) => {
-    button.addEventListener("click", hiddenClick);
-});
-
-function showClick() {
-    popupForm.classList.add("popup_opened"); //открытие попапа
-}
-
-function profileAdded() {
-    //попап редактирования профиля
-    showClick();
-    nameInput.placeholder = profileName.textContent;
-    jobInput.placeholder = profileAbout.textContent;
-}
-
-function hiddenClick() {
-    popupForm.classList.remove("popup_opened"); //закрытие по close-btn
-    imgAddForm.classList.remove("popup_opened");
-}
-
-function formSubmitHandler(evt) {
-    //добавление информации о себе
-    evt.preventDefault();
-    profileName.textContent = nameInput.value;
-    profileAbout.textContent = jobInput.value;
-    hiddenClick();
-}
-
-function showClickImg() {
-    imgAddForm.classList.add("popup_opened"); //открытие попапа
-}
-
-function addedImg() {
-    //попап добавления карточки
-    showClickImg();
-    nameInput.placeholder = "Название";
-    jobInput.placeholder = "Ссылка на картинку";
-}
 
 const initialCards = [
     {
@@ -87,13 +47,51 @@ const initialCards = [
     },
 ];
 
-//переменныее галлереи
-const galleryItem = document.querySelector(".gallery__grid-item");
-const galleryList = document.querySelector(".gallery__grid");
-const galleryTemplate = document.querySelector(".gallery__template").content;
+
+profileEdit.addEventListener("click", () => {
+    //попап редактирования профиля
+    showClick();
+    nameInput.placeholder = profileName.textContent;
+    jobInput.placeholder = profileAbout.textContent;
+
+});
+
+addImgForm.addEventListener("click", () => {
+//попап добавления карточки
+imgAddForm.classList.add("popup_opened");
+nameInput.placeholder = "Название";
+jobInput.placeholder = "Ссылка на картинку";
+});
+
+formProfileSaveBtn.addEventListener("click", (evt) => {
+  //добавление информации о себе
+  evt.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileAbout.textContent = jobInput.value;
+  hiddenClick();
+});
+
+closeBtns.forEach((button) => {
+    button.addEventListener("click", hiddenClick);
+});
+
+function showClick() {
+    popupForm.classList.add("popup_opened"); //открытие попапа
+}
+
+function hiddenClick() {
+    popupForm.classList.remove("popup_opened"); //закрытие по close-btn
+    imgAddForm.classList.remove("popup_opened");
+    openedImg.classList.remove("popup_opened");
+}
+
+
+
+
+
 
 //перебор массива
-initialCards.forEach(function (item) {
+initialCards.forEach((item) => {
     createNewCard(item.name, item.link);
 });
 
@@ -104,44 +102,32 @@ function createNewCard(cardName, cardLink) {
     cards.querySelector(".gallery__grid-name").textContent = cardName;
     cards.querySelector(".gallery__grid-image").alt = cardName;
     galleryList.prepend(cards);
-    const delItem = document.querySelector(".gallery__delete-img-button");
     
+    const delItem = document.querySelector(".gallery__delete-img-button");
     delItem.addEventListener("click", () => {
         const listItem = delItem.closest(".gallery__grid-item");
         listItem.remove();
-
-        const imgOpenedContainer = document.querySelector(".container__image");
-        let image = cards.querySelector(".gallery__grid-image");
-        cards.querySelector(".gallery__grid-item").addEventListener("click", () => {
-            imgOpenedContainer.querySelector(".image__opened").src = image.src;
-            imgOpenedContainer.querySelector(".image__opened").alt = image.alt;
-            imgOpenedContainer.querySelector(".image-opened__title").textContent = image.alt;
-            openImage();
-        });
         return cards;
     });
-    let likebtn = cards.querySelector('.gallery__grid-like');
+
+    const likebtn = cards.querySelector(".gallery__grid-like");
     likebtn.addEventListener("click", () => {
-        likebtn.classList.toggle('gallery__grid-like_active');
+        likebtn.classList.toggle("gallery__grid-like_active");
+    });
+
+    const imageContainer = document.querySelector(".container__image");
+    const image = cards.querySelector(".gallery__grid-image");
+    image.addEventListener("click", () => {
+        imageContainer.querySelector(".image__opened").src = image.src;
+        imageContainer.querySelector(".image-opened__title").textContent = image.alt;
+        openedImg.classList.add("popup_opened");
     });
 }
 
-const imgOpened = document.querySelector(".popup__img-opened");
-
-function popupImageClose() {
-    imgOpened.classList.remove("popup__opened");
-}
-
-imgOpened.addEventListener("click", popupImageClose);
-
-function openImage() {
-    imgOpened.classList.add("popup__opened");
-}
-
-//добавление новой картинки в карточку
-function addNewCard(evt) {
+imgAddForm.addEventListener("submit", (evt) => {
     evt.preventDefault();
     createNewCard(imgNameInput.value, imgLinkInput.value);
-}
-
-imgAddForm.addEventListener("submit", addNewCard);
+    hiddenClick();
+    imgNameInput.value = "";
+    imgLinkInput.value = "";
+});
