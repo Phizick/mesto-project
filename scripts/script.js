@@ -1,12 +1,12 @@
 "use strict";
 
 //объявляем переменные
-const abc = document.querySelector(".popup__form-profile");
+const popupProfileForm = document.querySelector(".popup__form-profile");//форма профайла
 const profileEdit = document.querySelector(".profile__name-edit"); //кнопка редактирования профиля
 const popupProfile = document.querySelector(".popup__profile"); //попап профиля
 const formProfileSaveBtn = document.querySelector(".popup__form-profile"); //сабмит профайла
-const nameInput = abc.querySelector(".popup__input_data_name"); //поле ввода имени профайла
-const jobInput = abc.querySelector(".popup__input_data_about"); //поле ввода инф профайла
+const nameInput = popupProfileForm.querySelector(".popup__input_data_name"); //поле ввода имени профайла
+const jobInput = popupProfileForm.querySelector(".popup__input_data_about"); //поле ввода инф профайла
 const profileName = document.querySelector(".profile__name-text"); //заголовок профайла
 const profileAbout = document.querySelector(".profile__bio"); //инф профайла
 const buttonOpenPopupCard = document.querySelector(".profile__add-button"); //кнопка добавления карточки
