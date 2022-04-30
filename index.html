@@ -27,22 +27,22 @@
             <section class="gallery">
                 <ul class="gallery__grid">
                     <template class="gallery__template">
-                        <li class="gallery__grid-item">                            
-                            <img src alt class="gallery__grid-image"/>
+                        <li class="gallery__grid-item">
+                            <img src alt class="gallery__grid-image" />
                             <button type="button" class="gallery__delete-img-button"></button>
                             <div class="gallery__grid-info">
                                 <h2 class="gallery__grid-name"></h2>
                                 <button class="gallery__grid-like" type="button" aria-label="кнопка состояния карточки с изображением. нравится - не нравится."></button>
-                            </div>                        
-                        </li>  
-                    </template>                
+                            </div>
+                        </li>
+                    </template>
                 </ul>
-            </section> 
+            </section>
         </main>
         <footer class="footer">
             <p class="footer__copyryght">&copy; 2020 Mesto Russia</p>
         </footer>
-        <div class="popup popup__form-container">
+        <div class="popup popup__profile">
             <div class="popup__container">
                 <form class="popup__form popup__form-profile" name="popupAddUser">
                     <h2 class="popup__title">Редактировать профиль</h2>
@@ -52,29 +52,25 @@
                 </form>
                 <button class="popup__close-button" type="button" aria-label="кнопка закрытия модального окна с формой для редактирования информации о профиле"></button>
             </div>
-        </div> 
+        </div>
         <div class="popup popup__img">
             <div class="popup__container">
                 <form class="popup__form popup__form-cards" name="popupAddCard">
                     <h2 class="popup__title">Новое место</h2>
                     <input class="popup__input popup__input_data_imgName" type="text" name="imgName" required placeholder="Название" />
-                    <input class="popup__input popup__input_data_imgUrl" type="text" name="imgUrl" required placeholder="Ссылка на картинку" />
+                    <input class="popup__input popup__input_data_imgUrl" type="url" name="imgUrl" required placeholder="Ссылка на картинку" />
                     <button class="popup__save-button popup__card-save-button" type="submit">Добавить</button>
                 </form>
                 <button class="popup__close-button" type="button" aria-label="кнопка закрытия модального окна с формой для редактирования информации о профиле"></button>
             </div>
         </div>
-        <div class="popup popup__img-opened">            
-                <figure class="container__image">
-                    <img src="" alt="" class="image__opened">
-                    <figcaption class="image-opened__title">
-                    </figcaption>
-                    <button class="popup__close-button" type="button" aria-label="кнопка закрытия модального окна с формой для редактирования информации о профиле"></button>
-                </figure>             
-                
-            
+        <div class="popup popup__img-opened">
+            <figure class="image__container">
+                <img src="" alt="" class="image__opened" />
+                <figcaption class="image__opened-title"></figcaption>
+                <button class="popup__close-button" type="button" aria-label="кнопка закрытия модального окна с формой для редактирования информации о профиле"></button>
+            </figure>
         </div>
-
         <script src="/script.js" defer></script>
     </body>
 </html>

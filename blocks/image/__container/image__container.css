@@ -1,0 +1,6 @@
+.image__container {
+    position: relative;
+    box-shadow: 0px 0px 50px rgba(218, 195, 195, 0.1);
+    display: inline-block;
+    vertical-align: middle;
+}

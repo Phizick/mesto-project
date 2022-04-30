@@ -111,11 +111,11 @@ function createNewCard(cardName, cardLink) {
         likebtn.classList.toggle("gallery__grid-like_active");
     });
 
-    const imageContainer = document.querySelector(".container__image");
+    const imageContainer = document.querySelector(".image__container");
     const image = cards.querySelector(".gallery__grid-image");
     image.addEventListener("click", () => {
         imageContainer.querySelector(".image__opened").src = image.src;
-        imageContainer.querySelector(".image-opened__title").textContent = image.alt;
+        imageContainer.querySelector(".image__opened-title").textContent = image.alt;
         openedImg.classList.add("popup_opened");
     });
 };
