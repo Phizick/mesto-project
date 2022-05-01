@@ -56,15 +56,15 @@ closeBtns.forEach((button) => {
     });
 });
 
+//отрисовка карточки в контейнер
+function renderCard(cardName, cardLink) {
+    galleryList.prepend(createNewCard(cardName, cardLink));    
+};
+
 //перебор массива
 initialCards.forEach((item) => {
-    createNewCard(item.name, item.link);
+    renderCard(item.name, item.link);
 });
-
-//отрисовка карточки в контейнер
-function renderCard(item, container) {
-    container.prepend(item);
-};
 
 //создание новой карточки
 function createNewCard(cardName, cardLink) {
@@ -74,18 +74,20 @@ function createNewCard(cardName, cardLink) {
     image.src = cardLink;
     image.alt = cardName;
     card.querySelector(".gallery__grid-name").textContent = cardName;
-    renderCard(card, galleryList);
+    
     //удаление карточки
-    const delItem = document.querySelector(".gallery__delete-img-button");
+    const delItem = card.querySelector(".gallery__delete-img-button");
     delItem.addEventListener("click", () => {
         const listItem = delItem.closest(".gallery__grid-item");
         listItem.remove();
     });
+
     //лайк карточки
     const likebtn = card.querySelector(".gallery__grid-like");
     likebtn.addEventListener("click", () => {
         likebtn.classList.toggle("gallery__grid-like_active");
-    });
+    }); 
+
     //открытие карточки в полном размере изображения
     const imageContainer = document.querySelector(".image__container");
     image.addEventListener("click", () => {
@@ -101,7 +103,7 @@ function createNewCard(cardName, cardLink) {
 //добавление новой карточки
 popupAddCard.addEventListener("submit", (evt) => {
     evt.preventDefault();
-    createNewCard(imgNameInput.value, imgLinkInput.value);
+    renderCard(imgNameInput.value, imgLinkInput.value);
     closePopup(popupAddCard);
     //обнуление значений полей ввода
     imgNameInput.value = "";
