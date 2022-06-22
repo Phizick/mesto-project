@@ -3,17 +3,17 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-        <link rel="stylesheet" href="pages/index.css" type="text/css" />
+        <link rel="stylesheet" href="../pages/index.css" type="text/css" />
         <title>Место</title>
     </head>
     <body class="page">
         <header class="header">
-            <img src="./images/Vector__logo.svg" alt="логотип проекта Место" class="header__logo" />
+            <img src="../images/Vector__logo.svg" alt="логотип проекта Место" class="header__logo" />
         </header>
         <main class="page__content">
             <section class="profile" aria-label="смысловой блок о профиле составителя галерии">
                 <div class="profile__info">
-                    <img src="./images/imageb.jpg" alt="аватар профиля" class="profile__avatar-image" />
+                    <img src="../images/imageb.jpg" alt="аватар профиля" class="profile__avatar-image" />
                     <div class="profile__about">
                         <div class="profile__name">
                             <h1 class="profile__name-text">Жак-Ив Кусто</h1>
@@ -44,10 +44,13 @@
         </footer>
         <div class="popup popup__profile">
             <div class="popup__container">
-                <form class="popup__form popup__form-profile" name="popupAddUser">
+                <form class="popup__form popup__form-profile" name="popupAddUser" novalidate>
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <input class="popup__input popup__input_data_name" type="text" name="userName" required placeholder="Ваше имя" />
-                    <input class="popup__input popup__input_data_about" type="text" name="userAbout" required placeholder="Ваш род занятий" />
+                    <input class="popup__input popup__input_data_name" id="userName-input" type="text" name="userName" required placeholder="Ваше имя" minlength="2" maxlength="40"/>
+                    <span class="userName-input-error popup__input-error"></span>
+
+                    <input class="popup__input popup__input_data_about" id="userAbout-input" type="text" name="userAbout" required placeholder="Ваш род занятий" minlength="2" maxlength="200"/>
+                    <span class="userAbout-input-error popup__input-error"></span>
                     <button class="popup__save-button popup__profile-save-button" type="submit">Сохранить</button>
                 </form>
                 <button class="popup__close-button" type="button" aria-label="кнопка закрытия модального окна с формой для редактирования информации о профиле"></button>
@@ -55,10 +58,12 @@
         </div>
         <div class="popup popup__img">
             <div class="popup__container">
-                <form class="popup__form popup__form-cards" name="popupAddCard">
+                <form class="popup__form popup__form-cards" name="popupAddCard" novalidate>
                     <h2 class="popup__title">Новое место</h2>
-                    <input class="popup__input popup__input_data_imgName" type="text" name="imgName" required placeholder="Название" />
-                    <input class="popup__input popup__input_data_imgUrl" type="url" name="imgUrl" required placeholder="Ссылка на картинку" />
+                    <input class="popup__input popup__input_data_imgName" id="imgName-input" type="text" name="imgName" required placeholder="Название" />
+                    <span class="imgName-input-error popup__input-error"></span>
+                    <input class="popup__input popup__input_data_imgUrl" id="imgUrl-input" type="url" name="imgUrl" required placeholder="Ссылка на картинку" />
+                    <span class="imgUrl-input-error popup__input-error"></span>
                     <button class="popup__save-button popup__card-save-button" type="submit">Добавить</button>
                 </form>
                 <button class="popup__close-button" type="button" aria-label="кнопка закрытия модального окна с формой для редактирования информации о профиле"></button>
@@ -71,7 +76,7 @@
                 <button class="popup__close-button" type="button" aria-label="кнопка закрытия модального окна с формой для редактирования информации о профиле"></button>
             </figure>
         </div>
-        <script src="scripts/cards.js" defer></script>
-        <script src="scripts/script.js" defer></script>        
+        <script src="../scripts/cards.js" defer></script>
+        <script src="../scripts/script.js" defer></script>        
     </body>
 </html>

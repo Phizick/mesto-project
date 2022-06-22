@@ -42,12 +42,12 @@ buttonOpenPopupCard.addEventListener("click", () => {
 });
 
 //добавление информации о себе
-formProfileSaveBtn.addEventListener("submit", (evt) => {
-    evt.preventDefault();
-    profileName.textContent = nameInput.value;
-    profileAbout.textContent = jobInput.value;
-    closePopup(popupProfile);
-});
+// formProfileSaveBtn.addEventListener("submit", (evt) => {
+//     evt.preventDefault();
+//     profileName.textContent = nameInput.value;
+//     profileAbout.textContent = jobInput.value;
+//     closePopup(popupProfile);
+// });
 
 //перебор всех кнопок с закрытием модальных окон
 closeBtns.forEach((button) => {
@@ -101,11 +101,76 @@ function createNewCard(cardName, cardLink) {
 };
 
 //добавление новой карточки
-popupAddCard.addEventListener("submit", (evt) => {
-    evt.preventDefault();
-    renderCard(imgNameInput.value, imgLinkInput.value);
-    closePopup(popupAddCard);
-    //обнуление значений полей ввода
-    imgNameInput.value = "";
-    imgLinkInput.value = "";
-});
+// popupAddCard.addEventListener("submit", (evt) => {
+//     evt.preventDefault();
+//     renderCard(imgNameInput.value, imgLinkInput.value);
+//     closePopup(popupAddCard);
+//     //обнуление значений полей ввода
+//     imgNameInput.value = "";
+//     imgLinkInput.value = "";
+// });
+
+// const popupFormElement = document.querySelector('.popup__form');
+// const popupFormInput = document.getElementById('userName-input');
+
+// const formError = popupFormElement.querySelector('.userName-input-error')
+
+
+const showInputError = (formElement, inputElement, errorMessage) => {
+    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.add('popup__input_type_error');
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add('popup__input-error-active');
+  };
+  
+  const hideInputError = (formElement, inputElement) => {
+    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.remove('popup__input_type_error');
+    errorElement.classList.remove('popup__input-error-active');
+    errorElement.textContent = '';
+  };
+  
+  const checkInputValidity = (formElement, inputElement) => {
+    if (!inputElement.validity.valid) {
+      showInputError(formElement, inputElement, inputElement.validationMessage);
+    } else {
+      hideInputError(formElement, inputElement);
+    }
+  };
+  
+  const setEventListeners = (formElement) => {
+    const inputList = formElement.querySelectorAll('.popup__input');
+    inputList.forEach((inputElement) => {
+      inputElement.addEventListener('input', function () {
+        checkInputValidity(formElement, inputElement);
+      });
+    });
+  };
+  
+  
+  const enableValidation = () => {
+    const formList = document.querySelectorAll('.popup__form');
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+  
+      setEventListeners(formElement);
+  })
+    
+  }
+  
+  enableValidation();
+
+
+
+const popupList = document.querySelectorAll('.popup');
+
+document.addEventListener('keydown', evt => {    
+if (evt.keyCode == 27) {
+    for (let i = 0; i < popupList.length; i++) {
+        popupList[i].classList.remove('popup_opened')
+    }
+}
+})
+
