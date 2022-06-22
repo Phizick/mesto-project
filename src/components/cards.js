@@ -1,5 +1,5 @@
-//массив с карточками
-const initialCards = [
+
+export const initialCards = [
     {
         name: "Стокгольм",
         link: "https://images.unsplash.com/photo-1630772063386-f363836989cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80",
@@ -25,3 +25,4 @@ const initialCards = [
         link: "https://images.unsplash.com/photo-1566297558982-b511b3690b94?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
     },
 ];
+

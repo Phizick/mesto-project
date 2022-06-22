@@ -33,6 +33,7 @@
 @import url(../blocks/image/__opened-title/image__opened-title.css);
 @import url(../blocks/image/__container/image__container.css);
 @import url(../blocks/gallery/__delete-img-button/gallery__delete-img-button.css);
+@import url(../blocks/popup/__save-button/_disabled/popup__save-button_disabled.css);
 
 .popup__input_type_error {
     border-bottom: 1px solid red;
