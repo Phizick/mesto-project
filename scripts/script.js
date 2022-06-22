@@ -22,6 +22,14 @@ const popupOpenedImg = document.querySelector(".popup__img-opened"); //попа�
 //открытие попапа
 function openPopup(item) {
     item.classList.add("popup_opened");
+    const currentPopup = document.querySelector('.popup_opened')
+
+currentPopup.addEventListener('click', evt => {
+    if (!evt.target.closest('.popup__container')) {
+        closePopup(evt.target.closest('.popup'))
+    }
+})
+
 };
 
 //закрытие попапа
@@ -174,3 +182,10 @@ if (evt.keyCode == 27) {
 }
 })
 
+// const currentPopup = document.querySelector('.popup_opened')
+
+// currentPopup.addEventListener('click', evt => {
+//     if (!evt.target.closest('.popup__container')) {
+//         closePopup(evt.target.closest('.popup'))
+//     }
+// })
