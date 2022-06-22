@@ -46,12 +46,12 @@ buttonOpenPopupCard.addEventListener("click", () => {
 });
 
 //добавление информации о себе
-// formProfileSaveBtn.addEventListener("submit", (evt) => {
-//     evt.preventDefault();
-//     profileName.textContent = nameInput.value;
-//     profileAbout.textContent = jobInput.value;
-//     closePopup(popupProfile);
-// });
+formProfileSaveBtn.addEventListener("submit", (evt) => {
+    evt.preventDefault();
+    profileName.textContent = nameInput.value;
+    profileAbout.textContent = jobInput.value;
+    closePopup(popupProfile);
+});
 
 //перебор всех кнопок с закрытием модальных окон
 closeBtns.forEach(button => {
@@ -59,14 +59,13 @@ closeBtns.forEach(button => {
 });
 
 //добавление новой карточки
-// popupAddCard.addEventListener("submit", (evt) => {
-//     evt.preventDefault();
-//     renderCard(imgNameInput.value, imgLinkInput.value);
-//     closePopup(popupAddCard);
-//     //обнуление значений полей ввода
-//     imgNameInput.value = "";
-//     imgLinkInput.value = "";
-// });
+popupAddCard.addEventListener("submit", (evt) => {
+    evt.preventDefault();
+    renderCard(imgNameInput.value, imgLinkInput.value);
+    closePopup(popupAddCard);    
+    imgNameInput.value = "";
+    imgLinkInput.value = "";
+});
 
 // const popupFormElement = document.querySelector('.popup__form');
 // const popupFormInput = document.getElementById('userName-input');

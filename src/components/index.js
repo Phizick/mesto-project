@@ -1,23 +1,23 @@
-//объявляем переменные
-const popupProfileForm = document.querySelector(".popup__form-profile");//форма профайла
-const profileEdit = document.querySelector(".profile__name-edit"); //кнопка редактирования профиля
-const popupProfile = document.querySelector(".popup__profile"); //попап профиля
-const formProfileSaveBtn = document.querySelector(".popup__form-profile"); //сабмит профайла
-const nameInput = popupProfileForm.querySelector(".popup__input_data_name"); //поле ввода имени профайла
-const jobInput = popupProfileForm.querySelector(".popup__input_data_about"); //поле ввода инф профайла
-const profileName = document.querySelector(".profile__name-text"); //заголовок профайла
-const profileAbout = document.querySelector(".profile__bio"); //инф профайла
-const buttonOpenPopupCard = document.querySelector(".profile__add-button"); //кнопка добавления карточки
-const popupAddCard = document.querySelector(".popup__img"); //форма добавления карточки
-const imgLinkInput = popupAddCard.querySelector(".popup__input_data_imgUrl"); //поле ввода ссылки на картинку в форме добавления карточки
-const imgNameInput = popupAddCard.querySelector(".popup__input_data_imgName"); //поле ввода имени картинки в форме добавления карточки
-const closeBtns = document.querySelectorAll(".popup__close-button"); //кнопка закрытия модальных окон
-const galleryList = document.querySelector(".gallery__grid"); //список карточек
-const galleryTemplate = document.querySelector(".gallery__template").content; //шаблон для добавления карточек в разметку
-const popupOpenedImg = document.querySelector(".popup__img-opened"); //попап карточки в полный размер картинки
+
+const popupProfileForm = document.querySelector(".popup__form-profile");
+const profileEdit = document.querySelector(".profile__name-edit"); 
+const popupProfile = document.querySelector(".popup__profile"); 
+const formProfileSaveBtn = document.querySelector(".popup__form-profile"); 
+const nameInput = popupProfileForm.querySelector(".popup__input_data_name"); 
+const jobInput = popupProfileForm.querySelector(".popup__input_data_about");
+const profileName = document.querySelector(".profile__name-text");
+const profileAbout = document.querySelector(".profile__bio");
+const buttonOpenPopupCard = document.querySelector(".profile__add-button");
+const popupAddCard = document.querySelector(".popup__img");
+const imgLinkInput = popupAddCard.querySelector(".popup__input_data_imgUrl");
+const imgNameInput = popupAddCard.querySelector(".popup__input_data_imgName");
+const closeBtns = document.querySelectorAll(".popup__close-button"); 
+const galleryList = document.querySelector(".gallery__grid");
+const galleryTemplate = document.querySelector(".gallery__template").content;
+const popupOpenedImg = document.querySelector(".popup__img-opened");
 
 const formElement = document.querySelector('.popup__form')
-const inputSelector = formElement.querySelector('.popup__input')
+
 
 export {imgLinkInput, imgNameInput, galleryList, galleryTemplate, popupOpenedImg, openPopup, closePopup, keyClose, overlayClose}
 
@@ -27,7 +27,7 @@ const openPopup = (item => {
   document.addEventListener('keydown', keyClose);
 });
 
-//закрытие попапа
+
 const closePopup = (item => {
   item.classList.remove("popup_opened");
   document.removeEventListener('keydown', keyClose);
@@ -65,11 +65,10 @@ const validationConfig = {
   formButtonSubmit: '.popup__save-button'
 };
 
-
-
 const showInputError = (formElement, inputElement, validationConfig) => {
   const { inputErrorClass, errorClass } = validationConfig;
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  console.log(errorElement)
   inputElement.classList.add(inputErrorClass);
   errorElement.textContent = inputElement.validationMessage;
   errorElement.classList.add(errorClass);
@@ -92,14 +91,11 @@ const checkInputValidity = (formElement, inputElement) => {
     hideInputError(formElement, inputElement, validationConfig);       
   }
 };
-const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+const inputList = Array.from(document.querySelectorAll('.popup__input'));
 
 const invalidInput = (inputList) => {
   return inputList.some(inputElement => !inputElement.validity.valid);
 }
-
-
-
 
 const buttonCondition = (buttonSelected, inputList, validationConfig) => {
   
@@ -110,10 +106,8 @@ const buttonCondition = (buttonSelected, inputList, validationConfig) => {
     
   } else {
     buttonSelected.classList.remove(inactiveButtonClass)
-    buttonSelected.disabled = false;
-    
+    buttonSelected.disabled = false;    
   }
-
 }
 
 const setEventListeners = (formElement, validationConfig) => {
@@ -133,11 +127,25 @@ const setEventListeners = (formElement, validationConfig) => {
 
 const enableValidation = () => {
   const {formSelector, ...anyConfig} = validationConfig;
-  const formList = document.querySelectorAll(formSelector)
+  const formList = Array.from(document.querySelectorAll(formSelector));
   formList.forEach(formElement => {
-    setEventListeners(formElement, anyConfig)
+    setEventListeners(formElement, anyConfig)    
   })
 }
 
 enableValidation()
 
+formProfileSaveBtn.addEventListener("submit", evt => {
+  evt.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileAbout.textContent = jobInput.value;
+  closePopup(popupProfile);
+});
+
+popupAddCard.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+  renderCard(imgNameInput.value, imgLinkInput.value);
+  closePopup(popupAddCard);    
+  imgNameInput.value = "";
+  imgLinkInput.value = "";
+});
