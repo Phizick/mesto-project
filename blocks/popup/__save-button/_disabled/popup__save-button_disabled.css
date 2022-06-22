@@ -2,5 +2,10 @@
     border: 1px solid #000000;
     background: transparent;
     color: #000000;
-    
+    opacity: .4;    
+}
+
+.popup__save-button_disabled:hover {
+    opacity: .4;
+
 }
