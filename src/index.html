@@ -58,7 +58,7 @@
         </div>
         <div class="popup popup__img">
             <div class="popup__container">
-                <form class="popup__form popup__form-cards" name="popupAddCard" novalidate>
+                <form class="popup__form popup__form-cards" name="popupAddCard" novalidate id="123">
                     <h2 class="popup__title">Новое место</h2>
                     <input class="popup__input popup__input_data_imgName" id="imgName-input" type="text" name="imgName" required placeholder="Название" />
                     <span class="imgName-input-error popup__input-error"></span>
@@ -76,9 +76,9 @@
                 <button class="popup__close-button" type="button" aria-label="кнопка закрытия модального окна с формой для редактирования информации о профиле"></button>
             </figure>
         </div>
-        <script src="./components/index.js" type="module"></script>
-        <script src="./components/card.js" type="module"></script>
-        <script src="./components/cards.js" type="module"></script>
+        <script src="./components/index.js" defer type="module" ></script>
+        <script src="./components/card.js" defer type="module"></script>
+        <script src="./components/cards.js" defer type="module"></script>
         <script src="./components/validate.js"  type="module"></script>
     </body>
 </html>
