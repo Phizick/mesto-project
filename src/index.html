@@ -3,17 +3,16 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-        <link rel="stylesheet" href="../pages/index.css" type="text/css" />
         <title>Место</title>
     </head>
     <body class="page">
         <header class="header">
-            <img src="../images/Vector__logo.svg" alt="логотип проекта Место" class="header__logo" />
+            <img src="<%=require('../src/images/Vector__logo.svg')%>" alt="логотип проекта Место" class="header__logo" />
         </header>
         <main class="page__content">
             <section class="profile" aria-label="смысловой блок о профиле составителя галерии">
                 <div class="profile__info">
-                    <img src="../images/imageb.jpg" alt="аватар профиля" class="profile__avatar-image" />
+                    <img src="<%=require('../src/images/imageb.jpg')%>" alt="аватар профиля" class="profile__avatar-image" />
                     <div class="profile__about">
                         <div class="profile__name">
                             <h1 class="profile__name-text">Жак-Ив Кусто</h1>
@@ -48,7 +47,6 @@
                     <h2 class="popup__title">Редактировать профиль</h2>
                     <input class="popup__input popup__input_data_name" id="userName-input" type="text" name="userName" required placeholder="Ваше имя" minlength="2" maxlength="40"/>
                     <span class="userName-input-error popup__input-error"></span>
-
                     <input class="popup__input popup__input_data_about" id="userAbout-input" type="text" name="userAbout" required placeholder="Ваш род занятий" minlength="2" maxlength="200"/>
                     <span class="userAbout-input-error popup__input-error"></span>
                     <button class="popup__save-button popup__profile-save-button" type="submit">Сохранить</button>
@@ -75,10 +73,6 @@
                 <figcaption class="image__opened-title"></figcaption>
                 <button class="popup__close-button" type="button" aria-label="кнопка закрытия модального окна с формой для редактирования информации о профиле"></button>
             </figure>
-        </div>
-        <script src="./components/index.js" defer type="module" ></script>
-        <script src="./components/card.js" defer type="module"></script>
-        <script src="./components/cards.js" defer type="module"></script>
-        <script src="./components/validate.js"  type="module"></script>
+        </div>    
     </body>
 </html>

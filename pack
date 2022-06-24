@@ -31,4 +31,4 @@ npm list --depth=0
 Вместо npm test пишем npm t
 
 
-npm i -D webpack webpack-cli webpack-dev-server @babel/core @babel/present-env babel-loader html-webpack-plugin clean-webpack-plugin css-loader mini-css-extract-plugin postcss-loader autoprefixer cssnano
+npm i -D webpack webpack-cli webpack-dev-server @babel/core @babel/prest-env babel-loader html-webpack-plugin clean-webpack-plugin css-loader mini-css-extract-plugin postcss-loader autoprefixer cssnano
