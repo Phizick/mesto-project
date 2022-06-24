@@ -17,11 +17,6 @@ const galleryTemplate = document.querySelector(".gallery__template").content;
 const popupOpenedImg = document.querySelector(".popup__img-opened");
 
 
-// const popupOpenedForm = document.querySelector('.popup_opened')
-// const formElement = document.querySelector('.popup__form')
-// const formElement = document.getElementById('123')
-
-
 
 export {imgLinkInput, imgNameInput, galleryList, galleryTemplate, popupOpenedImg, openPopup, closePopup, keyClose, overlayClose}
 
@@ -29,16 +24,17 @@ const openPopup = (item => {
   item.classList.add("popup_opened");
   item.addEventListener('click', overlayClose);
   document.addEventListener('keydown', keyClose);
-  enableValidation()
+  enableValidation();
 });
-
 
 
 const closePopup = (item => {
   item.classList.remove("popup_opened");
   document.removeEventListener('keydown', keyClose);
   item.removeEventListener('click', overlayClose);
-});
+  // disableValidation(); 
+  desableValidation();
+ });
 
 
 profileEdit.addEventListener("click", () => {
@@ -53,13 +49,25 @@ buttonOpenPopupCard.addEventListener("click", () => {
 });
 
 
-closeBtns.forEach(button => {
-  button.addEventListener("click", () => {closePopup(button.closest(".popup"))});
-});
+closeBtns.forEach(button => {button.addEventListener("click", () => {closePopup(button.closest(".popup"))})});
 
 const keyClose = (evt => {evt.keyCode == 27 && closePopup(document.querySelector('.popup_opened'))})    
 
 const overlayClose = (evt => {!evt.target.closest('.popup__container') && closePopup(evt.target.closest('.popup'))})
+
+
+
+// const clear = () => {
+//   const {formSelector, inputSelector, ...anyConfig} = validationConfig;
+//   const formElements = Array.from(document.querySelectorAll(formSelector));
+//   const inputElements = Array.from(document.querySelectorAll(inputSelector));
+  
+ 
+  
+  
+//   hideInputError(formElement, inputElement, validationConfig);
+  
+// };
 
 const validationConfig = {
   formSelector: '.popup__form',
@@ -67,8 +75,7 @@ const validationConfig = {
   submitButtonSelector: '.popup__save-button',
   inactiveButtonClass: 'popup__save-button_disabled',
   inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error-active',
-  formButtonSubmit: '.popup__save-button'
+  errorClass: 'popup__input-error-active',  
 };
 
 const showInputError = (formElement, inputElement, validationConfig) => {
@@ -90,11 +97,13 @@ const hideInputError = (formElement, inputElement, validationConfig) => {
 
 
 const checkInputValidity = (formElement, inputElement) => {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, validationConfig);
+
+ if (inputElement.validity.valid) {
+    hideInputError(formElement, inputElement, validationConfig);
   } else {
-    hideInputError(formElement, inputElement, validationConfig);       
+    showInputError(formElement, inputElement, validationConfig);
   }
+  
 };
 
 
@@ -116,21 +125,40 @@ const setEventListeners = (formElement, validationConfig) => {
   const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
   const buttonSelected = formElement.querySelector('.popup__save-button'); 
   const {inputSelector, submitButtonSelector, ...anyConfig} = validationConfig;
-  formElement.addEventListener('submit', evt => {evt.preventDefault()})
-  
+  formElement.addEventListener('submit', evt => {evt.preventDefault()});  
   inputList.forEach(inputElement => {
     inputElement.addEventListener('input', () => {
       checkInputValidity(formElement, inputElement, anyConfig)
       buttonCondition(buttonSelected, inputList, anyConfig)
     })
   })
-  buttonCondition(buttonSelected, inputList, anyConfig)
-}
+  buttonCondition(buttonSelected, inputList, anyConfig)  
+};
 
+const removeEventListeners = (formElement, validationConfig) => {
+  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+  const buttonSelected =  formElement.querySelector('.popup__save-button'); 
+  const {inputSelector, submitButtonSelector, ...anyConfig} = validationConfig;
+  formElement.removeEventListener('submit', evt => {evt.preventDefault()})
+  inputList.forEach(inputElement => {
+    inputElement.removeEventListener('input', () => {
+      checkInputValidity(formElement, inputElement, anyConfig)
+      buttonCondition(buttonSelected, inputList, anyConfig)
+    });
+  }); 
+};
+
+const desableValidation = () => {
+  const {formSelector, ...anyConfig} = validationConfig;
+  const formList = Array.from(document.querySelectorAll(formSelector));
+  formList.forEach(formElement => {
+    removeEventListeners(formElement, anyConfig)    
+  });
+};
 
 const invalidInput = (inputList) => {
   return inputList.some(inputElement => !inputElement.validity.valid);
-}
+};
 
 
 
@@ -139,8 +167,10 @@ const enableValidation = () => {
   const formList = Array.from(document.querySelectorAll(formSelector));
   formList.forEach(formElement => {
     setEventListeners(formElement, anyConfig)    
-  })
-}
+  });
+};
+
+
 
 
 formProfileSaveBtn.addEventListener("submit", evt => {
