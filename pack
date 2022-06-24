@@ -1,0 +1,34 @@
+npm init -y
+npm set registry https://registry.npmjs.org
+npm i webpack --save-dev
+npm i webpack-cli --save-dev
+npm i webpack-dev-server --save-dev
+npm i @babel/core --save-dev
+npm i @babel/preset-env --save-dev
+
+npm i core-js --save
+
+npm i babel-loader --save-dev
+npm i html-webpack-plugin --save-dev 
+npm i clean-webpack-plugin --save-dev
+npm i css-loader --save-dev
+npm i mini-css-extract-plugin --save-dev 
+npm i postcss-loader --save-dev
+npm i autoprefixer --save-dev
+npm i cssnano --save-dev
+
+npm list --depth=0
+
+
+Вместо npm install <package> пишем npm i <package>.
+
+Вместо npm install --save <package> пишем npm i -S <package>.
+
+Вместо npm install --save-dev <package> пишем npm i -D <package>.
+
+Вместо npm install --global <package> пишем npm i -G <package> или npm i -g <package>.
+
+Вместо npm test пишем npm t
+
+
+npm i -D webpack webpack-cli webpack-dev-server @babel/core @babel/prest-env babel-loader html-webpack-plugin clean-webpack-plugin css-loader mini-css-extract-plugin postcss-loader autoprefixer cssnano

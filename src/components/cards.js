@@ -1,4 +1,3 @@
-//массив с карточками
 const initialCards = [
     {
         name: "Стокгольм",
@@ -25,3 +24,5 @@ const initialCards = [
         link: "https://images.unsplash.com/photo-1566297558982-b511b3690b94?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
     },
 ];
+
+export {initialCards};
