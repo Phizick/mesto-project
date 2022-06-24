@@ -1,11 +1,9 @@
 import { initialCards } from "./cards.js";
-import { openPopup, closePopup } from "./modal.js";
-import { popupAddCard } from "../index.js";
+import { openPopup } from "./modal.js";
 
 const galleryList = document.querySelector(".gallery__grid");
 const galleryTemplate = document.querySelector(".gallery__template").content;
 const popupOpenedImg = document.querySelector(".popup__img-opened");
-
 
 const createNewCard = (cardName, cardLink) => {
     const card = galleryTemplate.querySelector(".gallery__grid-item").cloneNode(true);
@@ -32,8 +30,6 @@ const createNewCard = (cardName, cardLink) => {
     });
     return card;
 };
-
-
 
 const renderCard = (cardName, cardLink) => {
     galleryList.prepend(createNewCard(cardName, cardLink));

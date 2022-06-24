@@ -1,4 +1,3 @@
-
 const initialCards = [
     {
         name: "Стокгольм",
