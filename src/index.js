@@ -1,6 +1,7 @@
 import './pages/index.css' ;
 import { openPopup, closePopup } from "./components/modal.js";
 import { renderCard } from './components/card.js';
+import { enableValidation } from './components/validate.js';
 
 const popupProfileForm = document.querySelector(".popup__form-profile");
 const profileEdit = document.querySelector(".profile__name-edit");
@@ -19,11 +20,13 @@ const imgNameInput = popupAddCard.querySelector(".popup__input_data_imgName");
 const validationConfig = {
     formSelector: ".popup__form",
     inputSelector: ".popup__input",
-    submitButtonSelector: ".popup__save-button",
+    submitButtonSelector: ".popup__save-button",    
     inactiveButtonClass: "popup__save-button_disabled",
     inputErrorClass: "popup__input-type-error",
-    errorClass: "popup__input-error_active",
+    errorClass: "popup__input-error_active"
+    
 };
+
 
 profileEdit.addEventListener("click", () => {
     openPopup(popupProfile);
@@ -55,5 +58,9 @@ popupAddCard.addEventListener("submit", evt => {
     imgNameInput.value = "";
     imgLinkInput.value = "";
 });
+
+enableValidation();
+
+
 
 export { validationConfig, popupAddCard };
