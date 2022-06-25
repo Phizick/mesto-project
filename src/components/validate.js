@@ -40,13 +40,12 @@ const invalidInput = (inputList) => {
     return inputList.some(inputElement => !inputElement.validity.valid);
 };
 
-
 const enableValidation = () => {
     const { formSelector, ...anyConfig } = validationConfig;
     const formList = Array.from(document.querySelectorAll(formSelector));
     formList.forEach(formElement => {
         setEventListeners(formElement, anyConfig);
-    });
+    })   
 };
 
 const resetValidation = (formElement, validationConfig) => {
@@ -64,14 +63,13 @@ const resetValidation = (formElement, validationConfig) => {
     buttonItem.classList.add(inactiveButtonClass);
 };
 
-const clearValidity = () => {
+const clearValidity = (formItem) => {
     const { formSelector, ...anyConfig } = validationConfig;
-    const formList = Array.from(document.querySelectorAll(formSelector));
+    const formList = Array.from(formItem.querySelectorAll(formSelector));
     formList.forEach(formElement => {
         resetValidation(formElement, anyConfig);
-    });
+        formElement.reset();
+    })    
 };
-
-
 
 export { enableValidation, buttonCondition, checkInputValidity, invalidInput, clearValidity };
