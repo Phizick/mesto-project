@@ -21,8 +21,5 @@ Webpack
 * проект собран webpack-ом
 
 
-
-
-
-
+[ссылка на проект](https://phizick.github.io/mesto-project/)
 
