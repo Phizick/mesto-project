@@ -1,5 +1,5 @@
 import { validationConfig } from "../index.js";
-import { setEventListeners, removeEventListeners } from "./units.js";
+import { setEventListeners} from "./units.js";
 
 const showInputError = (formElement, inputElement, validationConfig) => {
     const { inputErrorClass, errorClass } = validationConfig;
@@ -40,20 +40,36 @@ const invalidInput = (inputList) => {
     return inputList.some(inputElement => !inputElement.validity.valid);
 };
 
-const disableValidation = () => {
-    const { formSelector, ...anyConfig } = validationConfig;
-    const formList = Array.from(document.querySelectorAll(formSelector));
-    formList.forEach(formElement => {
-        removeEventListeners(formElement, anyConfig);
-    });
-};
-
 const enableValidation = () => {
     const { formSelector, ...anyConfig } = validationConfig;
     const formList = Array.from(document.querySelectorAll(formSelector));
     formList.forEach(formElement => {
         setEventListeners(formElement, anyConfig);
-    });
+    })   
 };
 
-export { enableValidation, disableValidation, buttonCondition, checkInputValidity, invalidInput };
+const resetValidation = (formElement, validationConfig) => {
+    const { errorClass, inputErrorClass, inactiveButtonClass, submitButtonSelector, ...anyConfig } = validationConfig;
+    const errorItems = Array.from(formElement.querySelectorAll(`.${errorClass}`));    
+    const inputList = Array.from(formElement.querySelectorAll(`.${inputErrorClass}`));
+    const buttonItem = formElement.querySelector(submitButtonSelector);
+    errorItems.forEach(errorItem => {
+        errorItem.classList.remove(errorClass);
+    })
+    inputList.forEach(inputItem => {
+        inputItem.classList.remove(inputErrorClass);
+    })
+    buttonItem.disabled = true;
+    buttonItem.classList.add(inactiveButtonClass);
+};
+
+const clearValidity = (formItem) => {
+    const { formSelector, ...anyConfig } = validationConfig;
+    const formList = Array.from(formItem.querySelectorAll(formSelector));
+    formList.forEach(formElement => {
+        resetValidation(formElement, anyConfig);
+        formElement.reset();
+    })    
+};
+
+export { enableValidation, buttonCondition, checkInputValidity, invalidInput, clearValidity };

@@ -1,6 +1,7 @@
 import './pages/index.css' ;
 import { openPopup, closePopup } from "./components/modal.js";
-import { renderCard } from './components/card.js';
+import { renderData, galleryList, openImgPreview } from './components/card.js';
+import { clearValidity, enableValidation } from './components/validate.js';
 
 const popupProfileForm = document.querySelector(".popup__form-profile");
 const profileEdit = document.querySelector(".profile__name-edit");
@@ -19,14 +20,15 @@ const imgNameInput = popupAddCard.querySelector(".popup__input_data_imgName");
 const validationConfig = {
     formSelector: ".popup__form",
     inputSelector: ".popup__input",
-    submitButtonSelector: ".popup__save-button",
+    submitButtonSelector: ".popup__save-button",    
     inactiveButtonClass: "popup__save-button_disabled",
     inputErrorClass: "popup__input-type-error",
-    errorClass: "popup__input-error_active",
+    errorClass: "popup__input-error_active"    
 };
 
 profileEdit.addEventListener("click", () => {
     openPopup(popupProfile);
+    clearValidity(popupProfile);
     nameInput.value = profileName.textContent;
     jobInput.value = profileAbout.textContent;
 });
@@ -39,6 +41,7 @@ closeBtns.forEach(button => {
 
 buttonOpenPopupCard.addEventListener("click", () => {
     openPopup(popupAddCard);
+    clearValidity(popupAddCard);
 });
 
 formProfileSaveBtn.addEventListener("submit", evt => {
@@ -50,10 +53,12 @@ formProfileSaveBtn.addEventListener("submit", evt => {
 
 popupAddCard.addEventListener("submit", evt => {
     evt.preventDefault();
-    renderCard(imgNameInput.value, imgLinkInput.value);    
-    closePopup(popupAddCard);
-    imgNameInput.value = "";
-    imgLinkInput.value = "";
+    renderData(imgNameInput.value, imgLinkInput.value);    
+    closePopup(popupAddCard);    
 });
+
+galleryList.addEventListener('click', evt => openImgPreview(evt))
+
+enableValidation();
 
 export { validationConfig, popupAddCard };
