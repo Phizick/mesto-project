@@ -62,3 +62,11 @@ galleryList.addEventListener('click', evt => openImgPreview(evt))
 enableValidation();
 
 export { validationConfig, popupAddCard };
+
+fetch('https://mesto.nomoreparties.co/v1/plus-cohort-12/cards', {
+    headers: {
+        authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1'
+    }
+})
+.then(res => res.json())
+.then(res => console.log(res))
