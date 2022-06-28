@@ -1,4 +1,4 @@
-import { initialCards } from "./cards.js";
+
 import { openPopup } from "./modal.js";
 
 const galleryList = document.querySelector(".gallery__grid");
@@ -17,10 +17,16 @@ const gallerySpec = {
 };
 
 const cardData = {
-    cardName: '',
-    cardLink: ''
+    name: '',
+    link: '',
+    likes: '',
+    owner: '',
+    _id: '',
+    createdAt: ''
 };    
     
+
+
 const openImgPreview = (evt) => {    
     if (evt.target.closest('.gallery__grid-image')) {    
         imageOpened.src = evt.target.src;
@@ -33,13 +39,13 @@ const openImgPreview = (evt) => {
 };
 
 const createNewCard = (cardData) => {    
-    const { cardName, cardLink} = cardData;
+    const { name, link} = cardData;
     const { galleryItemClass, galleryImgClass, galleryCardNameClass, galleryLikeClass, galleryLikeStatus, galleryDelButton, ...anySpec} = gallerySpec;
     const card = galleryTemplate.querySelector(galleryItemClass).cloneNode(true);
     const image = card.querySelector(galleryImgClass);
-    image.src = cardLink;
-    image.alt = cardName;
-    card.querySelector(galleryCardNameClass).textContent = cardName;
+    image.src = link;
+    image.alt = name;
+    card.querySelector(galleryCardNameClass).textContent = name;
     const delItem = card.querySelector(galleryDelButton);    
     const likebtn = card.querySelector(galleryLikeClass);
     delItem.addEventListener("click", () => card.remove());
@@ -49,16 +55,119 @@ const createNewCard = (cardData) => {
     return card;
 };
 
-const renderData = (cardName, cardLink) => {
-    cardData.cardName = `${cardName}`;
-    cardData.cardLink = `${cardLink}`;       
+const renderData = (name, link) => {
+    cardData.name = `${name}`;
+    cardData.link = `${link}`;       
     renderCard(cardData);
+    
 };
+
+// function renderPull(name, link) {
+//     cardData.name = `${name}`;
+//     cardData.link = `${link}`; 
+//     pullCard(cardData);
+// }
 
 const renderCard = (cardData) => {
-    galleryList.prepend(createNewCard(cardData));
+    galleryList.append(createNewCard(cardData));    
 };
 
-initialCards.forEach(item => {renderData(item.name, item.link)});
+
+const apiConfig = {
+    serverUrl: 'https://nomoreparties.co/v1/plus-cohort-12',
+    headers: {
+        authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1',
+        'Content-Type': 'application/json'
+    },
+    userID: '7a744b5fd03159f0028e76c6'
+}
+
+const pullCard = (cardData) => {
+    return fetch(`${apiConfig.serverUrl}/cards`, {
+        method: 'POST',
+        headers: apiConfig.headers,
+        body: JSON.stringify(cardData),        
+    })
+    .then(res => {
+        if (res.ok) {
+            return res.json()
+        } return Promise.reject(`error: ${res.status}`)
+    })
+
+}
+
+export { pullCard, cardData}
+
+
+
+
+
+
+
+
+// let renderPulls = new Promise(function(resolve, reject)  {
+//     if (cardData) {
+//         resolve(cardData)
+//     } else {
+//         reject('all is fine');
+//    }
+// });
+
+// renderPulls
+// .then(function(cardData) {
+//     fetch('https://nomoreparties.co/v1/plus-cohort-12/cards', {
+//     method: 'POST',
+//     headers: {
+//         authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1',
+//         'Content-Type': 'image/jpeg'
+//     },        
+//     body: JSON.stringify(cardData)
+// })
+// .then(res => res.json())
+// .then(data => {
+//     console.log('ok', data)})
+// .then(error => { console.log('error', cardData)})})
+
+
+
+
+        
+
+// fetch('https://nomoreparties.co/v1/plus-cohort-12/cards', {
+//     method: 'POST',
+//     headers: {
+//         authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1',
+//         'Content-Type': 'image/jpeg'
+//     },        
+//     body: JSON.stringify(cardData)
+// })
+// .then(res => res.json())
+// .then(data => {
+//     console.log('ok', data)})
+// .then(error => { console.log('error', cardData)})
+    
+
+
+
+fetch('https://mesto.nomoreparties.co/v1/plus-cohort-12/cards', {
+    headers: {
+        authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1'
+    }
+})
+.then(res => res.json())
+.then(res => {
+    res.forEach(item => {renderData(item.name, item.link)});
+})
+
+fetch('https://mesto.nomoreparties.co/v1/plus-cohort-12/cards', {
+    headers: {
+        authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1'
+    }
+})
+.then(res => res.json())
+.then(res => console.log(res))
+
+
+// initialCards.forEach(item => {renderData(item.name, item.link)});
 
 export {renderCard, renderData, openImgPreview, galleryList};
