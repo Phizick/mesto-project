@@ -21,7 +21,7 @@ const cardData = {
     link: '',
     likes: '',
     owner: '',
-    _id: '',
+    _Id: '',
     createdAt: ''
 };    
     
@@ -96,57 +96,33 @@ const pullCard = (cardData) => {
 
 }
 
+const deleteCard = (cardData) => {
+    return fetch(`${apiConfig.serverUrl}/cards/${cardData._Id}`, {
+        method: 'DELETE',
+        headers: apiConfig.headers,
+        body: JSON.stringify(cardData),        
+    })
+    .then(res => {
+        if (res.ok) {
+            return res.json()
+        } return Promise.reject(`error: ${res.status}`)
+    })
+
+}
+
 export { pullCard, cardData}
 
-
-
-
-
-
-
-
-// let renderPulls = new Promise(function(resolve, reject)  {
-//     if (cardData) {
-//         resolve(cardData)
-//     } else {
-//         reject('all is fine');
-//    }
-// });
-
-// renderPulls
-// .then(function(cardData) {
-//     fetch('https://nomoreparties.co/v1/plus-cohort-12/cards', {
-//     method: 'POST',
-//     headers: {
-//         authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1',
-//         'Content-Type': 'image/jpeg'
-//     },        
-//     body: JSON.stringify(cardData)
-// })
-// .then(res => res.json())
-// .then(data => {
-//     console.log('ok', data)})
-// .then(error => { console.log('error', cardData)})})
-
-
-
-
-        
-
-// fetch('https://nomoreparties.co/v1/plus-cohort-12/cards', {
-//     method: 'POST',
-//     headers: {
-//         authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1',
-//         'Content-Type': 'image/jpeg'
-//     },        
-//     body: JSON.stringify(cardData)
-// })
-// .then(res => res.json())
-// .then(data => {
-//     console.log('ok', data)})
-// .then(error => { console.log('error', cardData)})
     
+const renderCardArray = async () => {
+    const cardsArray = new Promise((res, rej) => {
+        fetch(`${apiConfig.serverUrl}/cards`, {
+        headers: apiConfig.headers
+    });
+    .then
 
+
+    })
+}
 
 
 fetch('https://mesto.nomoreparties.co/v1/plus-cohort-12/cards', {
@@ -168,6 +144,6 @@ fetch('https://mesto.nomoreparties.co/v1/plus-cohort-12/cards', {
 .then(res => console.log(res))
 
 
-// initialCards.forEach(item => {renderData(item.name, item.link)});
+
 
 export {renderCard, renderData, openImgPreview, galleryList};

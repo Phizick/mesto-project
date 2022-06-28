@@ -35,15 +35,7 @@ profileEdit.addEventListener("click", () => {
     clearValidity(popupProfile);
     nameInput.value = profileName.textContent;
     jobInput.value = profileAbout.textContent;
-    // profileName.textContent = user.name;
-    // profileAbout.textContent = user.about
 
-    // let user = {
-    //     name: '',
-    //     about: ''
-    // }
-    
-    // userUpdate(user)
 });
 
 closeBtns.forEach(button => {
@@ -77,7 +69,7 @@ popupAddCard.addEventListener("submit", evt => {
         renderCard(cardData);
     })
     .catch(err => { console.log(err)})
-    // renderPull(imgNameInput.value, imgLinkInput.value);
+    
 });
 
 galleryList.addEventListener('click', evt => openImgPreview(evt))
