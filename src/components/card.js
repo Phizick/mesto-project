@@ -62,12 +62,6 @@ const renderData = (name, link) => {
     
 };
 
-// function renderPull(name, link) {
-//     cardData.name = `${name}`;
-//     cardData.link = `${link}`; 
-//     pullCard(cardData);
-// }
-
 const renderCard = (cardData) => {
     galleryList.append(createNewCard(cardData));    
 };
@@ -82,100 +76,58 @@ const apiConfig = {
     userID: '7a744b5fd03159f0028e76c6'
 }
 
-const pullCard = (cardData) => {
-    return fetch(`${apiConfig.serverUrl}/cards`, {
-        method: 'POST',
-        headers: apiConfig.headers,
-        body: JSON.stringify(cardData),        
-    })
-    .then(res => {
-        if (res.ok) {
-            return res.json()
-        } return Promise.reject(`error: ${res.status}`)
-    })
-
-}
-
-const deleteCard = (cardData) => {
-    return fetch(`${apiConfig.serverUrl}/cards/${cardData._Id}`, {
-        method: 'DELETE',
-        headers: apiConfig.headers,
-        body: JSON.stringify(cardData),        
-    })
-    .then(res => {
-        if (res.ok) {
-            return res.json()
-        } return Promise.reject(`error: ${res.status}`)
-    })
-
-}
-
-export { pullCard, cardData}
-
-    
-// const renderCards = () => {
+// const pullCard = (cardData) => {
 //     return fetch(`${apiConfig.serverUrl}/cards`, {
-//         headers: apiConfig.headers
+//         method: 'POST',
+//         headers: apiConfig.headers,
+//         body: JSON.stringify(cardData),        
 //     })
 //     .then(res => {
 //         if (res.ok) {
 //             return res.json()
-//         }
-//         return Promise.reject(`error: ${res.status}`)
+//         } return Promise.reject(`error: ${res.status}`)
 //     })
+
 // }
 
-// renderCards()
-// .then ( cardData)
-
-
-
-
-async function loadJson() {
-    let response = await fetch('https://mesto.nomoreparties.co/v1/plus-cohort-12/cards', {
-        headers: {
-            authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1'
+const pullCard = async (cardData) => {
+    let res = await fetch(`${apiConfig.serverUrl}/cards`, {
+                method: 'POST',
+                headers: apiConfig.headers,
+                body: JSON.stringify(cardData),        
+            })
+        if (res.status === 200) {
+            return await res.json();
         }
-    });
+        throw new Error(res.status)
+};
 
-    if (response.status === 200) {
-        return await response.json();
+const loadCards = async () => {
+    let res = await fetch(`${apiConfig.serverUrl}/cards`, {headers: apiConfig.headers})
+    if (res.status === 200) {
+        return await res.json();
     }
+    throw new Error(res.status);
+};
 
-    throw new Error(response.status);
-}
+const loadedCards = loadCards().then(data => data);
+loadedCards.then(data => data.forEach(item => {renderData(item.name, item.link)}))
+.catch(err => {console.log(err)});
 
-const a = loadJson().then((data) => data)
-a.then(data=> 
-    data.forEach(item => {renderData(item.name, item.link)}))
-.catch(err => {
-    console.log(err)})
+export {renderCard, renderData, openImgPreview, galleryList, pullCard, cardData};
 
-    // a.forEach(item => {renderData(item.name, item.link)})
+// const deleteCard = (cardData) => {
+//     return fetch(`${apiConfig.serverUrl}/cards/${cardData._Id}`, {
+//         method: 'DELETE',
+//         headers: apiConfig.headers,
+//         body: JSON.stringify(cardData),        
+//     })
+//     .then(res => {
+//         if (res.ok) {
+//             return res.json()
+//         } return Promise.reject(`error: ${res.status}`)
+//     })
 
+// }
+    
 
-
-
-
-// fetch('https://mesto.nomoreparties.co/v1/plus-cohort-12/cards', {
-//     headers: {
-//         authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1'
-//     }
-// })
-// .then(res => res.json())
-// .then(res => {
-//     res.forEach(item => {renderData(item.name, item.link)});
-// })
-
-// fetch('https://mesto.nomoreparties.co/v1/plus-cohort-12/cards', {
-//     headers: {
-//         authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1'
-//     }
-// })
-// .then(res => res.json())
-// .then(res => console.log(res))
-
-
-
-
-export {renderCard, renderData, openImgPreview, galleryList};
