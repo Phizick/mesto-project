@@ -3,6 +3,8 @@ import { openPopup, closePopup } from "./components/modal.js";
 import { renderData, galleryList, openImgPreview, renderCard } from './components/card.js';
 import { clearValidity, enableValidation } from './components/validate.js';
 import { pullCard, cardData } from './components/card.js';
+import { apiConfig } from './components/card.js';
+
 
 
 const popupProfileForm = document.querySelector(".popup__form-profile");
@@ -18,6 +20,7 @@ const popupAddCard = document.querySelector(".popup__img");
 const closeBtns = document.querySelectorAll(".popup__close-button");
 const imgLinkInput = popupAddCard.querySelector(".popup__input_data_imgUrl");
 const imgNameInput = popupAddCard.querySelector(".popup__input_data_imgName");
+const profileAvatar = document.querySelector('.profile__avatar-image');
 
 const validationConfig = {
     formSelector: ".popup__form",
@@ -35,7 +38,6 @@ profileEdit.addEventListener("click", () => {
     clearValidity(popupProfile);
     nameInput.value = profileName.textContent;
     jobInput.value = profileAbout.textContent;
-
 });
 
 closeBtns.forEach(button => {
@@ -50,12 +52,16 @@ buttonOpenPopupCard.addEventListener("click", () => {
 });
 
 formProfileSaveBtn.addEventListener("submit", evt => {
-    evt.preventDefault();
-    profileName.textContent = nameInput.value;
-    profileAbout.textContent = jobInput.value;
+    evt.preventDefault();    
     closePopup(popupProfile);
-  
-    
+    userProfile.name = nameInput.value;
+    userProfile.about = jobInput.value;    
+    editProfileData(userProfile)
+    .then((userProfile) => {
+    profileName.textContent = userProfile.name;
+    profileAbout.textContent = userProfile.about;        
+    })
+    .catch(err => {console.log(err)})
 });
 
 popupAddCard.addEventListener("submit", evt => {
@@ -76,19 +82,55 @@ galleryList.addEventListener('click', evt => openImgPreview(evt))
 
 enableValidation();
 
-export { validationConfig, popupAddCard };
+export { validationConfig, popupAddCard, userProfile };
 
 let userProfile = {
-    name: 'Denis Kraev',
-    about: 'power ranger',
+    name: '',
+    about: '',
     avatar: ''
 }
 
-// fetch('https://mesto.nomoreparties.co/v1/plus-cohort-12/users/me', {
-//     headers: {
-//         authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1'
-//     }
+const editProfileData = async (userProfile) => {
+    let res = await fetch(`${apiConfig.serverUrl}/users/me`, {
+        method: 'PATCH',
+        headers: apiConfig.headers,
+        body: JSON.stringify(userProfile)
+    })
+    if (res.status === 200) {        
+        return await res.json()        
+    }
+    throw new Error(res.status)    
+};
+
+const loadProfileData = async () => {
+    let res = await fetch(`${apiConfig.serverUrl}/users/me`, {        
+        headers: apiConfig.headers,        
+    })
+    if (res.status === 200) {        
+        return await res.json()        
+    }
+    throw new Error(res.status)    
+};
+
+
+loadProfileData()
+.then((userProfile) => {
+    profileName.textContent = userProfile.name;
+    profileAbout.textContent = userProfile.about;
+    profileAvatar.src = userProfile.avatar
+})
+.catch(err => {console.log(err)})
+
+
+// const editProfileAccept = editProfileData().then(data => data);
+// editProfileAccept.then(data => {
+//     userProfile.name = data.name;
+//     userProfile.about = data.about;
+//     userProfile.avatar = data.avatar;
 // })
+// .catch(err => {console.log(err)});
+
+
 // .then(res => res.json())
 // .then(res => {
 //     profileName.textContent = res.name;
@@ -96,49 +138,7 @@ let userProfile = {
 //     userProfile.avatar = res.avatar;
 //     console.log(res)
 // })
-
-
-
-
-
-
-
-// fetch('https://mesto.nomoreparties.co/v1/plus-cohort-12/cards', {
-//     headers: {
-//         authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1'
-//     }
-// })
-// .then(res => res.json())
-// .then(res => console.log(res))
-
-// fetch('https://nomoreparties.co/v1/plus-cohort-12/users/me', {
-//     headers: {
-//         authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1'
-//     }
-// })
-// .then(res => res.json())
-// .then(res => console.log(res))
-
-
-
-
-
-fetch('https://nomoreparties.co/v1/plus-cohort-12/users/me', {
-    method: 'PATCH',
-    headers: {
-        authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1',
-        'Content-Type': 'application/json'
-    },        
-    body: JSON.stringify(userProfile)
-})
-.then(res => res.json())
-.then(res => {
-    profileName.textContent = res.name;
-    profileAbout.textContent = res.about;
-    userProfile.avatar = res.avatar;
-    console.log(res)
-})
-.then(error => { console.log('error', error)})
+// .then(error => { console.log('error', error)})
 
 
 

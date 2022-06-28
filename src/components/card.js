@@ -1,4 +1,4 @@
-
+import { userProfile } from "../index.js";
 import { openPopup } from "./modal.js";
 
 const galleryList = document.querySelector(".gallery__grid");
@@ -6,6 +6,7 @@ const galleryTemplate = document.querySelector(".gallery__template").content;
 const popupOpenedImg = document.querySelector(".popup__img-opened");
 const imageContainer = document.querySelector(".image__container");
 const imageOpened = imageContainer.querySelector(".image__opened");
+
 
 const gallerySpec = {
     galleryItemClass: ".gallery__grid-item",
@@ -24,8 +25,6 @@ const cardData = {
     _Id: '',
     createdAt: ''
 };    
-    
-
 
 const openImgPreview = (evt) => {    
     if (evt.target.closest('.gallery__grid-image')) {    
@@ -58,8 +57,7 @@ const createNewCard = (cardData) => {
 const renderData = (name, link) => {
     cardData.name = `${name}`;
     cardData.link = `${link}`;       
-    renderCard(cardData);
-    
+    renderCard(cardData);    
 };
 
 const renderCard = (cardData) => {
@@ -76,19 +74,7 @@ const apiConfig = {
     userID: '7a744b5fd03159f0028e76c6'
 }
 
-// const pullCard = (cardData) => {
-//     return fetch(`${apiConfig.serverUrl}/cards`, {
-//         method: 'POST',
-//         headers: apiConfig.headers,
-//         body: JSON.stringify(cardData),        
-//     })
-//     .then(res => {
-//         if (res.ok) {
-//             return res.json()
-//         } return Promise.reject(`error: ${res.status}`)
-//     })
 
-// }
 
 const pullCard = async (cardData) => {
     let res = await fetch(`${apiConfig.serverUrl}/cards`, {
@@ -114,20 +100,11 @@ const loadedCards = loadCards().then(data => data);
 loadedCards.then(data => data.forEach(item => {renderData(item.name, item.link)}))
 .catch(err => {console.log(err)});
 
-export {renderCard, renderData, openImgPreview, galleryList, pullCard, cardData};
 
-// const deleteCard = (cardData) => {
-//     return fetch(`${apiConfig.serverUrl}/cards/${cardData._Id}`, {
-//         method: 'DELETE',
-//         headers: apiConfig.headers,
-//         body: JSON.stringify(cardData),        
-//     })
-//     .then(res => {
-//         if (res.ok) {
-//             return res.json()
-//         } return Promise.reject(`error: ${res.status}`)
-//     })
 
-// }
-    
+
+
+export {renderCard, renderData, openImgPreview, galleryList, pullCard, cardData, apiConfig};
+
+
 
