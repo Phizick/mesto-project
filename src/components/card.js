@@ -7,7 +7,6 @@ const popupOpenedImg = document.querySelector(".popup__img-opened");
 const imageContainer = document.querySelector(".image__container");
 const imageOpened = imageContainer.querySelector(".image__opened");
 
-
 const gallerySpec = {
     galleryItemClass: ".gallery__grid-item",
     galleryImgClass: ".gallery__grid-image",
@@ -43,14 +42,6 @@ const openImgPreview = (evt) => {
     }
 };
 
-// const deleteCard = () => {
-//     if (cardData.owner._id === userProfile._id) {
-//         .remove
-//     } else {
-//         return
-//     }
-// }
-
 const createNewCard = (cardData) => {    
     const { name, link} = cardData;
     const { _id} = cardData.owner;    
@@ -66,8 +57,7 @@ const createNewCard = (cardData) => {
     delItem.addEventListener("click", () => card.remove());
     likebtn.addEventListener("click", () => {
         likebtn.classList.toggle(galleryLikeStatus);
-    });    
-      
+    });     
     return card;
 };
 
@@ -81,7 +71,6 @@ const renderData = (name, link, owner_id) => {
 const renderCard = (cardData) => {
     galleryList.append(createNewCard(cardData));    
 };
-
 
 const apiConfig = {
     serverUrl: 'https://nomoreparties.co/v1/plus-cohort-12',
@@ -115,9 +104,6 @@ const loadCards = async () => {
 const loadedCards = loadCards().then(data => data);
 loadedCards.then(data => data.forEach(item => {renderData(item.name, item.link, item.owner._id)}))
 .catch(err => {console.log(err)});
-
-
-
 
 
 export {renderCard, renderData, openImgPreview, galleryList, pullCard, cardData, apiConfig};
