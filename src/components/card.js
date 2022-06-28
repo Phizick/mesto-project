@@ -113,35 +113,67 @@ const deleteCard = (cardData) => {
 export { pullCard, cardData}
 
     
-const renderCardArray = async () => {
-    const cardsArray = new Promise((res, rej) => {
-        fetch(`${apiConfig.serverUrl}/cards`, {
-        headers: apiConfig.headers
+// const renderCards = () => {
+//     return fetch(`${apiConfig.serverUrl}/cards`, {
+//         headers: apiConfig.headers
+//     })
+//     .then(res => {
+//         if (res.ok) {
+//             return res.json()
+//         }
+//         return Promise.reject(`error: ${res.status}`)
+//     })
+// }
+
+// renderCards()
+// .then ( cardData)
+
+
+
+
+async function loadJson() {
+    let response = await fetch('https://mesto.nomoreparties.co/v1/plus-cohort-12/cards', {
+        headers: {
+            authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1'
+        }
     });
-    .then
 
+    if (response.status === 200) {
+        return await response.json();
+    }
 
-    })
+    throw new Error(response.status);
 }
 
+const a = loadJson().then((data) => data)
+a.then(data=> 
+    data.forEach(item => {renderData(item.name, item.link)}))
+.catch(err => {
+    console.log(err)})
 
-fetch('https://mesto.nomoreparties.co/v1/plus-cohort-12/cards', {
-    headers: {
-        authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1'
-    }
-})
-.then(res => res.json())
-.then(res => {
-    res.forEach(item => {renderData(item.name, item.link)});
-})
+    // a.forEach(item => {renderData(item.name, item.link)})
 
-fetch('https://mesto.nomoreparties.co/v1/plus-cohort-12/cards', {
-    headers: {
-        authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1'
-    }
-})
-.then(res => res.json())
-.then(res => console.log(res))
+
+
+
+
+// fetch('https://mesto.nomoreparties.co/v1/plus-cohort-12/cards', {
+//     headers: {
+//         authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1'
+//     }
+// })
+// .then(res => res.json())
+// .then(res => {
+//     res.forEach(item => {renderData(item.name, item.link)});
+// })
+
+// fetch('https://mesto.nomoreparties.co/v1/plus-cohort-12/cards', {
+//     headers: {
+//         authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1'
+//     }
+// })
+// .then(res => res.json())
+// .then(res => console.log(res))
 
 
 
