@@ -22,8 +22,14 @@ const cardData = {
     link: '',
     likes: '',
     owner: '',
-    _Id: '',
-    createdAt: ''
+    _id: '',
+    createdAt: '',
+    owner: {
+        name: '',
+        about: '',
+        avatar: '',
+        _id: ''
+    }
 };    
 
 const openImgPreview = (evt) => {    
@@ -37,6 +43,14 @@ const openImgPreview = (evt) => {
     }
 };
 
+// const deleteCard = () => {
+//     if (cardData.owner._id === userProfile._id) {
+//         card.remove
+//     } else {
+//         return
+//     }
+// }
+
 const createNewCard = (cardData) => {    
     const { name, link} = cardData;
     const { galleryItemClass, galleryImgClass, galleryCardNameClass, galleryLikeClass, galleryLikeStatus, galleryDelButton, ...anySpec} = gallerySpec;
@@ -47,7 +61,9 @@ const createNewCard = (cardData) => {
     card.querySelector(galleryCardNameClass).textContent = name;
     const delItem = card.querySelector(galleryDelButton);    
     const likebtn = card.querySelector(galleryLikeClass);
-    delItem.addEventListener("click", () => card.remove());
+    delItem.addEventListener("click", () => {if (cardData.owner._id === userProfile._id) {
+        card.remove
+    }});
     likebtn.addEventListener("click", () => {
         likebtn.classList.toggle(galleryLikeStatus);
     });    
@@ -74,15 +90,13 @@ const apiConfig = {
     userID: '7a744b5fd03159f0028e76c6'
 }
 
-
-
 const pullCard = async (cardData) => {
     let res = await fetch(`${apiConfig.serverUrl}/cards`, {
                 method: 'POST',
                 headers: apiConfig.headers,
                 body: JSON.stringify(cardData),        
             })
-        if (res.status === 200) {
+        if (res.status === 200) {            
             return await res.json();
         }
         throw new Error(res.status)
@@ -90,7 +104,7 @@ const pullCard = async (cardData) => {
 
 const loadCards = async () => {
     let res = await fetch(`${apiConfig.serverUrl}/cards`, {headers: apiConfig.headers})
-    if (res.status === 200) {
+    if (res.status === 200) {        
         return await res.json();
     }
     throw new Error(res.status);

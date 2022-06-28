@@ -32,7 +32,6 @@ const validationConfig = {
 };
 
 
-
 profileEdit.addEventListener("click", () => {
     openPopup(popupProfile);
     clearValidity(popupProfile);
@@ -59,7 +58,8 @@ formProfileSaveBtn.addEventListener("submit", evt => {
     editProfileData(userProfile)
     .then((userProfile) => {
     profileName.textContent = userProfile.name;
-    profileAbout.textContent = userProfile.about;        
+    profileAbout.textContent = userProfile.about;
+    console.log(userProfile)        
     })
     .catch(err => {console.log(err)})
 });
@@ -87,7 +87,8 @@ export { validationConfig, popupAddCard, userProfile };
 let userProfile = {
     name: '',
     about: '',
-    avatar: ''
+    avatar: '',
+    _id: '7a744b5fd03159f0028e76c6'
 }
 
 const editProfileData = async (userProfile) => {
@@ -122,23 +123,6 @@ loadProfileData()
 .catch(err => {console.log(err)})
 
 
-// const editProfileAccept = editProfileData().then(data => data);
-// editProfileAccept.then(data => {
-//     userProfile.name = data.name;
-//     userProfile.about = data.about;
-//     userProfile.avatar = data.avatar;
-// })
-// .catch(err => {console.log(err)});
-
-
-// .then(res => res.json())
-// .then(res => {
-//     profileName.textContent = res.name;
-//     profileAbout.textContent = res.about;
-//     userProfile.avatar = res.avatar;
-//     console.log(res)
-// })
-// .then(error => { console.log('error', error)})
 
 
 
