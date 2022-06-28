@@ -66,10 +66,11 @@ formProfileSaveBtn.addEventListener("submit", evt => {
 
 popupAddCard.addEventListener("submit", evt => {
     evt.preventDefault();
-    renderData(imgNameInput.value, imgLinkInput.value);    
+    renderData(imgNameInput.value, imgLinkInput.value, apiConfig.userId);    
     closePopup(popupAddCard); 
     cardData.name = imgNameInput.value
     cardData.link = imgLinkInput.value
+    cardData.owner._id = apiConfig.userId
     pullCard(cardData)
     .then( (cardData) => {
         renderCard(cardData);
@@ -88,7 +89,7 @@ let userProfile = {
     name: '',
     about: '',
     avatar: '',
-    _id: '7a744b5fd03159f0028e76c6'
+    _id: ''
 }
 
 const editProfileData = async (userProfile) => {

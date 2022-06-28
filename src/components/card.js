@@ -45,7 +45,7 @@ const openImgPreview = (evt) => {
 
 // const deleteCard = () => {
 //     if (cardData.owner._id === userProfile._id) {
-//         card.remove
+//         .remove
 //     } else {
 //         return
 //     }
@@ -53,26 +53,28 @@ const openImgPreview = (evt) => {
 
 const createNewCard = (cardData) => {    
     const { name, link} = cardData;
+    const { _id} = cardData.owner;    
     const { galleryItemClass, galleryImgClass, galleryCardNameClass, galleryLikeClass, galleryLikeStatus, galleryDelButton, ...anySpec} = gallerySpec;
     const card = galleryTemplate.querySelector(galleryItemClass).cloneNode(true);
     const image = card.querySelector(galleryImgClass);
     image.src = link;
     image.alt = name;
     card.querySelector(galleryCardNameClass).textContent = name;
-    const delItem = card.querySelector(galleryDelButton);    
+    const delItem = card.querySelector(galleryDelButton);
+    (_id !== apiConfig.userId) && delItem.remove();       
     const likebtn = card.querySelector(galleryLikeClass);
-    delItem.addEventListener("click", () => {if (cardData.owner._id === userProfile._id) {
-        card.remove
-    }});
+    delItem.addEventListener("click", () => card.remove());
     likebtn.addEventListener("click", () => {
         likebtn.classList.toggle(galleryLikeStatus);
     });    
+      
     return card;
 };
 
-const renderData = (name, link) => {
+const renderData = (name, link, owner_id) => {
     cardData.name = `${name}`;
-    cardData.link = `${link}`;       
+    cardData.link = `${link}`; 
+    cardData.owner._id = `${owner_id}`         
     renderCard(cardData);    
 };
 
@@ -87,7 +89,7 @@ const apiConfig = {
         authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1',
         'Content-Type': 'application/json'
     },
-    userID: '7a744b5fd03159f0028e76c6'
+    userId: '7a744b5fd03159f0028e76c6'
 }
 
 const pullCard = async (cardData) => {
@@ -111,7 +113,7 @@ const loadCards = async () => {
 };
 
 const loadedCards = loadCards().then(data => data);
-loadedCards.then(data => data.forEach(item => {renderData(item.name, item.link)}))
+loadedCards.then(data => data.forEach(item => {renderData(item.name, item.link, item.owner._id)}))
 .catch(err => {console.log(err)});
 
 
