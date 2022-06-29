@@ -4,4 +4,31 @@
     height: 120px;    
     object-fit: cover;
     align-self: center; 
+    display: block;
+    opacity: 1;
+    transition: opacity .5s ease;
 }
+
+
+
+.profile__edit-btn {
+    background: url(../../../images/pensil.svg) center no-repeat;
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    opacity: 1;
+    transition: opacity .5s linear;
+    top: 15px;
+    left: 75px;
+    background-color: white;
+
+}
+
+.profile__avatar-image:hover {
+    opacity: .6;
+    cursor: pointer;
+}
+
+/* .profile__edit-btn:hover {
+    opacity: .2;
+} */

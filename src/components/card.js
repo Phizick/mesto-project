@@ -34,10 +34,10 @@ const cardData = {
 
 // const delSubmitDtn = document.getElementById('conf')
 
-const  deletingCard = () => {
-    openPopup(popupConfirmDel)
+// const  deletingCard = () => {
+//     openPopup(popupConfirmDel)
     
-}
+// }
 
 // delSubmitDtn.addEventListener("click", (card, _Id) => {
 //     deletingCard2(card, _Id)
