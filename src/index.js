@@ -40,10 +40,7 @@ const validationConfig = {
 
 popupAvatarEditBtn.addEventListener('click', () => {
     openPopup(popupAvatarEdit)
-})
-
-
-
+});
 
 profileEdit.addEventListener("click", () => {
     openPopup(popupProfile);
@@ -83,7 +80,6 @@ formProfileSaveBtn.addEventListener("submit", evt => {
     .then((userProfile) => {
     profileName.textContent = userProfile.name;
     profileAbout.textContent = userProfile.about;
-           
     })
     .catch(err => {console.log(err)})
 });

@@ -15,7 +15,8 @@ const gallerySpec = {
     galleryCardNameClass: ".gallery__grid-name",
     galleryLikeClass: ".gallery__grid-like",
     galleryLikeStatus: "gallery__grid-like_active",
-    galleryDelButton: ".gallery__delete-img-button"
+    galleryDelButton: ".gallery__delete-img-button",
+    galleryLikeCountClass: ".gallery__grid-like-count"
 };
 
 const cardData = {
@@ -67,12 +68,12 @@ const openImgPreview = (evt) => {
 const createNewCard = (cardData) => {    
     const { name, link, _Id, likes} = cardData;
     const { _id} = cardData.owner;        
-    const { galleryItemClass, galleryImgClass, galleryCardNameClass, galleryLikeClass, galleryLikeStatus, galleryDelButton, ...anySpec} = gallerySpec;
+    const { galleryItemClass, galleryImgClass, galleryCardNameClass, galleryLikeClass, galleryLikeStatus, galleryDelButton, galleryLikeCountClass, ...anySpec} = gallerySpec;
     const card = galleryTemplate.querySelector(galleryItemClass).cloneNode(true);
     const image = card.querySelector(galleryImgClass);
     image.src = link;
     image.alt = name;
-    const likeContainer = card.querySelector('.gallery__grid-like-count')
+    const likeContainer = card.querySelector(galleryLikeCountClass)
     const likebtn = card.querySelector(galleryLikeClass);
     const likeStatus = likes.find(elem => elem._id === apiConfig.userId) === undefined ? false : true;    
     likeStatus && likebtn.classList.add(galleryLikeStatus);  
@@ -81,17 +82,15 @@ const createNewCard = (cardData) => {
     
     card.querySelector(galleryCardNameClass).textContent = name;
     const delItem = card.querySelector(galleryDelButton);
-    (_id !== apiConfig.userId) && delItem.remove();       
+    (_id !== apiConfig.userId) && delItem.remove();    
     
-    // delItem.addEventListener("click", deletingCard );
     delItem.addEventListener('click', () => {
-        // closePopup(popupConfirmDel)
+        
         deleteCard(_Id).catch(err => console.log(err))         
         card.remove() 
-    })        
+    });    
     likebtn.addEventListener("click", () => {
-        likeCardAdd(_Id, likebtn, likeContainer, galleryLikeStatus)
-               
+        likeCardAdd(_Id, likebtn, likeContainer, galleryLikeStatus)               
     });     
     return card;
 };
@@ -144,8 +143,6 @@ const loadedCards = loadCards().then(data => data);
 loadedCards.then(data => data.forEach(item => {renderData(item.name, item.link, item.owner._id, item._id, item.likes)}))
 .catch(err => {console.log(err)});
 
-
-
 const deleteCard = async (_Id) => {
     let res = await fetch(`${apiConfig.serverUrl}/cards/${_Id}`, {
         method: 'DELETE',
@@ -168,9 +165,6 @@ const likeCardAddApi = async (_Id) => {
     throw new Error(res.status)
 };
 
-
-
-
 const likeCardRemoveApi = async (_Id) => {
     let res = await fetch(`${apiConfig.serverUrl}/cards/likes/${_Id}`, {
         method: 'DELETE',
@@ -180,8 +174,7 @@ const likeCardRemoveApi = async (_Id) => {
         return await res.json();
     } 
     throw new Error(res.status)
-
-}
+};
 
 const likeCardAdd = (_Id, likebtn, likeContainer, galleryLikeStatus) => {
     if (!likebtn.classList.contains(galleryLikeStatus)) {
