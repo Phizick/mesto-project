@@ -21,7 +21,7 @@ const cardData = {
     link: '',
     likes: '',
     owner: '',
-    _id: '',
+    _Id: '',
     createdAt: '',
     owner: {
         name: '',
@@ -43,28 +43,35 @@ const openImgPreview = (evt) => {
 };
 
 const createNewCard = (cardData) => {    
-    const { name, link} = cardData;
-    const { _id} = cardData.owner;    
+    const { name, link, _Id, likes} = cardData;
+    const { _id} = cardData.owner;       
     const { galleryItemClass, galleryImgClass, galleryCardNameClass, galleryLikeClass, galleryLikeStatus, galleryDelButton, ...anySpec} = gallerySpec;
     const card = galleryTemplate.querySelector(galleryItemClass).cloneNode(true);
     const image = card.querySelector(galleryImgClass);
     image.src = link;
     image.alt = name;
+    card.querySelector('.gallery__grid-like-count').textContent = likes.length
     card.querySelector(galleryCardNameClass).textContent = name;
     const delItem = card.querySelector(galleryDelButton);
     (_id !== apiConfig.userId) && delItem.remove();       
     const likebtn = card.querySelector(galleryLikeClass);
-    delItem.addEventListener("click", () => card.remove());
+    delItem.addEventListener("click", () => {
+        card.remove()
+        deletingCard()});
     likebtn.addEventListener("click", () => {
+        likeCardAdd(_Id)
+        console.log(_Id)
         likebtn.classList.toggle(galleryLikeStatus);
     });     
     return card;
 };
 
-const renderData = (name, link, owner_id) => {
+const renderData = (name, link, owner_id, _id, likes) => {
     cardData.name = `${name}`;
     cardData.link = `${link}`; 
-    cardData.owner._id = `${owner_id}`         
+    cardData.owner._id = `${owner_id}` 
+    cardData._Id = `${_id}`
+    cardData.likes = `${likes}`           
     renderCard(cardData);    
 };
 
@@ -102,9 +109,41 @@ const loadCards = async () => {
 };
 
 const loadedCards = loadCards().then(data => data);
-loadedCards.then(data => data.forEach(item => {renderData(item.name, item.link, item.owner._id)}))
+loadedCards.then(data => data.forEach(item => {renderData(item.name, item.link, item.owner._id, item._id, item.likes)}))
 .catch(err => {console.log(err)});
 
+
+const deleteCard = async () => {
+    let res = await fetch(`${apiConfig.serverUrl}/cards/${cardData._Id} `, {
+        method: 'DELETE',
+        header: apiConfig.headers,         
+    })
+    if (res.status === 200) {        
+        return await res.json();
+    }
+    throw new Error(res.status)
+};
+
+const deletingCard = () => {
+    deleteCard()    
+    .catch(err => (console.log(err)))
+}
+
+const likeCardAddApi = async (_Id) => {
+    let res = await fetch(`${apiConfig.serverUrl}/cards/likes/${_Id}` , {
+        method: 'PUT',
+        headers: apiConfig.headers        
+    })
+    if (res.status === 200) {
+        return await res.json();
+    } 
+    throw new Error(res.status)
+};
+
+const likeCardAdd = (_Id) => {
+    likeCardAddApi(_Id)
+    .catch(err => (console.log(err)))
+}
 
 export {renderCard, renderData, openImgPreview, galleryList, pullCard, cardData, apiConfig};
 

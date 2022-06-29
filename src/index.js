@@ -104,6 +104,7 @@ const editProfileData = async (userProfile) => {
     throw new Error(res.status)    
 };
 
+
 const loadProfileData = async () => {
     let res = await fetch(`${apiConfig.serverUrl}/users/me`, {        
         headers: apiConfig.headers,        
