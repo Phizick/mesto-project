@@ -4,6 +4,7 @@ import { renderData, galleryList, openImgPreview, renderCard } from './component
 import { clearValidity, enableValidation } from './components/validate.js';
 import { pullCard, cardData } from './components/card.js';
 import { apiConfig } from './components/card.js';
+// import { avatarEdit } from './components/card.js';
 
 
 
@@ -21,6 +22,11 @@ const closeBtns = document.querySelectorAll(".popup__close-button");
 const imgLinkInput = popupAddCard.querySelector(".popup__input_data_imgUrl");
 const imgNameInput = popupAddCard.querySelector(".popup__input_data_imgName");
 const profileAvatar = document.querySelector('.profile__avatar-image');
+const popupAvatarEdit = document.querySelector('.popup__avatar-edit');
+const popupAvatarEditBtn = document.querySelector('.profile__avatar-edit-btn');
+const popupAvatarSaveBtn = document.querySelector('.popup__avatar-save-button');
+const avatarInput = popupAvatarEdit.querySelector('.popup__input_data_avatarUrl');
+const avatEditForm = document.querySelector('.popup__form-avatar');
 
 
 const validationConfig = {
@@ -31,6 +37,11 @@ const validationConfig = {
     inputErrorClass: "popup__input-type-error",
     errorClass: "popup__input-error_active"    
 };
+
+popupAvatarEditBtn.addEventListener('click', () => {
+    openPopup(popupAvatarEdit)
+})
+
 
 
 
@@ -52,6 +63,17 @@ buttonOpenPopupCard.addEventListener("click", () => {
     clearValidity(popupAddCard);
 });
 
+avatEditForm.addEventListener('submit', evt => {
+    evt.preventDefault();
+    closePopup(popupAvatarEdit);
+    const avatar = avatarInput.value    
+    avatarEdit(avatar)    
+    .then((avatar) => {        
+        profileAvatar.src = avatar
+    })
+    .catch(err => {console.log(err)})
+})
+
 formProfileSaveBtn.addEventListener("submit", evt => {
     evt.preventDefault();    
     closePopup(popupProfile);
@@ -61,7 +83,7 @@ formProfileSaveBtn.addEventListener("submit", evt => {
     .then((userProfile) => {
     profileName.textContent = userProfile.name;
     profileAbout.textContent = userProfile.about;
-    console.log(userProfile)        
+           
     })
     .catch(err => {console.log(err)})
 });
@@ -85,7 +107,7 @@ galleryList.addEventListener('click', evt => openImgPreview(evt))
 
 enableValidation();
 
-export { validationConfig, popupAddCard, userProfile };
+export { validationConfig, popupAddCard, userProfile};
 
 let userProfile = {
     name: '',
@@ -104,6 +126,20 @@ const editProfileData = async (userProfile) => {
         return await res.json()        
     }
     throw new Error(res.status)    
+};
+
+const avatarEdit = async (avatar) => {
+    let res = await fetch(`${apiConfig.serverUrl}/users/me/avatar`, {
+        method: 'PATCH',
+        headers: apiConfig.headers,
+        body: JSON.stringify({
+            avatar: avatar
+        }),    
+    })
+    if (res.status === 200) {
+        return await res.json();
+    } 
+    throw new Error(res.status)
 };
 
 

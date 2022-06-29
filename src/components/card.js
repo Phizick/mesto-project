@@ -1,5 +1,6 @@
 import { userProfile } from "../index.js";
 import { closePopup, openPopup } from "./modal.js";
+import { avatar } from "../index.js";
 
 const galleryList = document.querySelector(".gallery__grid");
 const galleryTemplate = document.querySelector(".gallery__template").content;
@@ -72,13 +73,16 @@ const createNewCard = (cardData) => {
     image.src = link;
     image.alt = name;
     const likeContainer = card.querySelector('.gallery__grid-like-count')
-    const delSubmitDtn = document.getElementById('conf')
+    const likebtn = card.querySelector(galleryLikeClass);
+    const likeStatus = likes.find(elem => elem._id === apiConfig.userId) === undefined ? false : true;    
+    likeStatus && likebtn.classList.add(galleryLikeStatus);  
+    
     likeContainer.textContent = likes.length
     
     card.querySelector(galleryCardNameClass).textContent = name;
     const delItem = card.querySelector(galleryDelButton);
     (_id !== apiConfig.userId) && delItem.remove();       
-    const likebtn = card.querySelector(galleryLikeClass);
+    
     // delItem.addEventListener("click", deletingCard );
     delItem.addEventListener('click', () => {
         // closePopup(popupConfirmDel)
@@ -97,7 +101,7 @@ const renderData = (name, link, owner_id, _id, likes) => {
     cardData.link = `${link}`; 
     cardData.owner._id = `${owner_id}` 
     cardData._Id = `${_id}`
-    cardData.likes = likes                    
+    cardData.likes = likes          
     renderCard(cardData);    
 };
 
