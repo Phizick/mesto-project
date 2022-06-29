@@ -44,24 +44,26 @@ const openImgPreview = (evt) => {
 
 const createNewCard = (cardData) => {    
     const { name, link, _Id, likes} = cardData;
-    const { _id} = cardData.owner;       
+    const { _id} = cardData.owner;        
     const { galleryItemClass, galleryImgClass, galleryCardNameClass, galleryLikeClass, galleryLikeStatus, galleryDelButton, ...anySpec} = gallerySpec;
     const card = galleryTemplate.querySelector(galleryItemClass).cloneNode(true);
     const image = card.querySelector(galleryImgClass);
     image.src = link;
     image.alt = name;
-    card.querySelector('.gallery__grid-like-count').textContent = likes.length
+    const likeContainer = card.querySelector('.gallery__grid-like-count')
+    likeContainer.textContent = likes.length
+    
     card.querySelector(galleryCardNameClass).textContent = name;
     const delItem = card.querySelector(galleryDelButton);
     (_id !== apiConfig.userId) && delItem.remove();       
     const likebtn = card.querySelector(galleryLikeClass);
-    delItem.addEventListener("click", () => {
-        card.remove()
-        deletingCard()});
+    delItem.addEventListener("click", () => {        
+        deleteCard(_Id).catch(err => console.log(err))         
+        card.remove()       
+    });        
     likebtn.addEventListener("click", () => {
-        likeCardAdd(_Id)
-        console.log(_Id)
-        likebtn.classList.toggle(galleryLikeStatus);
+        likeCardAdd(_Id, likebtn, likeContainer, galleryLikeStatus)        
+        
     });     
     return card;
 };
@@ -71,7 +73,7 @@ const renderData = (name, link, owner_id, _id, likes) => {
     cardData.link = `${link}`; 
     cardData.owner._id = `${owner_id}` 
     cardData._Id = `${_id}`
-    cardData.likes = `${likes}`           
+    cardData.likes = likes                
     renderCard(cardData);    
 };
 
@@ -113,10 +115,11 @@ loadedCards.then(data => data.forEach(item => {renderData(item.name, item.link, 
 .catch(err => {console.log(err)});
 
 
-const deleteCard = async () => {
-    let res = await fetch(`${apiConfig.serverUrl}/cards/${cardData._Id} `, {
+
+const deleteCard = async (_Id) => {
+    let res = await fetch(`${apiConfig.serverUrl}/cards/${_Id}`, {
         method: 'DELETE',
-        header: apiConfig.headers,         
+        headers: apiConfig.headers        
     })
     if (res.status === 200) {        
         return await res.json();
@@ -124,13 +127,8 @@ const deleteCard = async () => {
     throw new Error(res.status)
 };
 
-const deletingCard = () => {
-    deleteCard()    
-    .catch(err => (console.log(err)))
-}
-
 const likeCardAddApi = async (_Id) => {
-    let res = await fetch(`${apiConfig.serverUrl}/cards/likes/${_Id}` , {
+    let res = await fetch(`${apiConfig.serverUrl}/cards/likes/${_Id}`, {
         method: 'PUT',
         headers: apiConfig.headers        
     })
@@ -140,8 +138,11 @@ const likeCardAddApi = async (_Id) => {
     throw new Error(res.status)
 };
 
-const likeCardAdd = (_Id) => {
+
+const likeCardAdd = (_Id, likebtn, likeContainer, galleryLikeStatus) => {
+    likebtn.classList.add(galleryLikeStatus);
     likeCardAddApi(_Id)
+    .then(data => likeContainer.textContent = data.likes.length)
     .catch(err => (console.log(err)))
 }
 
