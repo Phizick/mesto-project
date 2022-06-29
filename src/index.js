@@ -22,6 +22,7 @@ const imgLinkInput = popupAddCard.querySelector(".popup__input_data_imgUrl");
 const imgNameInput = popupAddCard.querySelector(".popup__input_data_imgName");
 const profileAvatar = document.querySelector('.profile__avatar-image');
 
+
 const validationConfig = {
     formSelector: ".popup__form",
     inputSelector: ".popup__input",
@@ -30,6 +31,7 @@ const validationConfig = {
     inputErrorClass: "popup__input-type-error",
     errorClass: "popup__input-error_active"    
 };
+
 
 
 profileEdit.addEventListener("click", () => {
@@ -66,11 +68,11 @@ formProfileSaveBtn.addEventListener("submit", evt => {
 
 popupAddCard.addEventListener("submit", evt => {
     evt.preventDefault();
-    renderData(imgNameInput.value, imgLinkInput.value, apiConfig.userId);    
+    renderData(imgNameInput.value, imgLinkInput.value, apiConfig.userId, apiConfig._id, apiConfig.likes);    
     closePopup(popupAddCard); 
     cardData.name = imgNameInput.value
     cardData.link = imgLinkInput.value
-    cardData.owner._id = apiConfig.userId
+    cardData.owner._id = apiConfig.userId    
     pullCard(cardData)
     .then( (cardData) => {
         renderCard(cardData);

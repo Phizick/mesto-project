@@ -1,11 +1,12 @@
 import { userProfile } from "../index.js";
-import { openPopup } from "./modal.js";
+import { closePopup, openPopup } from "./modal.js";
 
 const galleryList = document.querySelector(".gallery__grid");
 const galleryTemplate = document.querySelector(".gallery__template").content;
 const popupOpenedImg = document.querySelector(".popup__img-opened");
 const imageContainer = document.querySelector(".image__container");
 const imageOpened = imageContainer.querySelector(".image__opened");
+const popupConfirmDel = document.querySelector('.popup__delete-confirm')
 
 const gallerySpec = {
     galleryItemClass: ".gallery__grid-item",
@@ -29,7 +30,27 @@ const cardData = {
         avatar: '',
         _id: ''
     }
-};    
+};   
+
+// const delSubmitDtn = document.getElementById('conf')
+
+const  deletingCard = () => {
+    openPopup(popupConfirmDel)
+    
+}
+
+// delSubmitDtn.addEventListener("click", (card, _Id) => {
+//     deletingCard2(card, _Id)
+//     closePopup(popupConfirmDel)
+
+// })
+
+// const deletingCard2 = (card, _Id) => {
+//  deleteCard(_Id).catch(err => console.log(err))         
+//         card.remove()
+// }
+
+
 
 const openImgPreview = (evt) => {    
     if (evt.target.closest('.gallery__grid-image')) {    
@@ -51,19 +72,22 @@ const createNewCard = (cardData) => {
     image.src = link;
     image.alt = name;
     const likeContainer = card.querySelector('.gallery__grid-like-count')
+    const delSubmitDtn = document.getElementById('conf')
     likeContainer.textContent = likes.length
     
     card.querySelector(galleryCardNameClass).textContent = name;
     const delItem = card.querySelector(galleryDelButton);
     (_id !== apiConfig.userId) && delItem.remove();       
     const likebtn = card.querySelector(galleryLikeClass);
-    delItem.addEventListener("click", () => {        
+    // delItem.addEventListener("click", deletingCard );
+    delItem.addEventListener('click', () => {
+        // closePopup(popupConfirmDel)
         deleteCard(_Id).catch(err => console.log(err))         
-        card.remove()       
-    });        
+        card.remove() 
+    })        
     likebtn.addEventListener("click", () => {
-        likeCardAdd(_Id, likebtn, likeContainer, galleryLikeStatus)        
-        
+        likeCardAdd(_Id, likebtn, likeContainer, galleryLikeStatus)
+               
     });     
     return card;
 };
@@ -73,7 +97,7 @@ const renderData = (name, link, owner_id, _id, likes) => {
     cardData.link = `${link}`; 
     cardData.owner._id = `${owner_id}` 
     cardData._Id = `${_id}`
-    cardData.likes = likes                
+    cardData.likes = likes                    
     renderCard(cardData);    
 };
 
@@ -87,7 +111,9 @@ const apiConfig = {
         authorization: 'c1b9d872-823e-43ab-9724-10a589fee2c1',
         'Content-Type': 'application/json'
     },
-    userId: '7a744b5fd03159f0028e76c6'
+    userId: '7a744b5fd03159f0028e76c6',
+    likes: '',
+    _id: ''
 }
 
 const pullCard = async (cardData) => {
@@ -139,12 +165,35 @@ const likeCardAddApi = async (_Id) => {
 };
 
 
+
+
+const likeCardRemoveApi = async (_Id) => {
+    let res = await fetch(`${apiConfig.serverUrl}/cards/likes/${_Id}`, {
+        method: 'DELETE',
+        headers: apiConfig.headers        
+    })
+    if (res.status === 200) {
+        return await res.json();
+    } 
+    throw new Error(res.status)
+
+}
+
 const likeCardAdd = (_Id, likebtn, likeContainer, galleryLikeStatus) => {
-    likebtn.classList.add(galleryLikeStatus);
+    if (!likebtn.classList.contains(galleryLikeStatus)) {
+        likebtn.classList.add(galleryLikeStatus);
     likeCardAddApi(_Id)
     .then(data => likeContainer.textContent = data.likes.length)
     .catch(err => (console.log(err)))
+    } else {
+        likebtn.classList.remove(galleryLikeStatus);
+    likeCardRemoveApi(_Id)
+    .then(data => likeContainer.textContent = data.likes.length)
+    .catch(err => (console.log(err)))
+    }    
 }
+
+
 
 export {renderCard, renderData, openImgPreview, galleryList, pullCard, cardData, apiConfig};
 
