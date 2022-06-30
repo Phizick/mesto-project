@@ -101,7 +101,6 @@ formProfileSaveBtn.addEventListener("submit", (evt) => {
 });
 
 popupAddCard.addEventListener("submit", (evt) => {
-    evt.preventDefault();
     closePopup(popupAddCard);
     cardData.name = imgNameInput.value;
     cardData.link = imgLinkInput.value;
