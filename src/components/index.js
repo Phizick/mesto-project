@@ -2,7 +2,7 @@ import "../pages/index.css";
 import { openPopup, closePopup } from "./modal";
 import { galleryList, openImgPreview, cardData, renderCard} from "./card";
 import { clearValidity, enableValidation } from "./validate";
-import { loadProfileData, avatarEdit, editProfileData, pullCard, apiConfig } from "./api";
+import { loadProfileData, avatarEdit, editProfileData, pullCard, apiConfig, loadCards } from "./api";
 
 const popupProfileForm = document.querySelector(".popup__form-profile");
 const profileEdit = document.querySelector(".profile__name-edit");
@@ -42,6 +42,23 @@ const userProfile = {
     _id: "",
 };
 
+Promise.all([loadProfileData(), loadCards()])
+    .then(([user, card]) => {
+        profileName.textContent = user.name;
+        profileAbout.textContent = user.about;
+        profileAvatar.src = user.avatar;      
+        card.forEach((item) => {
+            cardData.name = item.name;
+            cardData.link = item.link;
+            cardData.owner._id = item.owner._id;
+            cardData._Id = item._id;
+            cardData.likes = item.likes;
+            renderCard(cardData);
+        })      
+    })
+    .catch(err => {console.log(err)})
+
+
 popupAvatarEditBtn.addEventListener("click", () => {
     openPopup(popupAvatarEdit);
 });
@@ -65,13 +82,13 @@ buttonOpenPopupCard.addEventListener("click", () => {
 });
 
 avatEditForm.addEventListener("submit", (evt) => {
-    evt.preventDefault();
-    closePopup(popupAvatarEdit);
-    const avatar = avatarInput.value;
+    evt.preventDefault();   
     popupAvatarSaveBtn.textContent = "Сохранение...";
-    avatarEdit(avatar)
-        .then((avatar) => {
-            profileAvatar.src = avatar;
+    avatarEdit(avatarInput.value)
+        .then((data) => {
+            profileAvatar.src = data.avatar;
+            closePopup(popupAvatarEdit);
+            avatEditForm.reset()
         })
         .catch((err) => {
             console.log(err);
@@ -82,8 +99,7 @@ avatEditForm.addEventListener("submit", (evt) => {
 });
 
 formProfileSaveBtn.addEventListener("submit", (evt) => {
-    evt.preventDefault();
-    closePopup(popupProfile);
+    evt.preventDefault();    
     userProfile.name = nameInput.value;
     userProfile.about = jobInput.value;
     profileSaveBtns.textContent = "Сохранение...";
@@ -91,6 +107,7 @@ formProfileSaveBtn.addEventListener("submit", (evt) => {
         .then((userProfile) => {
             profileName.textContent = userProfile.name;
             profileAbout.textContent = userProfile.about;
+            closePopup(popupProfile);            
         })
         .catch((err) => {
             console.log(err);
@@ -101,15 +118,15 @@ formProfileSaveBtn.addEventListener("submit", (evt) => {
 });
 
 popupAddCard.addEventListener("submit", (evt) => {
-    evt.preventDefault();
-    closePopup(popupAddCard);
+    evt.preventDefault();    
     cardData.name = imgNameInput.value;
     cardData.link = imgLinkInput.value;
     cardData.owner._id = apiConfig.userId;
     (cardData._Id = ""), (cardData.likes = ""), (profileAddCardSaveBtn.textContent = "Добавление...");
     pullCard(cardData)
         .then((cardData) => {
-            renderCard(cardData);            
+            renderCard(cardData);
+            closePopup(popupAddCard);           
         })
         .catch((err) => {
             console.log(err);
@@ -122,16 +139,7 @@ popupAddCard.addEventListener("submit", (evt) => {
 
 galleryList.addEventListener("click", (evt) => openImgPreview(evt));
 
-enableValidation();
+enableValidation(validationConfig);
 
-loadProfileData()
-    .then((userProfile) => {
-        profileName.textContent = userProfile.name;
-        profileAbout.textContent = userProfile.about;
-        profileAvatar.src = userProfile.avatar;
-    })
-    .catch((err) => {
-        console.log(err);
-    });
 
 export { validationConfig, popupAddCard, userProfile };

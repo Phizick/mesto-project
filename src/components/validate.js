@@ -1,5 +1,5 @@
-import { validationConfig } from "./index";
-import { setEventListeners} from "./units";
+import { setEventListeners} from "./units.js";
+import { validationConfig } from './index'
 
 const showInputError = (formElement, inputElement, validationConfig) => {
     const { inputErrorClass, errorClass } = validationConfig;
@@ -26,7 +26,7 @@ const checkInputValidity = (formElement, inputElement) => {
 };
 
 const buttonCondition = (buttonSelected, inputList, validationConfig) => {
-    const { inactiveButtonClass, errorClass, inputErrorClass, ...anyConfig } = validationConfig;
+    const { inactiveButtonClass } = validationConfig;
     if (invalidInput(inputList)) {
         buttonSelected.classList.add(inactiveButtonClass);
         buttonSelected.disabled = true;
@@ -40,16 +40,16 @@ const invalidInput = (inputList) => {
     return inputList.some(inputElement => !inputElement.validity.valid);
 };
 
-const enableValidation = () => {
-    const { formSelector, ...anyConfig } = validationConfig;
+const enableValidation = (validationConfig) => {
+    const { formSelector } = validationConfig;
     const formList = Array.from(document.querySelectorAll(formSelector));
     formList.forEach(formElement => {
-        setEventListeners(formElement, anyConfig);
+        setEventListeners(formElement, validationConfig);
     })   
 };
 
 const resetValidation = (formElement, validationConfig) => {
-    const { errorClass, inputErrorClass, inactiveButtonClass, submitButtonSelector, ...anyConfig } = validationConfig;
+    const { errorClass, inputErrorClass, inactiveButtonClass, submitButtonSelector } = validationConfig;
     const errorItems = Array.from(formElement.querySelectorAll(`.${errorClass}`));    
     const inputList = Array.from(formElement.querySelectorAll(`.${inputErrorClass}`));
     const buttonItem = formElement.querySelector(submitButtonSelector);
@@ -64,10 +64,10 @@ const resetValidation = (formElement, validationConfig) => {
 };
 
 const clearValidity = (formItem) => {
-    const { formSelector, ...anyConfig } = validationConfig;
+    const { formSelector } = validationConfig;
     const formList = Array.from(formItem.querySelectorAll(formSelector));
     formList.forEach(formElement => {
-        resetValidation(formElement, anyConfig);
+        resetValidation(formElement, validationConfig);
         formElement.reset();
     })    
 };

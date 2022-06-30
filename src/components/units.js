@@ -8,28 +8,28 @@ const overlayClose = (evt => {!evt.target.closest(".popup__container") & !evt.ta
 const resetDefaultAction = (evt => {evt.preventDefault()});
 
 const setEventListeners = (formElement, validationConfig) => {
-    const { inputSelector, submitButtonSelector, ...anyConfig } = validationConfig;
+    const { inputSelector, submitButtonSelector } = validationConfig;
     const inputList = Array.from(formElement.querySelectorAll(inputSelector));
     const buttonSelected = formElement.querySelector(submitButtonSelector);
     formElement.addEventListener("submit", resetDefaultAction);
     inputList.forEach(inputElement => {
         inputElement.addEventListener("input", () => {
-            checkInputValidity(formElement, inputElement, anyConfig);
-            buttonCondition(buttonSelected, inputList, anyConfig);
+            checkInputValidity(formElement, inputElement, validationConfig);
+            buttonCondition(buttonSelected, inputList, validationConfig);
         });
     });
-    buttonCondition(buttonSelected, inputList, anyConfig);
+    buttonCondition(buttonSelected, inputList, validationConfig);
 };
 
 const removeEventListeners = (formElement, validationConfig) => {
-    const { inputSelector, submitButtonSelector, ...anyConfig } = validationConfig;
+    const { inputSelector, submitButtonSelector } = validationConfig;
     const inputList = Array.from(formElement.querySelectorAll(inputSelector));
     const buttonSelected = formElement.querySelector(submitButtonSelector);
     formElement.removeEventListener("submit", resetDefaultAction);
     inputList.forEach(inputElement => {
         inputElement.removeEventListener("input", () => {
-            checkInputValidity(formElement, inputElement, anyConfig);
-            buttonCondition(buttonSelected, inputList, anyConfig);
+            checkInputValidity(formElement, inputElement, validationConfig);
+            buttonCondition(buttonSelected, inputList, validationConfig);
         });
     });
 };
