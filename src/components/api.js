@@ -9,8 +9,24 @@ const apiConfig = {
     _id: "",
 };
 
+// _checkResponse(res) {
+//     if (res.ok) {
+//         return res.json();
+//     }
+//     return Promise.reject(new Error (`Произошла ошибка со статус-кодом ${res.status}`));
+// };
+
+// _checkResponse(res) {
+//     if (res.status === 200) {
+//         return await res.json();
+//     }
+//     throw new Error(res.status);
+// };
+
+
+
 const pullCard = async (cardData) => {
-    let res = await fetch(`${apiConfig.serverUrl}/cards`, {
+    const res = await fetch(`${apiConfig.serverUrl}/cards`, {
         method: "POST",
         headers: apiConfig.headers,
         body: JSON.stringify(cardData),
@@ -21,8 +37,9 @@ const pullCard = async (cardData) => {
     throw new Error(res.status);
 };
 
+
 const loadCards = async () => {
-    let res = await fetch(`${apiConfig.serverUrl}/cards`, {
+    const res = await fetch(`${apiConfig.serverUrl}/cards`, {
         headers: apiConfig.headers,
     });
     if (res.status === 200) {
@@ -32,7 +49,7 @@ const loadCards = async () => {
 };
 
 const deleteCard = async (_Id) => {
-    let res = await fetch(`${apiConfig.serverUrl}/cards/${_Id}`, {
+    const res = await fetch(`${apiConfig.serverUrl}/cards/${_Id}`, {
         method: "DELETE",
         headers: apiConfig.headers,
     });
@@ -43,7 +60,7 @@ const deleteCard = async (_Id) => {
 };
 
 const likeCardAddApi = async (_Id) => {
-    let res = await fetch(`${apiConfig.serverUrl}/cards/likes/${_Id}`, {
+    const res = await fetch(`${apiConfig.serverUrl}/cards/likes/${_Id}`, {
         method: "PUT",
         headers: apiConfig.headers,
     });
@@ -54,7 +71,7 @@ const likeCardAddApi = async (_Id) => {
 };
 
 const likeCardRemoveApi = async (_Id) => {
-    let res = await fetch(`${apiConfig.serverUrl}/cards/likes/${_Id}`, {
+    const res = await fetch(`${apiConfig.serverUrl}/cards/likes/${_Id}`, {
         method: "DELETE",
         headers: apiConfig.headers,
     });
@@ -65,7 +82,7 @@ const likeCardRemoveApi = async (_Id) => {
 };
 
 const editProfileData = async (userProfile) => {
-    let res = await fetch(`${apiConfig.serverUrl}/users/me`, {
+    const res = await fetch(`${apiConfig.serverUrl}/users/me`, {
         method: "PATCH",
         headers: apiConfig.headers,
         body: JSON.stringify(userProfile),
@@ -77,7 +94,7 @@ const editProfileData = async (userProfile) => {
 };
 
 const avatarEdit = async (avatar) => {
-    let res = await fetch(`${apiConfig.serverUrl}/users/me/avatar`, {
+    const res = await fetch(`${apiConfig.serverUrl}/users/me/avatar`, {
         method: "PATCH",
         headers: apiConfig.headers,
         body: JSON.stringify({
@@ -91,7 +108,7 @@ const avatarEdit = async (avatar) => {
 };
 
 const loadProfileData = async () => {
-    let res = await fetch(`${apiConfig.serverUrl}/users/me`, {
+    const res = await fetch(`${apiConfig.serverUrl}/users/me`, {
         headers: apiConfig.headers,
     });
     if (res.status === 200) {
@@ -99,5 +116,7 @@ const loadProfileData = async () => {
     }
     throw new Error(res.status);
 };
+
+
 
 export { loadProfileData, avatarEdit, editProfileData, likeCardAddApi, likeCardRemoveApi, deleteCard, loadCards, pullCard, apiConfig };

@@ -8,6 +8,7 @@ const imageContainer = document.querySelector(".image__container");
 const imageOpened = imageContainer.querySelector(".image__opened");
 const popupConfirmDel = document.querySelector(".popup__delete-confirm");
 const formDelete = document.querySelector(".popup__form-delete");
+const imageOpenedTitel = imageContainer.querySelector('.image__opened-title');
 
 const gallerySpec = {
     galleryItemClass: ".gallery__grid-item",
@@ -38,7 +39,7 @@ const openImgPreview = (evt) => {
     if (evt.target.closest(".gallery__grid-image")) {
         imageOpened.src = evt.target.src;
         imageOpened.alt = evt.target.alt;
-        imageContainer.querySelector(".image__opened-title").textContent = evt.target.alt;
+        imageOpenedTitel.textContent = evt.target.alt;
         openPopup(popupOpenedImg);
     } else {
         return;
@@ -67,7 +68,7 @@ const createNewCard = (cardData) => {
         popupConfirmDel.dataset.Id = _Id;   
     });
     likebtn.addEventListener("click", () => {
-        likeCardAdd(_Id, likebtn, likeContainer, galleryLikeStatus);
+        likeCardAdd(card, likebtn, likeContainer, galleryLikeStatus);
     });
     return card;
 };
@@ -98,34 +99,19 @@ const renderCard = (cardData) => {
     galleryList.append(createNewCard(cardData));
 };
 
-const loadedCards = loadCards().then((data) => data);
-loadedCards
-    .then((data) =>
-        data.forEach((item) => {
-            cardData.name = item.name;
-            cardData.link = item.link;
-            cardData.owner._id = item.owner._id;
-            cardData._Id = item._id;
-            cardData.likes = item.likes;
-            renderCard(cardData);
-        })
-    )
-    .catch((err) => {
-        console.log(err);
-    });
 
-const likeCardAdd = (_Id, likebtn, likeContainer, galleryLikeStatus) => {
-    if (!likebtn.classList.contains(galleryLikeStatus)) {
-        likebtn.classList.add(galleryLikeStatus);
-        likeCardAddApi(_Id)
-            .then((data) => (likeContainer.textContent = data.likes.length))
+const likeCardAdd = (card, likebtn, likeContainer, galleryLikeStatus) => {
+    if (!likebtn.classList.contains(galleryLikeStatus)) {        
+        likeCardAddApi(card.dataset.id)            
+            .then((res) => (likeContainer.textContent = res.likes.length),
+            likebtn.classList.add(galleryLikeStatus))
             .catch((err) => console.log(err));
-    } else {
-        likebtn.classList.remove(galleryLikeStatus);
-        likeCardRemoveApi(_Id)
-            .then((data) => (likeContainer.textContent = data.likes.length))
+    } else {        
+        likeCardRemoveApi(card.dataset.id)            
+            .then((res) => (likeContainer.textContent = res.likes.length),
+            likebtn.classList.remove(galleryLikeStatus))
             .catch((err) => console.log(err));
     }
 };
 
-export { openImgPreview, galleryList, cardData, renderCard, loadedCards};
+export { openImgPreview, galleryList, cardData, renderCard};
