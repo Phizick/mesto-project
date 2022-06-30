@@ -1,0 +1,26 @@
+.profile__avatar-edit-btn {
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    border: none;    
+    background: transparent;
+    cursor: pointer;
+    border-radius: 50%;    
+}
+
+.profile__avatar-edit-btn::after {
+    content: '';
+    width: 100%;
+    position: absolute;
+    background: url('../../../images/pensil.svg') no-repeat center rgba(0, 0, 0, .8);
+    background-size: 26px 26px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity .3s ease;
+}
+
+.profile__avatar-edit-btn:hover::after {
+    opacity: 1;
+}

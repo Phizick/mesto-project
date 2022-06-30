@@ -1,4 +1,4 @@
-import { keyClose, overlayClose } from "./units.js";
+import { keyClose, overlayClose } from "./units";
 
 const openPopup = (item => {
     item.classList.add("popup_opened");

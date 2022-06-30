@@ -1,5 +1,5 @@
-import { buttonCondition, checkInputValidity } from "./validate.js";
-import { closePopup } from "./modal.js";
+import { buttonCondition, checkInputValidity } from "./validate";
+import { closePopup } from "./modal";
 
 const keyClose = (evt => {evt.keyCode == 27 && closePopup(document.querySelector(".popup_opened"))});
 
