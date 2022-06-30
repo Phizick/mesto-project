@@ -1,5 +1,5 @@
 import { closePopup, openPopup } from "./modal";
-import { deleteCard, likeCardAddApi, likeCardRemoveApi } from "./api";
+import { deleteCard, likeCardAddApi, likeCardRemoveApi, apiConfig } from "./api";
 
 const galleryList = document.querySelector(".gallery__grid");
 const galleryTemplate = document.querySelector(".gallery__template").content;
@@ -79,13 +79,14 @@ function confirmDeleteCard(evt) {
     evt.preventDefault();
     const deleteId = popupConfirmDel.dataset.Id;
     deletingCard(deleteId);
-    closePopup(popupConfirmDel);
+    ;
 };
 
 function deletingCard(deleteId) {
     deleteCard(deleteId)
         .then(() => {
-            document.querySelector(`.gallery__grid-item[data-id="${deleteId}"]`).remove();
+            document.querySelector(`.gallery__grid-item[data-id="${deleteId}"]`).remove(),
+            closePopup(popupConfirmDel);
         })
         .catch((err) => {
             console.log(err);
