@@ -10,7 +10,7 @@ const apiConfig = {
 };
 
 const checkResponse = (res) => {
-    if (res.ok) {
+    if (res.status === 200) {
         return res.json();
     }
     return Promise.reject(new Error (`Error ${res.status}`));

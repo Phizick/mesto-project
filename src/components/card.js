@@ -1,5 +1,5 @@
 import { closePopup, openPopup } from "./modal";
-import { likeCardAddApi, likeCardRemoveApi, deleteCard, apiConfig } from "./api";
+import { deleteCard, likeCardAddApi, likeCardRemoveApi } from "./api";
 
 const galleryList = document.querySelector(".gallery__grid");
 const galleryTemplate = document.querySelector(".gallery__template").content;
