@@ -36,14 +36,6 @@ const cardData = {
 };   
 
 
-// var openModals({remove}) => {
-//     if (true) { 
-//         remove()
-//     }
-// }
-
-// if (confirm('удалить')) ()
-
 
 const openImgPreview = (evt) => {    
     if (evt.target.closest('.gallery__grid-image')) {    
@@ -56,8 +48,6 @@ const openImgPreview = (evt) => {
     }
 };
 
-
-
 const createNewCard = (cardData) => {    
     const { name, link, _Id, likes} = cardData;
     const { _id} = cardData.owner;        
@@ -69,8 +59,8 @@ const createNewCard = (cardData) => {
     card.dataset.id = _Id;
     const likeContainer = card.querySelector(galleryLikeCountClass)
     const likebtn = card.querySelector(galleryLikeClass);
-    // const likeStatus = likes.find(elem => elem._id === apiConfig.userId) === undefined ? false : true;    
-    // likeStatus && likebtn.classList.add(galleryLikeStatus);  
+    const likeStatus = likes.find(elem => elem._id === apiConfig.userId) === undefined ? false : true;    
+    likeStatus && likebtn.classList.add(galleryLikeStatus);  
     
     likeContainer.textContent = likes.length
     
@@ -113,7 +103,7 @@ const renderData = (name, link, owner_id, _id, likes) => {
     cardData.link = `${link}`; 
     cardData.owner._id = `${owner_id}` 
     cardData._Id = `${_id}`
-    cardData.likes = likes          
+    cardData.likes = likes      
     renderCard(cardData);    
 };
 

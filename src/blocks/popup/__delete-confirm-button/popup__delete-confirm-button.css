@@ -1,8 +1,8 @@
 .popup__delete-confirm-button {
-    width: 358px;
-    margin: 36px;
+    width: 358px;    
     height: 50px;
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
+    margin-top: 0;
 }

@@ -4,8 +4,6 @@ import { renderData, galleryList, openImgPreview, renderCard } from './component
 import { clearValidity, enableValidation } from './components/validate.js';
 import { pullCard, cardData } from './components/card.js';
 import { apiConfig } from './components/card.js';
-// import { avatarEdit } from './components/card.js';
-
 
 
 const popupProfileForm = document.querySelector(".popup__form-profile");
@@ -27,6 +25,8 @@ const popupAvatarEditBtn = document.querySelector('.profile__avatar-edit-btn');
 const popupAvatarSaveBtn = document.querySelector('.popup__avatar-save-button');
 const avatarInput = popupAvatarEdit.querySelector('.popup__input_data_avatarUrl');
 const avatEditForm = document.querySelector('.popup__form-avatar');
+const profileSaveBtns = document.querySelector('.popup__profile-save-button');
+const profileAddCardSaveBtn = document.querySelector('.popup__card-save-button');
 
 
 const validationConfig = {
@@ -63,39 +63,45 @@ buttonOpenPopupCard.addEventListener("click", () => {
 avatEditForm.addEventListener('submit', evt => {
     evt.preventDefault();
     closePopup(popupAvatarEdit);
-    const avatar = avatarInput.value    
+    const avatar = avatarInput.value
+    popupAvatarSaveBtn.textContent = 'Сохранение...';
     avatarEdit(avatar)    
     .then((avatar) => {        
         profileAvatar.src = avatar
     })
     .catch(err => {console.log(err)})
+    .finally(() => {popupAvatarSaveBtn.textContent = 'Сохранить';})
 })
 
 formProfileSaveBtn.addEventListener("submit", evt => {
     evt.preventDefault();    
     closePopup(popupProfile);
     userProfile.name = nameInput.value;
-    userProfile.about = jobInput.value;    
+    userProfile.about = jobInput.value;
+    profileSaveBtns.textContent = 'Сохранение...';    
     editProfileData(userProfile)
     .then((userProfile) => {
     profileName.textContent = userProfile.name;
     profileAbout.textContent = userProfile.about;
     })
     .catch(err => {console.log(err)})
+    .finally(() => {profileSaveBtns.textContent = 'Сохранить';})
 });
 
 popupAddCard.addEventListener("submit", evt => {
     evt.preventDefault();
-    renderData(imgNameInput.value, imgLinkInput.value, apiConfig.userId, apiConfig._id, apiConfig.likes);    
+    renderData(imgNameInput.value, imgLinkInput.value, apiConfig.userId, cardData._Id, cardData.likes);    
     closePopup(popupAddCard); 
     cardData.name = imgNameInput.value
     cardData.link = imgLinkInput.value
-    cardData.owner._id = apiConfig.userId    
+    cardData.owner._id = apiConfig.userId
+    profileAddCardSaveBtn.textContent = 'Сохранение...';     
     pullCard(cardData)
     .then( (cardData) => {
         renderCard(cardData);
     })
     .catch(err => { console.log(err)})
+    .finally(() => {profileAddCardSaveBtn.textContent = 'Сохранить';})
     
 });
 
