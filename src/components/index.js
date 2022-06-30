@@ -77,7 +77,7 @@ avatEditForm.addEventListener("submit", (evt) => {
             console.log(err);
         })
         .finally(() => {
-            popupAvatarSaveBtn.textContent = "Сохранить";
+            popupAvatarSaveBtn.textContent = "Сохранить";           
         });
 });
 
@@ -101,6 +101,7 @@ formProfileSaveBtn.addEventListener("submit", (evt) => {
 });
 
 popupAddCard.addEventListener("submit", (evt) => {
+    evt.preventDefault();
     closePopup(popupAddCard);
     cardData.name = imgNameInput.value;
     cardData.link = imgLinkInput.value;
@@ -108,13 +109,14 @@ popupAddCard.addEventListener("submit", (evt) => {
     (cardData._Id = ""), (cardData.likes = ""), (profileAddCardSaveBtn.textContent = "Добавление...");
     pullCard(cardData)
         .then((cardData) => {
-            renderCard(cardData);
+            renderCard(cardData);            
         })
         .catch((err) => {
             console.log(err);
         })
         .finally(() => {
             profileAddCardSaveBtn.textContent = "Добавить";
+            location.reload()
         });
 });
 

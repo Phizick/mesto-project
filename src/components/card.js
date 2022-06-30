@@ -64,7 +64,7 @@ const createNewCard = (cardData) => {
     _id !== apiConfig.userId && delItem.remove();
     delItem.addEventListener("click", (evt) => {
         openPopup(popupConfirmDel);
-        popupConfirmDel.dataset.Id = _Id;        
+        popupConfirmDel.dataset.Id = _Id;   
     });
     likebtn.addEventListener("click", () => {
         likeCardAdd(_Id, likebtn, likeContainer, galleryLikeStatus);
@@ -128,4 +128,4 @@ const likeCardAdd = (_Id, likebtn, likeContainer, galleryLikeStatus) => {
     }
 };
 
-export { openImgPreview, galleryList, cardData, renderCard };
+export { openImgPreview, galleryList, cardData, renderCard, loadedCards};
