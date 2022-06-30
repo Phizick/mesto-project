@@ -85,8 +85,8 @@ avatEditForm.addEventListener("submit", (evt) => {
     evt.preventDefault();   
     popupAvatarSaveBtn.textContent = "Сохранение...";
     avatarEdit(avatarInput.value)
-        .then((avatar) => {
-            profileAvatar.src = avatarInput.value;
+        .then((data) => {
+            profileAvatar.src = data.avatar;
             closePopup(popupAvatarEdit);
             avatEditForm.reset()
         })
