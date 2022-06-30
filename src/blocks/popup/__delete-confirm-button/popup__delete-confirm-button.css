@@ -6,3 +6,9 @@
     line-height: 22px;
     margin-top: 0;
 }
+
+@media screen and (max-width: 610px) {
+    .popup__delete-confirm-button {
+        max-width: 238px;
+    }
+}

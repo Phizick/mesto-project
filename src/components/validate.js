@@ -1,5 +1,5 @@
-import { validationConfig } from "../index.js";
-import { setEventListeners} from "./units.js";
+import { validationConfig } from "./index";
+import { setEventListeners} from "./units";
 
 const showInputError = (formElement, inputElement, validationConfig) => {
     const { inputErrorClass, errorClass } = validationConfig;
