@@ -93,12 +93,12 @@ const editProfileData = async (userProfile) => {
     throw new Error(res.status);
 };
 
-const avatarEdit = async (avatar) => {
+const avatarEdit = async (image) => {
     const res = await fetch(`${apiConfig.serverUrl}/users/me/avatar`, {
         method: "PATCH",
         headers: apiConfig.headers,
         body: JSON.stringify({
-            avatar: avatar,
+            avatar: image
         }),
     });
     if (res.status === 200) {

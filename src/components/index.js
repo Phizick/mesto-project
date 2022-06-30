@@ -82,13 +82,13 @@ buttonOpenPopupCard.addEventListener("click", () => {
 });
 
 avatEditForm.addEventListener("submit", (evt) => {
-    evt.preventDefault();    
-    const avatar = avatarInput.value;
+    evt.preventDefault();   
     popupAvatarSaveBtn.textContent = "Сохранение...";
-    avatarEdit(avatar)
+    avatarEdit(avatarInput.value)
         .then((avatar) => {
-            profileAvatar.src = avatar;
+            profileAvatar.src = avatarInput.value;
             closePopup(popupAvatarEdit);
+            avatEditForm.reset()
         })
         .catch((err) => {
             console.log(err);
@@ -107,7 +107,7 @@ formProfileSaveBtn.addEventListener("submit", (evt) => {
         .then((userProfile) => {
             profileName.textContent = userProfile.name;
             profileAbout.textContent = userProfile.about;
-            closePopup(popupProfile);
+            closePopup(popupProfile);            
         })
         .catch((err) => {
             console.log(err);
@@ -139,7 +139,7 @@ popupAddCard.addEventListener("submit", (evt) => {
 
 galleryList.addEventListener("click", (evt) => openImgPreview(evt));
 
-enableValidation();
+enableValidation(validationConfig);
 
 
 export { validationConfig, popupAddCard, userProfile };
