@@ -34,24 +34,17 @@ const cardData = {
     }
 };   
 
-// const delSubmitDtn = document.getElementById('conf')
 
-// const  deletingCard = () => {
-//     openPopup(popupConfirmDel)
-    
-// }
+var openModals({remove}) => {
+    if (true) { 
+        remove()
+    }
+}
 
-// delSubmitDtn.addEventListener("click", (card, _Id) => {
-//     deletingCard2(card, _Id)
-//     closePopup(popupConfirmDel)
 
-// })
 
-// const deletingCard2 = (card, _Id) => {
-//  deleteCard(_Id).catch(err => console.log(err))         
-//         card.remove()
-// }
 
+if (confirm('удалить')) ()
 
 
 const openImgPreview = (evt) => {    
