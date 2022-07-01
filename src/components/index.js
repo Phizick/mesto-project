@@ -35,25 +35,27 @@ const validationConfig = {
     errorClass: "popup__input-error_active",
 };
 
-const userProfile = {
+const userProfile = { //обьект для хранения данных пользователя
     name: "",
     about: "",
     avatar: "",
     _id: "",
 };
 
+// закружаем все данные с сервера одним выражением (аватар, карточки, информацию профиля)
+
 Promise.all([loadProfileData(), loadCards()])
     .then(([user, card]) => {
         profileName.textContent = user.name;
         profileAbout.textContent = user.about;
         profileAvatar.src = user.avatar;      
-        card.forEach((item) => {
+        card.forEach((item) => {   //сразу отрисовываем все карточки из массива с сервера, назначаем свойства в вобьект хранения свойств карточек. передаем дальше его
             cardData.name = item.name;
             cardData.link = item.link;
             cardData.owner._id = item.owner._id;
             cardData._Id = item._id;
             cardData.likes = item.likes;
-            renderCard(cardData);
+            renderCard(cardData); //отправляем обьект со свойствами дальше на рендеринг
         })      
     })
     .catch(err => {console.log(err)})
@@ -84,17 +86,17 @@ buttonOpenPopupCard.addEventListener("click", () => {
 avatEditForm.addEventListener("submit", (evt) => {
     evt.preventDefault();   
     popupAvatarSaveBtn.textContent = "Сохранение...";
-    avatarEdit(avatarInput.value)
+    avatarEdit(avatarInput.value) //отправляем данные автара 
         .then((data) => {
             profileAvatar.src = data.avatar;
-            closePopup(popupAvatarEdit);
+            closePopup(popupAvatarEdit); //попапы закрываем после того, как пришел ответ от сервера, так везде
             avatEditForm.reset()
         })
         .catch((err) => {
             console.log(err);
         })
         .finally(() => {
-            popupAvatarSaveBtn.textContent = "Сохранить";           
+            popupAvatarSaveBtn.textContent = "Сохранить"; //нужно что-то указать что бы было понятно что все не повисло          
         });
 });
 
@@ -103,7 +105,7 @@ formProfileSaveBtn.addEventListener("submit", (evt) => {
     userProfile.name = nameInput.value;
     userProfile.about = jobInput.value;
     profileSaveBtns.textContent = "Сохранение...";
-    editProfileData(userProfile)
+    editProfileData(userProfile) //отправляем данные профайла( они хранятся в отдельном обьекте, так же как карточки)
         .then((userProfile) => {
             profileName.textContent = userProfile.name;
             profileAbout.textContent = userProfile.about;
@@ -123,7 +125,7 @@ popupAddCard.addEventListener("submit", (evt) => {
     cardData.link = imgLinkInput.value;
     cardData.owner._id = apiConfig.userId;
     (cardData._Id = ""), (cardData.likes = ""), (profileAddCardSaveBtn.textContent = "Добавление...");
-    pullCard(cardData)
+    pullCard(cardData) //отправляем карточку на сервер, так же обьектом
         .then((cardData) => {
             renderCard(cardData);
             closePopup(popupAddCard);           
@@ -139,7 +141,7 @@ popupAddCard.addEventListener("submit", (evt) => {
 
 galleryList.addEventListener("click", (evt) => openImgPreview(evt));
 
-enableValidation(validationConfig);
+enableValidation(validationConfig); //в валидации передаем только условия с настройками, далее везде
 
 
 export { validationConfig, popupAddCard, userProfile };

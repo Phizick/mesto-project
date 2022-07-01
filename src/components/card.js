@@ -20,7 +20,7 @@ const gallerySpec = {
     galleryLikeCountClass: ".gallery__grid-like-count",
 };
 
-const cardData = {
+const cardData = { //обьект для хранения всех свойств карточек
     name: "",
     link: "",
     likes: "",
@@ -57,15 +57,22 @@ const createNewCard = (cardData) => {
     card.dataset.id = _Id;
     const likeContainer = card.querySelector(galleryLikeCountClass);
     const likebtn = card.querySelector(galleryLikeClass);
-    const likeStatus = likes.find((elem) => elem._id === apiConfig.userId) === undefined ? false : true;
+    //проверяем есть в массиве лайков лайк от нас, поиском нашего userId. Выражение возвращает значение первого найденного элемента, в противном случае 
+    // вернет undefined. нам нужен ответ результата через условный оператор. если userId найден, то find не вернет undefined и все выражение вернет false,
+    // иначе - true
+    const likeStatus = likes.find((elem) => elem._id === apiConfig.userId) === undefined ? false : true; 
+    //активируем лайк, если мы не лайкали
     likeStatus && likebtn.classList.add(galleryLikeStatus);
     likeContainer.textContent = likes.length;
-    card.querySelector(galleryCardNameClass).textContent = name;
+    card.querySelector(galleryCardNameClass).textContent = name;    
     const delItem = card.querySelector(galleryDelButton);
+    // снимаем кнопки удаления с карточек простым условием
+    // если id владельца карточки не равен нашему userId - удаляем иконку
     _id !== apiConfig.userId && delItem.remove();
+    //удаление карточки через подтверждение
     delItem.addEventListener("click", (evt) => {
-        openPopup(popupConfirmDel);
-        popupConfirmDel.dataset.Id = _Id;   
+        openPopup(popupConfirmDel); //открыли попап с запросом удаления
+        popupConfirmDel.dataset.Id = _Id; //передали id карточки в атрибуты попапа
     });
     likebtn.addEventListener("click", () => {
         likeCardAdd(card, likebtn, likeContainer, galleryLikeStatus);
@@ -73,26 +80,26 @@ const createNewCard = (cardData) => {
     return card;
 };
 
-formDelete.addEventListener("submit", confirmDeleteCard);
+formDelete.addEventListener("submit", confirmDeleteCard); //при нажатии на кнопку происходит удаление карточки
 
 function confirmDeleteCard(evt) {
     evt.preventDefault();
-    const deleteId = popupConfirmDel.dataset.Id;
-    deletingCard(deleteId);
+    const deleteId = popupConfirmDel.dataset.Id; //забираем id карточки, из атрибутов
+    deletingCard(deleteId); //обрабатываем удаление карточки с заданным id
     ;
 };
 
 function deletingCard(deleteId) {
-    deleteCard(deleteId)
+    deleteCard(deleteId) //отправляем карточку на удаление с сервера
         .then(() => {
-            document.querySelector(`.gallery__grid-item[data-id="${deleteId}"]`).remove(),
+            document.querySelector(`.gallery__grid-item[data-id="${deleteId}"]`).remove(), //удаляем карточку из DOM
             closePopup(popupConfirmDel);
         })
         .catch((err) => {
             console.log(err);
         })
         .finally(() => {
-            popupConfirmDel.dataset.Id = "";
+            popupConfirmDel.dataset.Id = ""; //сбрасываем значение атрибута
         });
 };
 

@@ -9,7 +9,7 @@ const apiConfig = {
     _id: "",
 };
 
-const checkResponse = (res) => {
+const checkResponse = (res) => {  //делаем отдельную функцию для проверки ответа, что бы не плодить одинаковые куски кода
     if (res.status === 200) {
         return res.json();
     }
