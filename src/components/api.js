@@ -9,78 +9,89 @@ const apiConfig = {
     _id: "",
 };
 
-const checkResponse = (res) => {
-    if (res.status === 200) {
-        return res.json();
+
+export class Api {
+    constructor(apiConfig) {
+        this.apiConfig = apiConfig;
     }
-    return Promise.reject(new Error (`Error ${res.status}`));
-};
 
-const pullCard = async (cardData) => {
-    return fetch(`${apiConfig.serverUrl}/cards`, {
-        method: "POST",
-        headers: apiConfig.headers,
-        body: JSON.stringify(cardData),
-    })
-    .then (res => checkResponse(res))   
-};
+    _checkResponse(res) {
+        if (res.status === 200) {
+            return res.json();
+        }
+        return Promise.reject(new Error (`Error ${res.status}`));
+    }
 
-const loadCards = async () => {
-   return fetch(`${apiConfig.serverUrl}/cards`, {
-        headers: apiConfig.headers,
-    })
-    .then (res => checkResponse(res))
-};
+    pullCard({name, link}) {
+        return fetch(`${this.apiConfig.serverUrl}/cards`, {
+            method: "POST",
+            headers: this.apiConfig.headers,
+            body: JSON.stringify(cardData), //карддату поменять на валидную
+        })
+        .then (this._checkResponse)  
+    }
 
-const deleteCard = async (_Id) => {
-    return fetch(`${apiConfig.serverUrl}/cards/${_Id}`, {
-        method: "DELETE",
-        headers: apiConfig.headers,
-    })
-    .then (res => checkResponse(res))
-};
+    loadCards() {
+        return fetch(`${this.apiConfig.serverUrl}/cards`, {
+            headers: this.apiConfig.headers,
+        })
+        .then (this._checkResponse)
+    }
 
-const likeCardAddApi = async (_Id) => {
-    return fetch(`${apiConfig.serverUrl}/cards/likes/${_Id}`, {
-        method: "PUT",
-        headers: apiConfig.headers,
-    })
-    .then (res => checkResponse(res))
-};
+    deleteCard(_Id) {
+        return fetch(`${this.apiConfig.serverUrl}/cards/${_Id}`, {
+            method: "DELETE",
+            headers: this.apiConfig.headers,
+        })
+        .then (this._checkResponse)
+    }
 
-const likeCardRemoveApi = async (_Id) => {
-    return fetch(`${apiConfig.serverUrl}/cards/likes/${_Id}`, {
-        method: "DELETE",
-        headers: apiConfig.headers,
-    })
-    .then (res => checkResponse(res))
-};
+    likeCardAddApi(_Id) {
+        return fetch(`${this.apiConfig.serverUrl}/cards/likes/${_Id}`, {
+            method: "PUT",
+            headers: this.apiConfig.headers,
+        })
+        .then (this._checkResponse)
+    }
 
-const editProfileData = async (userProfile) => {
-   return fetch(`${apiConfig.serverUrl}/users/me`, {
-        method: "PATCH",
-        headers: apiConfig.headers,
-        body: JSON.stringify(userProfile),
-    })
-    .then (res => checkResponse(res))
-};
+    likeCardRemoveApi(_Id) {
+        return fetch(`${this.apiConfig.serverUrl}/cards/likes/${_Id}`, {
+            method: "DELETE",
+            headers: this.apiConfig.headers,
+        })
+        .then (this._checkResponse)
+    }
 
-const avatarEdit = async (image) => {
-    return fetch(`${apiConfig.serverUrl}/users/me/avatar`, {
-        method: "PATCH",
-        headers: apiConfig.headers,
-        body: JSON.stringify({
-            avatar: image
-        }),
-    })
-    .then (res => checkResponse(res))
-};
+    editProfileData(userProfile) {
+        return fetch(`${this.apiConfig.serverUrl}/users/me`, {
+            method: "PATCH",
+            headers: this.apiConfig.headers,
+            body: JSON.stringify(userProfile),
+        })
+        .then (this._checkResponse)
+    }
 
-const loadProfileData = async () => {
-    return fetch(`${apiConfig.serverUrl}/users/me`, {
-        headers: apiConfig.headers,
-    })
-    .then (res => checkResponse(res))
-};
+    avatarEdit(image) {
+        return fetch(`${this.apiConfig.serverUrl}/users/me/avatar`, {
+            method: "PATCH",
+            headers: this.apiConfig.headers,
+            body: JSON.stringify({
+                avatar: image
+            }),
+        })
+        .then (this._checkResponse)
+    }
 
-export { loadProfileData, avatarEdit, editProfileData, likeCardAddApi, likeCardRemoveApi, deleteCard, loadCards, pullCard, apiConfig };
+    loadProfileData() {
+        return fetch(`${this.apiConfig.serverUrl}/users/me`, {
+            headers: this.apiConfig.headers,
+        })
+        .then (this._checkResponse)
+   }
+   
+
+}
+
+
+
+
