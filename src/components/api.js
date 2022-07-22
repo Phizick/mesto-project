@@ -8,7 +8,13 @@
 //     likes: "",
 //     _id: "",
 // };
-
+const links = {
+    profile: '/users/me',
+    avatar: '/users/me/avatar',
+    cards: '/cards',
+    cardLike: '/cards/likes/',
+    cardDelete: '/cards/'
+}
 
 export default class Api {
     constructor(data) {
@@ -23,34 +29,64 @@ export default class Api {
         return Promise.reject(new Error (`Error ${res.status}`));
     }
 
-    _getData(link, method) {
-        return fetch(`${this._config.serverUrl}${link}`, {
+    _getData(links, method, id) {
+        return fetch(`${this._config.serverUrl}${links}${id}`, {
             method: method,
             headers: this._config.headers
         })
         .then (this._checkResponse)
     }
+
+    loadCards() {
+        return this._getData(this._link.cards, 'GET', '');
+    }
+
+    loadProfileData() {
+        return this._getData(this._link.profile, 'GET', '');
+    }
+
+    deleteCard() {
+        return this._getData(this._link.cardDelete, 'DELETE', id);
+    }
+
+    likeCardAdd() {
+        return this._getData(this._link.cardLike, 'PUT', '');
+    }
+
+    likeCardRemove() {
+        return this._getData(this._link.cardLike, 'DELETE', '');
+    }
+
+
+
+
+
+
+
+
+
+ 
 }
 
 
 
 
 
-//     pullCard({name, link}) {
-//         return fetch(`${this.apiConfig.serverUrl}/cards`, {
-//             method: "POST",
-//             headers: this.apiConfig.headers,
-//             body: JSON.stringify(cardData), //карддату поменять на валидную
-//         })
-//         .then (this._checkResponse)  
-//     }
+    // pullCard({name, link}) {
+    //     return fetch(`${this.apiConfig.serverUrl}/cards`, {
+    //         method: "POST",
+    //         headers: this.apiConfig.headers,
+    //         body: JSON.stringify(cardData), //карддату поменять на валидную
+    //     })
+    //     .then (this._checkResponse)  
+    // }
 
-//     loadCards() {
-//         return fetch(`${this.apiConfig.serverUrl}/cards`, {
-//             headers: this.apiConfig.headers,
-//         })
-//         .then (this._checkResponse)
-//     }
+    // loadCards() {
+    //     return fetch(`${this.apiConfig.serverUrl}/cards`, {
+    //         headers: this.apiConfig.headers,
+    //     })
+    //     .then (this._checkResponse)
+    // }
 
 //     deleteCard(_Id) {
 //         return fetch(`${this.apiConfig.serverUrl}/cards/${_Id}`, {
