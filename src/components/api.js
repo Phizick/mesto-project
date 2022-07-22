@@ -34,7 +34,16 @@ export default class Api {
             method: method,
             headers: this._config.headers
         })
-        .then (this._checkResponse)
+        .then (this._checkResponse);
+    }
+
+    _pushData(links, method, jsonInfo) {
+        return fetch(`${this._config.serverUrl}${links}`, {
+            method: method,
+            headers: this._config.headers,
+            body: JSON.stringify(jsonInfo)
+        })
+        .then (this._checkResponse);
     }
 
     loadCards() {
@@ -45,25 +54,29 @@ export default class Api {
         return this._getData(this._link.profile, 'GET', '');
     }
 
-    deleteCard() {
+    deleteCard(id) {
         return this._getData(this._link.cardDelete, 'DELETE', id);
     }
 
-    likeCardAdd() {
-        return this._getData(this._link.cardLike, 'PUT', '');
+    likeCardAdd(id) {
+        return this._getData(this._link.cardLike, 'PUT', id);
     }
 
-    likeCardRemove() {
-        return this._getData(this._link.cardLike, 'DELETE', '');
+    likeCardRemove(id) {
+        return this._getData(this._link.cardLike, 'DELETE', id);
     }
 
+    pushCard(data) {
+        return this._pushData(this._link.cards, 'POST', data);
+    }
 
+    editProfileData(data) {
+        return this._pushData(this._link.profile, 'PATCH', data);
+    }
 
-
-
-
-
-
+    avatarEdit(data) {
+        return this._pushData(this._link.avatar, 'PATCH', data);
+    }
 
  
 }
@@ -72,76 +85,4 @@ export default class Api {
 
 
 
-    // pullCard({name, link}) {
-    //     return fetch(`${this.apiConfig.serverUrl}/cards`, {
-    //         method: "POST",
-    //         headers: this.apiConfig.headers,
-    //         body: JSON.stringify(cardData), //карддату поменять на валидную
-    //     })
-    //     .then (this._checkResponse)  
-    // }
-
-    // loadCards() {
-    //     return fetch(`${this.apiConfig.serverUrl}/cards`, {
-    //         headers: this.apiConfig.headers,
-    //     })
-    //     .then (this._checkResponse)
-    // }
-
-//     deleteCard(_Id) {
-//         return fetch(`${this.apiConfig.serverUrl}/cards/${_Id}`, {
-//             method: "DELETE",
-//             headers: this.apiConfig.headers,
-//         })
-//         .then (this._checkResponse)
-//     }
-
-//     likeCardAddApi(_Id) {
-//         return fetch(`${this.apiConfig.serverUrl}/cards/likes/${_Id}`, {
-//             method: "PUT",
-//             headers: this.apiConfig.headers,
-//         })
-//         .then (this._checkResponse)
-//     }
-
-//     likeCardRemoveApi(_Id) {
-//         return fetch(`${this.apiConfig.serverUrl}/cards/likes/${_Id}`, {
-//             method: "DELETE",
-//             headers: this.apiConfig.headers,
-//         })
-//         .then (this._checkResponse)
-//     }
-
-//     editProfileData(userProfile) {
-//         return fetch(`${this.apiConfig.serverUrl}/users/me`, {
-//             method: "PATCH",
-//             headers: this.apiConfig.headers,
-//             body: JSON.stringify(userProfile),
-//         })
-//         .then (this._checkResponse)
-//     }
-
-//     avatarEdit(image) {
-//         return fetch(`${this.apiConfig.serverUrl}/users/me/avatar`, {
-//             method: "PATCH",
-//             headers: this.apiConfig.headers,
-//             body: JSON.stringify({
-//                 avatar: image
-//             }),
-//         })
-//         .then (this._checkResponse)
-//     }
-
-//     loadProfileData() {
-//         return fetch(`${this.apiConfig.serverUrl}/users/me`, {
-//             headers: this.apiConfig.headers,
-//         })
-//         .then (this._checkResponse)
-//    }
-   
-
-// }
-
-
-
-
+    
