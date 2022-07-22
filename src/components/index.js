@@ -26,14 +26,7 @@ const avatEditForm = document.querySelector(".popup__form-avatar");
 const profileSaveBtns = document.querySelector(".popup__profile-save-button");
 const profileAddCardSaveBtn = document.querySelector(".popup__card-save-button");
 
-const validationConfig = {
-    formSelector: ".popup__form",
-    inputSelector: ".popup__input",
-    submitButtonSelector: ".popup__save-button",
-    inactiveButtonClass: "popup__save-button_disabled",
-    inputErrorClass: "popup__input-type-error",
-    errorClass: "popup__input-error_active",
-};
+
 
 const userProfile = {
     name: "",
