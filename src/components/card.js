@@ -11,6 +11,15 @@ export default class Card {
         this._owner = cardData.owner;
         this._userId = cardData.owner._id;
     }
+
+    _getElement() {
+        return document
+            .querySelector(".gallery__template")
+            .content
+            .querySelector(".gallery__grid-item")
+            .cloneNode(true);
+    }
+
 }
 
 
