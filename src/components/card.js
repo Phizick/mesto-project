@@ -20,18 +20,11 @@ export default class Card {
             .cloneNode(true);
     }
 
+    createNewCard() {
+        this._card = this._getElement();
+    }
+
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
