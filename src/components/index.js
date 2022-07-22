@@ -3,6 +3,7 @@ import { openPopup, closePopup } from "./modal";
 import { galleryList, openImgPreview, cardData, renderCard} from "./card";
 import { clearValidity, enableValidation } from "./validate";
 import { loadProfileData, avatarEdit, editProfileData, pullCard, apiConfig, loadCards } from "./api";
+import config from '../utils/config'
 
 const popupProfileForm = document.querySelector(".popup__form-profile");
 const profileEdit = document.querySelector(".profile__name-edit");
@@ -28,12 +29,7 @@ const profileAddCardSaveBtn = document.querySelector(".popup__card-save-button")
 
 
 
-const userProfile = {
-    name: "",
-    about: "",
-    avatar: "",
-    _id: "",
-};
+
 
 Promise.all([loadProfileData(), loadCards()])
     .then(([user, card]) => {
@@ -135,4 +131,4 @@ galleryList.addEventListener("click", (evt) => openImgPreview(evt));
 enableValidation(validationConfig);
 
 
-export { validationConfig, popupAddCard, userProfile };
+export {  popupAddCard, userProfile };

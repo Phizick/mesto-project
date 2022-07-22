@@ -1,5 +1,6 @@
 import { closePopup, openPopup } from "./modal";
 import { deleteCard, likeCardAddApi, likeCardRemoveApi, apiConfig } from "./api";
+import config from '../utils/config';
 
 const galleryList = document.querySelector(".gallery__grid");
 const galleryTemplate = document.querySelector(".gallery__template").content;
@@ -10,30 +11,7 @@ const popupConfirmDel = document.querySelector(".popup__delete-confirm");
 const formDelete = document.querySelector(".popup__form-delete");
 const imageOpenedTitel = imageContainer.querySelector('.image__opened-title');
 
-const gallerySpec = {
-    galleryItemClass: ".gallery__grid-item",
-    galleryImgClass: ".gallery__grid-image",
-    galleryCardNameClass: ".gallery__grid-name",
-    galleryLikeClass: ".gallery__grid-like",
-    galleryLikeStatus: "gallery__grid-like_active",
-    galleryDelButton: ".gallery__delete-img-button",
-    galleryLikeCountClass: ".gallery__grid-like-count",
-};
 
-const cardData = {
-    name: "",
-    link: "",
-    likes: "",
-    owner: "",
-    _Id: "",
-    createdAt: "",
-    owner: {
-        name: "",
-        about: "",
-        avatar: "",
-        _id: "",
-    },
-};
 
 const openImgPreview = (evt) => {
     if (evt.target.closest(".gallery__grid-image")) {
@@ -46,10 +24,10 @@ const openImgPreview = (evt) => {
     }
 };
 
-const createNewCard = (cardData) => {
-    const { name, link, _Id, likes } = cardData;
-    const { _id } = cardData.owner;
-    const { galleryItemClass, galleryImgClass, galleryCardNameClass, galleryLikeClass, galleryLikeStatus, galleryDelButton, galleryLikeCountClass, ...anySpec } = gallerySpec;
+const createNewCard = (config) => {
+    const { name, link, _Id, likes } = config.cardData;
+    const { _id } = config.cardData.owner;
+    const { galleryItemClass, galleryImgClass, galleryCardNameClass, galleryLikeClass, galleryLikeStatus, galleryDelButton, galleryLikeCountClass, ...anySpec } = config.gallerySpec;
     const card = galleryTemplate.querySelector(galleryItemClass).cloneNode(true);
     const image = card.querySelector(galleryImgClass);
     image.src = link;
@@ -96,8 +74,8 @@ function deletingCard(deleteId) {
         });
 };
 
-const renderCard = (cardData) => {
-    galleryList.append(createNewCard(cardData));
+const renderCard = (config) => {
+    galleryList.append(createNewCard(config.cardData));
 };
 
 
@@ -115,4 +93,4 @@ const likeCardAdd = (card, likebtn, likeContainer, galleryLikeStatus) => {
     }
 };
 
-export { openImgPreview, galleryList, cardData, renderCard};
+export { openImgPreview, galleryList, renderCard};
