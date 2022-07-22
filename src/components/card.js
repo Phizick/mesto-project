@@ -2,6 +2,31 @@ import { closePopup, openPopup } from "./modal";
 import { deleteCard, likeCardAddApi, likeCardRemoveApi, apiConfig } from "./api";
 import config from '../utils/config';
 
+export default class Card {
+    constructor(cardData) {
+        this._name = cardData.name;
+        this._link = cardData.link;
+        this._id = cardData._id;
+        this._likes = cardData.likes;
+        this._owner = cardData.owner;
+        this._userId = cardData.owner._id;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const galleryList = document.querySelector(".gallery__grid");
 const galleryTemplate = document.querySelector(".gallery__template").content;
 const popupOpenedImg = document.querySelector(".popup__img-opened");

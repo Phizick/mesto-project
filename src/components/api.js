@@ -8,6 +8,7 @@
 //     likes: "",
 //     _id: "",
 // };
+
 const links = {
     profile: '/users/me',
     avatar: '/users/me/avatar',
@@ -15,6 +16,7 @@ const links = {
     cardLike: '/cards/likes/',
     cardDelete: '/cards/'
 }
+
 
 export default class Api {
     constructor(data) {

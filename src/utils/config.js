@@ -14,7 +14,7 @@ export const config = {
         link: "",
         likes: "",
         owner: "",
-        _Id: "",
+        _id: "",
         createdAt: "",
         owner: {
             name: "",
