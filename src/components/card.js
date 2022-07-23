@@ -1,15 +1,6 @@
 
-import { closePopup, openPopup } from "./modal";
-import { deleteCard, likeCardAddApi, likeCardRemoveApi, apiConfig } from "./api";
 
-const openImgPreview = (evt) => {
-    if (evt.target.closest(".gallery__grid-image")) {
-        imageOpened.src = evt.target.src;
-        imageOpened.alt = evt.target.alt;
-        imageOpenedTitel.textContent = evt.target.alt;
-        openPopup(popupOpenedImg);
-    } else {
-        return;
+
 
 export default class Card {
     constructor(cardData, userId, templateSelector) {
@@ -31,12 +22,6 @@ export default class Card {
             .cloneNode(true);
     }
 
-
-function confirmDeleteCard(evt) {
-    evt.preventDefault();
-    const deleteId = popupConfirmDel.dataset.Id;
-    deletingCard(deleteId);
-};
 
     createNewCard() {
         this._card = this._getElement();
