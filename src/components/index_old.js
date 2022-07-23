@@ -37,6 +37,16 @@ const profileAddCardSaveBtn = document.querySelector(".popup__card-save-button")
 
 
 
+// Promise.all([profileApi, cardsApi])
+//     .then(([user, card]) => {
+//         profile.setUserInfo(user);
+//         profile.setUserAvatar(user);
+     
+//         })      
+    
+//     .catch(err => {console.log(err)})
+
+
 
 
 

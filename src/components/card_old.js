@@ -24,7 +24,7 @@ const openImgPreview = (evt) => {
     }
 };
 
-const createNewCard = (config) => {
+const createNewCard = (cardData) => {
     const { name, link, _Id, likes } = config.cardData;
     const { _id } = config.cardData.owner;
     const { galleryItemClass, galleryImgClass, galleryCardNameClass, galleryLikeClass, galleryLikeStatus, galleryDelButton, galleryLikeCountClass, ...anySpec } = config.gallerySpec;
