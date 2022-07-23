@@ -80,10 +80,7 @@ export const editProfileBtn = {
 };
 
 /* селекторы профайла */
-export const profileSelector = {
-   profileName: ".profile__name-text", // фио профайла
-   profileAbout: ".profile__bio",      // профессия
-}; 
+ 
 
 /* модальные окна */ 
 export const popupModals = {

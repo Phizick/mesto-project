@@ -1,7 +1,5 @@
 
 
-
-
 export default class Card {
     constructor(cardData, userId, templateSelector) {
         this._name = cardData.name;
