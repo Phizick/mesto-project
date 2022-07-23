@@ -1,3 +1,16 @@
+
+import { closePopup, openPopup } from "./modal";
+import { deleteCard, likeCardAddApi, likeCardRemoveApi, apiConfig } from "./api";
+
+const openImgPreview = (evt) => {
+    if (evt.target.closest(".gallery__grid-image")) {
+        imageOpened.src = evt.target.src;
+        imageOpened.alt = evt.target.alt;
+        imageOpenedTitel.textContent = evt.target.alt;
+        openPopup(popupOpenedImg);
+    } else {
+        return;
+
 export default class Card {
     constructor(cardData, userId, templateSelector) {
         this._name = cardData.name;
@@ -7,6 +20,7 @@ export default class Card {
         this._owner = cardData.owner;
         this._userId = userId;
         this._templateSelector = templateSelector;
+
     }
 
     _getElement() {
@@ -16,6 +30,13 @@ export default class Card {
             .querySelector(".gallery__grid-item")
             .cloneNode(true);
     }
+
+
+function confirmDeleteCard(evt) {
+    evt.preventDefault();
+    const deleteId = popupConfirmDel.dataset.Id;
+    deletingCard(deleteId);
+};
 
     createNewCard() {
         this._card = this._getElement();
@@ -33,6 +54,7 @@ export default class Card {
         this._userId !== this._owner._id && delItem.remove();
         return this._card;
     }
+
 
     setEvtListeners() {
         this._cardLikeBtn.addEventListener('click', () => {
