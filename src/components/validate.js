@@ -23,7 +23,7 @@ const checkInputValidity = (formElement, inputElement) => {
         hideInputError(formElement, inputElement, validationConfig);
     } else {
         showInputError(formElement, inputElement, validationConfig);
-    }
+    } 
 };
 
 const buttonCondition = (buttonSelected, inputList, validationConfig) => {
