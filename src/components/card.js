@@ -48,8 +48,7 @@ export default class Card {
         })        
     }
 
-    _likeStatus() {
-        //можно сделать через some и условие, но так мне нравится больше )
+    _likeStatus() {        
         this._likes.find((elem) => elem._id === this._userId) === undefined ? false : true;
     }
 
