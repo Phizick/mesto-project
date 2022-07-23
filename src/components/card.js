@@ -24,9 +24,14 @@ export default class Card {
         this._cardLikeCount = this._card.querySelector('.gallery__grid-like-count');
         this._cardLikeBtn = this._card.querySelector('.gallery__grid-like');
         this._cardRemoveBtn = this._card.querySelector('.gallery__delete-img-button');
+        this._cardImage.src = this._link;
+        this._cardImage.alt = this._name;
+        this._cardTitle.textContent = this._name;
+        this._card.dataset.id = this._id;
+        this._cardLikeCount.textContent = this._likes.length;
         this._likeStatus();
         this._userId !== this._owner._id && delItem.remove();
-        
+
 
 
     }
