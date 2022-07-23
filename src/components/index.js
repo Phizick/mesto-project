@@ -8,14 +8,15 @@ import PopupWithImage from './popupWithImage';
 import Userinfo from './Userinfo'
 
 
-Promise.all([profileApi, cardsApi])
-    .then(([user, card]) => {
-        profile.setUserInfo(user);
-        profile.setUserAvatar(user);
+// Promise.all([profileApi, cardsApi])
+//     .then(([user, card]) => {
+//         profile.setUserInfo(user);
+//         profile.setUserAvatar(user);
      
-        })      
+//         })      
     
-    .catch(err => {console.log(err)})
+//     .catch(err => {console.log(err)})
+
 
 
 
