@@ -1,40 +1,6 @@
 import { closePopup, openPopup } from "./modal";
 import { deleteCard, likeCardAddApi, likeCardRemoveApi, apiConfig } from "./api";
 
-const galleryList = document.querySelector(".gallery__grid");
-const galleryTemplate = document.querySelector(".gallery__template").content;
-const popupOpenedImg = document.querySelector(".popup__img-opened");
-const imageContainer = document.querySelector(".image__container");
-const imageOpened = imageContainer.querySelector(".image__opened");
-const popupConfirmDel = document.querySelector(".popup__delete-confirm");
-const formDelete = document.querySelector(".popup__form-delete");
-const imageOpenedTitel = imageContainer.querySelector('.image__opened-title');
-
-const gallerySpec = {
-    galleryItemClass: ".gallery__grid-item",
-    galleryImgClass: ".gallery__grid-image",
-    galleryCardNameClass: ".gallery__grid-name",
-    galleryLikeClass: ".gallery__grid-like",
-    galleryLikeStatus: "gallery__grid-like_active",
-    galleryDelButton: ".gallery__delete-img-button",
-    galleryLikeCountClass: ".gallery__grid-like-count",
-};
-
-const cardData = {
-    name: "",
-    link: "",
-    likes: "",
-    owner: "",
-    _Id: "",
-    createdAt: "",
-    owner: {
-        name: "",
-        about: "",
-        avatar: "",
-        _id: "",
-    },
-};
-
 const openImgPreview = (evt) => {
     if (evt.target.closest(".gallery__grid-image")) {
         imageOpened.src = evt.target.src;
@@ -79,7 +45,6 @@ function confirmDeleteCard(evt) {
     evt.preventDefault();
     const deleteId = popupConfirmDel.dataset.Id;
     deletingCard(deleteId);
-    ;
 };
 
 function deletingCard(deleteId) {
