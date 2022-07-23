@@ -31,9 +31,26 @@ export default class Card {
         this._cardLikeCount.textContent = this._likes.length;
         this._likeStatus();
         this._userId !== this._owner._id && delItem.remove();
+        return this._card;
+    }
 
+    setEvtListeners() {
+        this._cardLikeBtn.addEventListener('click', () => {
+            //сделать метод клик-лайк
+        })
 
+        this._cardRemoveBtn.addEventListener('click', () => {
+            //сделать метод удаления
+        })
 
+        this._cardImage.addEventListener('click', () => {
+            //сделать открытие зум картинки по клику
+        })        
+    }
+
+    _likeStatus() {
+        //можно сделать через some и условие, но так мне нравится больше )
+        this._likes.find((elem) => elem._id === this._userId) === undefined ? false : true;
     }
 
 }
