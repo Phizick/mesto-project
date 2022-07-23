@@ -39,7 +39,9 @@ const popupProfile = new PopupWithForm(constant.popup.profile, {
                 popupProfile.textContent = "Сохранить";
             });}
     }, 
-    {clearValidity: try to code this: resetValid});
+    {clearValidity: resetValid});
+
+
 
 
 
