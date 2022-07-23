@@ -7,7 +7,11 @@ import PopupWithForm from './PopupWithForm';
 import PopupWithImage from './popupWithImage';
 import Userinfo from './Userinfo'
 import Card from './card'
-import * as constant from '../utils/constants.js'; 
+import * as constant from '../utils/constants';
+import Section from './Section';
+import PopupForDel from './PopupForDel';
+import { clearValidity } from './validate';
+
 
 Promise.all([userApi, cardsApi])
     .then(([user, cards]) => {
@@ -24,14 +28,14 @@ const cardsApi = getApi.getCards();
 const profileInfo = new Userinfo();
 const newCard = new Card(); // новая карточка 
 
-const formAvatar = new FormValidator(constant.validationConfig, constant.formAvatar);
-const formProfile = new FormValidator(constant.validationConfig, constant.formProfile);
-const formCard = new FormValidator(constant.validationConfig, constant.formCard);
+const formAvatar = new FormValidator(constant.validationConfig, constant.avatarForm);
+const formProfile = new FormValidator(constant.validationConfig, constant.profileForm);
+const formCard = new FormValidator(constant.validationConfig, constant.cardForm);
 
 
 
 // редактирование аватарки(мои ляпы)
-const popupAvatar = new PopupWithForm(constant.poupup.popupAvatar,{
+const popupAvatar = new PopupWithForm(constant.popupSelectors.popupAvatar,{
    submit: (data) => {
         popupAvatar.textContent = "Сохранение...";
         getApi.avatarEdit(data)
@@ -45,11 +49,12 @@ const popupAvatar = new PopupWithForm(constant.poupup.popupAvatar,{
             });}
 },
 {
-    {clearValidity: try to code this: resetValid}
-});  
+    clearValidity: (input) => {
+      resetValidation(input, constant.avatarForm, constant.popupSelectors.popupAvatar)
+    }}); 
 
 // редактирование профайла(вместе...)
-const popupProfile = new PopupWithForm(constant.popup.popupProfile, {
+const popupProfile = new PopupWithForm(constant.popupSelectors.popupProfile, {
     submit: (data) => {
         popupProfile.textContent = "Сохранение...";
         getApi.editProfileData(data)
@@ -62,17 +67,20 @@ const popupProfile = new PopupWithForm(constant.popup.popupProfile, {
                 popupProfile.textContent = "Сохранить";
             });}
     }, 
-    {clearValidity: resetValid});
+    {
+        clearValidity: (input) => {
+          resetValidation(input, constant.profileForm, constant.popupSelectors.popupProfile)
+        }});
 
 
 
 // добавление новой карточки(мои ляпы..) 
-const popupMesto = new PopupWithForm(constant.popup.popupAddCard,{
+const popupMesto = new PopupWithForm(constant.popupSelectors.popupAddCard,{
     submit: (data) => {
         popupMesto.textContent = "Сохранение...";
         getApi.pushCard(data)
             .then((data) => {
-                newCard.createNewCard(data);
+                newCard.createNewCard(data, data.owner._id);
                 popupMesto.close();
             })
             .catch((err) => { console.log(err); })
@@ -82,5 +90,12 @@ const popupMesto = new PopupWithForm(constant.popup.popupAddCard,{
 
 },
 {
-  clearValidity: try to code this: resetValid} 
+  clearValidity: (input) => {
+    resetValidation(input, constant.cardForm, constant.popupSelectors.popupAddCard)
+  }});
+
+
+const  resetValidation = ((input, formAbout, form) => {
+    const errorElement = form._form.querySelector(`.${inputElement.id}-error`);
+    formAbout.hideInputError(input, errorElement)
 });

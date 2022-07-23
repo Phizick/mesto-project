@@ -1,12 +1,5 @@
 
 
-const links = {
-    profile: '/users/me',
-    avatar: '/users/me/avatar',
-    cards: '/cards',
-    cardLike: '/cards/likes/',
-    cardDelete: '/cards/'
-}
 
 
 export default class Api {

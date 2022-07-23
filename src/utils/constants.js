@@ -26,6 +26,15 @@ export const userProfile = {
     _id: "",
 };
 
+
+const links = {
+    profile: '/users/me',
+    avatar: '/users/me/avatar',
+    cards: '/cards',
+    cardLike: '/cards/likes/',
+    cardDelete: '/cards/'
+};
+
 export const popupSelectors = {
     popupProfile: '.popup__profile',
     popupAvatar: '.popup__avatar-edit',

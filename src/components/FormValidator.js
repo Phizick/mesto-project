@@ -67,6 +67,8 @@ export default class FormValidator {
         this._buttonCondition();
     }
 
+   
+
     //типа этого  ?????? нужно ли снимать их потом?
     // _setEventListeners() {
     //     this._inputList.forEach(inputElement => {
