@@ -5,6 +5,14 @@ import { clearValidity, enableValidation } from "./validate";
 import { loadProfileData, avatarEdit, editProfileData, pullCard, apiConfig, loadCards } from "./api";
 import config from '../utils/config'
 
+
+const userProfile = {
+    name: "",
+    about: "",
+    avatar: "",
+    _id: "",
+};
+
 const popupProfileForm = document.querySelector(".popup__form-profile");
 const profileEdit = document.querySelector(".profile__name-edit");
 const popupProfile = document.querySelector(".popup__profile");
@@ -26,6 +34,7 @@ const avatarInput = popupAvatarEdit.querySelector(".popup__input_data_avatarUrl"
 const avatEditForm = document.querySelector(".popup__form-avatar");
 const profileSaveBtns = document.querySelector(".popup__profile-save-button");
 const profileAddCardSaveBtn = document.querySelector(".popup__card-save-button");
+
 
 
 

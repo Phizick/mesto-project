@@ -1,6 +1,7 @@
 import { setEventListeners} from "./units.js";
 import { validationConfig } from '../utils/constants'
 
+
 const showInputError = (formElement, inputElement, validationConfig) => {
     const { inputErrorClass, errorClass } = validationConfig;
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
