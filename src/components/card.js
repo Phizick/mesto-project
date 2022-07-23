@@ -18,18 +18,18 @@ export default class Card {
         return document
             .querySelector(".gallery__template")
             .content
-            .querySelector(".gallery__grid-item")
+            .querySelector(".card")
             .cloneNode(true);
     }
 
 
     createNewCard() {
         this._card = this._getElement();
-        this._cardImage = this._card.querySelector('.gallery__grid-image');
-        this._cardTitle = this._card.querySelector('.gallery__grid-name');
-        this._cardLikeCount = this._card.querySelector('.gallery__grid-like-count');
-        this._cardLikeBtn = this._card.querySelector('.gallery__grid-like');
-        this._cardRemoveBtn = this._card.querySelector('.gallery__delete-img-button');
+        this._cardImage = this._card.querySelector('.card__image');
+        this._cardTitle = this._card.querySelector('.card__name');
+        this._cardLikeCount = this._card.querySelector('.card__like-count');
+        this._cardLikeBtn = this._card.querySelector('.card__like-btn');
+        this._cardRemoveBtn = this._card.querySelector('.card__delete-btn');
         this._cardImage.src = this._link;
         this._cardImage.alt = this._name;
         this._cardTitle.textContent = this._name;

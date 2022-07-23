@@ -31,7 +31,7 @@ const formCard = new FormValidator(constant.validationConfig, constant.formCard)
 
 
 // редактирование аватарки(мои ляпы)
-const popupAvatar = new PopupWithForm(constant.poupup.popupAvatarEdit,{
+const popupAvatar = new PopupWithForm(constant.poupup.popupAvatar,{
    submit: (data) => {
         popupAvatar.textContent = "Сохранение...";
         getApi.avatarEdit(data)
@@ -49,7 +49,7 @@ const popupAvatar = new PopupWithForm(constant.poupup.popupAvatarEdit,{
 });  
 
 // редактирование профайла(вместе...)
-const popupProfile = new PopupWithForm(constant.popup.profile, {
+const popupProfile = new PopupWithForm(constant.popup.popupProfile, {
     submit: (data) => {
         popupProfile.textContent = "Сохранение...";
         getApi.editProfileData(data)
@@ -63,7 +63,6 @@ const popupProfile = new PopupWithForm(constant.popup.profile, {
             });}
     }, 
     {clearValidity: resetValid});
-
 
 
 

@@ -9,25 +9,5 @@ export const config = {
         galleryLikeCountClass: ".gallery__grid-like-count",
     },
     
-    cardData: {
-        name: "",
-        link: "",
-        likes: "",
-        owner: "",
-        _id: "",
-        createdAt: "",
-        owner: {
-            name: "",
-            about: "",
-            avatar: "",
-            _id: "",
-        },
-    },
-    
-    userProfile: {
-        name: "",
-        about: "",
-        avatar: "",
-        _id: "",
-    },
+  
 }
