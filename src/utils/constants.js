@@ -138,6 +138,7 @@ export const selectorModal = {
 
 /* селектора валидации форм */ 
 export const validationConfig = {
+
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__save-button",
@@ -145,3 +146,4 @@ export const validationConfig = {
   inputErrorClass: "popup__input-type-error",
   errorClass: "popup__input-error_active",
 };
+
