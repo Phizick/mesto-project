@@ -1,13 +1,4 @@
-// const apiConfig = {
-//     serverUrl: "https://nomoreparties.co/v1/plus-cohort-12",
-//     headers: {
-//         authorization: "c1b9d872-823e-43ab-9724-10a589fee2c1",
-//         "Content-Type": "application/json",
-//     },
-//     userId: "7a744b5fd03159f0028e76c6",
-//     likes: "",
-//     _id: "",
-// };
+
 
 const links = {
     profile: '/users/me',
