@@ -62,13 +62,13 @@ export const profileAvatar = ".profile__avatar-image"; // картинка Ав�
 
 /* селектора создаваемой карточки */ 
 const gallerySpec = {
-    galleryItemClass: ".gallery__grid-item",            // селектор карточки 
-    galleryImgClass: ".gallery__grid-image",            // изображение карточки   
-    galleryCardNameClass: ".gallery__grid-name",        // название карточки
-    galleryLikeClass: ".gallery__grid-like",            // селектор сердечка общий (без лайка) 
-    galleryLikeStatus: "gallery__grid-like_active",     // добавление селектора когда кликнули на сердечке 
-    galleryDelButton: ".gallery__delete-img-button",    // корзинка удаления карточки
-    galleryLikeCountClass: ".gallery__grid-like-count", // счетчик лайков 
+    galleryItemClass: ".card__item",            // селектор карточки 
+    galleryImgClass: ".card__image",            // изображение карточки   
+    galleryCardNameClass: ".card__name",        // название карточки
+    galleryLikeClass: ".card__like-btn",            // селектор сердечка общий (без лайка) 
+    galleryLikeStatus: "card__like-btn_active",     // добавление селектора когда кликнули на сердечке 
+    galleryDelButton: ".card__delete-btn",    // корзинка удаления карточки
+    galleryLikeCountClass: ".card__like-count", // счетчик лайков 
 };
 
 
