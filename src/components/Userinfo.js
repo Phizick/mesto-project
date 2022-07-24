@@ -1,8 +1,4 @@
-const profileSelector = {
-    profileName: ".profile__name-text", // фио профайла
-    profileAbout: ".profile__bio",      // профессия
-    profileAvatar: '.rofile__avatar-image'
- };
+
 
 
 export default class Userinfo {
@@ -31,3 +27,4 @@ export default class Userinfo {
         this._profileAvatar.src = this._avatar;
     }
 }
+

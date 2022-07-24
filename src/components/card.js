@@ -41,6 +41,16 @@ export default class Card {
         return this._card;
     }
 
+    _addedLike(data) {
+        this._cardLikeBtn.classList.add('.card__like-btn_active');
+        this.__cardLikeCount.textContent = data.likes.length;        
+    }
+
+    _removeLike(data) {
+        this._cardLikeBtn.classList.remove('.card__like-btn_active');
+        this.__cardLikeCount.textContent = data.likes.length; 
+    }
+
 
     setEvtListeners() {
         this._cardLikeBtn.addEventListener('click', () => {

@@ -2,8 +2,8 @@ export default class FormValidator {
     constructor(validationConfig, form) {
         this._config = validationConfig;
         this._form = form;
-        this._inputList =  Array.from(this._form.querySelectorAll(this._config.inputSelector));
-        this._submitBTn = this._form.querySelector(this._config.btnSelector);
+        this._inputList =  Array.from(this._form.querySelectorAll(this._config.validationConfig.inputSelector));
+        this._submitBTn = this._form.querySelector(this._config.validationConfig.submitButtonSelector);
     }
 
     _hideInputErrorElement (errorElement) {
@@ -26,12 +26,12 @@ export default class FormValidator {
         this._hideInputElement(inputElement); //??
     }
 
-    _checkInputValidity(inputElement) { //не уверен на счет строки V
+    _checkInputValidity(inputElement) { 
         const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
         if (inputElement.validity.valid) {
             this._hideInputError(inputElement, errorElement)
         } else {
-            this.__showInputError(inputElement, inputElement.validationMsg, errorElement); // inputElement.validationMsg - определить, если нет
+            this.__showInputError(inputElement, inputElement.validationMsg, errorElement); 
         }
     }
 
@@ -66,19 +66,16 @@ export default class FormValidator {
         });
         this._buttonCondition();
     }
-
-   
-
-    //типа этого  ?????? нужно ли снимать их потом?
-    // _setEventListeners() {
-    //     this._inputList.forEach(inputElement => {
-    //         inputElement.addEventListener("input", () => {
-    //             this._checkInputValidity(inputElement);
-    //             this._buttonCondition();
-    //         });
-    //     });
-    //     this._buttonCondition();
-    // }
+    
+    _setEventListeners() {
+        this._inputList.forEach(inputElement => {
+            inputElement.addEventListener("input", () => {
+                this._checkInputValidity(inputElement);
+                this._buttonCondition();
+            });
+        });
+        this._buttonCondition();
+    }
 
     // enableValidation() {
     //     this._setEventListeners()

@@ -3,6 +3,7 @@ export const cardForm = document.querySelector('.popup__form-cards');
 export const avatarForm = document.querySelector('.popup__form-avatar');
 export const cardsContainer = document.querySelector('.cards');
 export const templateSelector = document.querySelector('.gallery__template');
+export const containerSelector = document.querySelector('.card');
 
 export const cardData = {
     name: "",
@@ -27,7 +28,7 @@ export const userProfile = {
 };
 
 
-const links = {
+export const links = {
     profile: '/users/me',
     avatar: '/users/me/avatar',
     cards: '/cards',
@@ -35,6 +36,11 @@ const links = {
     cardDelete: '/cards/'
 };
 
+export const profileSelector = {
+    profileName: ".profile__name-text", 
+    profileAbout: ".profile__bio",      
+    profileAvatar: '.profile__avatar-image'
+ };
 export const popupSelectors = {
     popupProfile: '.popup__profile',
     popupAvatar: '.popup__avatar-edit',
@@ -62,3 +68,5 @@ export const apiConfig = {
       likes: "",
       _id: "",
   };
+
+  
