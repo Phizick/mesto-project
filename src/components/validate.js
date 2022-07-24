@@ -1,5 +1,5 @@
 import { setEventListeners} from "./units.js";
-import { validationConfig } from '../utils/constants'
+import { validationConfig } from '../utils/constants';
 
 
 const showInputError = (formElement, inputElement, validationConfig) => {
@@ -46,7 +46,7 @@ const enableValidation = (validationConfig) => {
     const formList = Array.from(document.querySelectorAll(formSelector));
     formList.forEach(formElement => {
         setEventListeners(formElement, validationConfig);
-    })   
+    });   
 };
 
 const resetValidation = (formElement, validationConfig) => {
@@ -56,10 +56,10 @@ const resetValidation = (formElement, validationConfig) => {
     const buttonItem = formElement.querySelector(submitButtonSelector);
     errorItems.forEach(errorItem => {
         errorItem.classList.remove(errorClass);
-    })
+    });
     inputList.forEach(inputItem => {
         inputItem.classList.remove(inputErrorClass);
-    })
+    });
     buttonItem.disabled = true;
     buttonItem.classList.add(inactiveButtonClass);
 };
@@ -70,7 +70,7 @@ const clearValidity = (formItem) => {
     formList.forEach(formElement => {
         resetValidation(formElement, validationConfig);
         formElement.reset();
-    })    
+    });    
 };
 
 export { enableValidation, buttonCondition, checkInputValidity, invalidInput, clearValidity };
