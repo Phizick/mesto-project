@@ -34,7 +34,7 @@ const formCard = new FormValidator(constant.validationConfig, constant.cardForm)
 const allForms = [formAvatar, formProfile, formCard];
 allForms.forEach((item) => item.enableValidation());
 
-// редактирование аватарки(мои ляпы)
+// редактирование аватарки
 const popupAvatar = new PopupWithForm(
     constant.popupSelectors.popupAvatar,
     {
@@ -61,7 +61,7 @@ const popupAvatar = new PopupWithForm(
     }
 );
 
-// редактирование профайла(вместе...)
+// редактирование профайла
 const popupProfile = new PopupWithForm(
     constant.popupSelectors.popupProfile,
     {
@@ -88,26 +88,23 @@ const popupProfile = new PopupWithForm(
     }
 );
 
-//изменить имена на валидные
-//  удалить старые константы const_old
-// удалить файл spec.js
-
-const popupMesto = new PopupWithForm(
+// 
+const addedCardPopup = new PopupWithForm(
     constant.popupSelectors.popupAddCard,
     {
         submit: (data) => {
-            popupMesto.setBtnContent('Сохранение...');
+            addedCardPopup.setBtnContent('Сохранение...');
             getApi
                 .pushCard(data)
                 .then((data) => {
                     newCard.addItem(data, data.owner._id);
-                    popupMesto.close();
+                    addedCardPopup.close();
                 })
                 .catch((err) => {
                     console.log(err);
                 })
                 .finally(() => {
-                    popupMesto.setBtnContent('Сохранить');
+                    addedCardPopup.setBtnContent('Сохранить');
                 });
         },
     },
