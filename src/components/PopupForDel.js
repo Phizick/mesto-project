@@ -1,6 +1,6 @@
 import Popup from "./popup";
 
-export default class PopupForDel {
+export default class PopupForDel extends Popup{
     constructor(popupSelector, {delSubmit}) {
         super(popupSelector);
         this._submit = delSubmit;

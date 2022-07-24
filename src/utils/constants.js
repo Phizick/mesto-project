@@ -41,6 +41,7 @@ export const profileSelector = {
     profileAbout: ".profile__bio",      
     profileAvatar: '.profile__avatar-image'
  };
+ 
 export const popupSelectors = {
     popupProfile: '.popup__profile',
     popupAvatar: '.popup__avatar-edit',

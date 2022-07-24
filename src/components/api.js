@@ -5,7 +5,7 @@
 export default class Api {
     constructor(data) {
         this._config = data.apiConfig;
-        this._link = data.link;
+        this._links = data.links;
     }
 
     _checkResponse(res) {
@@ -33,35 +33,35 @@ export default class Api {
     }
 
     loadCards() {
-        return this._getData(this._link.cards, 'GET', '');
+        return this._getData(this._links.cards, 'GET', '');
     }
 
     loadProfileData() {
-        return this._getData(this._link.profile, 'GET', '');
+        return this._getData(this._links.profile, 'GET', '');
     }
 
     deleteCard(id) {
-        return this._getData(this._link.cardDelete, 'DELETE', id);
+        return this._getData(this._links.cardDelete, 'DELETE', id);
     }
 
     likeCardAdd(id) {
-        return this._getData(this._link.cardLike, 'PUT', id);
+        return this._getData(this._links.cardLike, 'PUT', id);
     }
 
     likeCardRemove(id) {
-        return this._getData(this._link.cardLike, 'DELETE', id);
+        return this._getData(this._links.cardLike, 'DELETE', id);
     }
 
     pushCard(data) {
-        return this._pushData(this._link.cards, 'POST', data);
+        return this._pushData(this._links.cards, 'POST', data);
     }
 
     editProfileData(data) {
-        return this._pushData(this._link.profile, 'PATCH', data);
+        return this._pushData(this._links.profile, 'PATCH', data);
     }
 
     avatarEdit(data) {
-        return this._pushData(this._link.avatar, 'PATCH', data);
+        return this._pushData(this._links.avatar, 'PATCH', data);
     }
 
  

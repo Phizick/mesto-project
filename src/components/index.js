@@ -2,7 +2,6 @@ import "../pages/index.css";
 
 import Api from "./Api";
 import FormValidator from "./FormValidator";
-import Popup from "./popup";
 import PopupWithForm from "./PopupWithForm";
 import PopupWithImage from "./popupWithImage";
 import Userinfo from "./Userinfo";
@@ -13,17 +12,16 @@ import PopupForDel from "./PopupForDel";
 
 
 
-
 const getApi = new Api(constant);
-const userApi = getApi.getUser();
-const cardsApi = getApi.getCards();
-const profileInfo = new Userinfo();
+const userApi = getApi.loadProfileData();
+const cardsApi = getApi.loadCards();
+const profileInfo = new Userinfo(constant.profileSelector);
 
 Promise.all([userApi, cardsApi])
     .then(([user, cards]) => {
         Userinfo.setUserInfo(user);
         Userinfo.setUserAvatar(user);
-        newCard.addItem(cards, user._id);
+        newCard.renderItems(cards, user._id);
     })
     .catch((err) => {
         console.log(err);

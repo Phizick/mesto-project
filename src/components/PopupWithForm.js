@@ -1,3 +1,4 @@
+import Popup from "./popup";
 export default class PopupWithForm extends Popup {
     constructor(popupSelector, {submit}, {clearValidity}) {
         super(popupSelector);
