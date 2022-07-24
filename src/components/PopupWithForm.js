@@ -26,6 +26,10 @@ export default class PopupWithForm extends Popup {
         })
     }
 
+    setBtnContent(content) {
+        this._submitBtn.textContent = content;
+    }
+
     close() {
         super.close();
         this._form.reset();
@@ -34,7 +38,7 @@ export default class PopupWithForm extends Popup {
         })
     }
 
-    
+
 
 
 

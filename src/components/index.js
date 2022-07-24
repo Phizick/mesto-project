@@ -1,101 +1,127 @@
-import '../pages/index.css';
+import "../pages/index.css";
 
-import Api from './Api';
-import FormValidator from './FormValidator';
-import Popup from './popup';
-import PopupWithForm from './PopupWithForm';
-import PopupWithImage from './popupWithImage';
-import Userinfo from './Userinfo'
-import Card from './card'
-import * as constant from '../utils/constants';
-import Section from './Section';
-import PopupForDel from './PopupForDel';
-import { clearValidity } from './validate';
-
+import Api from "./Api";
+import FormValidator from "./FormValidator";
+import Popup from "./popup";
+import PopupWithForm from "./PopupWithForm";
+import PopupWithImage from "./popupWithImage";
+import Userinfo from "./Userinfo";
+import Card from "./card";
+import * as constant from "../utils/constants";
+import Section from "./Section";
+import PopupForDel from "./PopupForDel";
+import { clearValidity } from "./validate";
 
 Promise.all([userApi, cardsApi])
     .then(([user, cards]) => {
         Userinfo.setUserInfo(user);
-        Userinfo.setUserAvatar(user); 
+        Userinfo.setUserAvatar(user);
         // сдесь будут отрисованы карточки
-
     })
-    .catch(err => {console.log(err)});
-    
+    .catch((err) => {
+        console.log(err);
+    });
+
 const getApi = new Api(constant);
 const userApi = getApi.getUser();
 const cardsApi = getApi.getCards();
 const profileInfo = new Userinfo();
-const newCard = new Card(); // новая карточка 
+const newCard = new Card(); // новая карточка
 
 const formAvatar = new FormValidator(constant.validationConfig, constant.avatarForm);
 const formProfile = new FormValidator(constant.validationConfig, constant.profileForm);
 const formCard = new FormValidator(constant.validationConfig, constant.cardForm);
-
-
+const allForms = [formAvatar, formProfile, formCard];
+allForms.forEach((item) => item.enableValidation());
 
 // редактирование аватарки(мои ляпы)
-const popupAvatar = new PopupWithForm(constant.popupSelectors.popupAvatar,{
-   submit: (data) => {
-        popupAvatar.textContent = "Сохранение...";
-        getApi.avatarEdit(data)
-            .then((data) => {
-                profileInfo.setUserAvatar(data);
-                popupAvatar.close();
-            })
-            .catch((err) => { console.log(err); })
-            .finally(() => {
-                popupAvatar.textContent = "Сохранить";
-            });}
-},
-{
-    clearValidity: (input) => {
-      resetValidation(input, constant.avatarForm, constant.popupSelectors.popupAvatar)
-    }}); 
-
-// редактирование профайла(вместе...)
-const popupProfile = new PopupWithForm(constant.popupSelectors.popupProfile, {
-    submit: (data) => {
-        popupProfile.textContent = "Сохранение...";
-        getApi.editProfileData(data)
-            .then((data) => {
-                profileInfo.setUserInfo(data);
-                popupProfile.close();
-            })
-            .catch((err) => { console.log(err) })
-            .finally(() => {
-                popupProfile.textContent = "Сохранить";
-            });}
-    }, 
+const popupAvatar = new PopupWithForm(
+    constant.popupSelectors.popupAvatar,
+    {
+        submit: (data) => {
+            popupAvatar.setBtnContent('Сохранение...');
+            getApi
+                .avatarEdit(data)
+                .then((data) => {
+                    profileInfo.setUserAvatar(data);
+                    popupAvatar.close();
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .finally(() => {
+                    popupAvatar.setBtnContent('Сохранить');
+                });
+        },
+    },
     {
         clearValidity: (input) => {
-          resetValidation(input, constant.profileForm, constant.popupSelectors.popupProfile)
-        }});
+            resetValidation(input, constant.avatarForm, constant.popupSelectors.popupAvatar);
+        },
+    }
+);
 
+// редактирование профайла(вместе...)
+const popupProfile = new PopupWithForm(
+    constant.popupSelectors.popupProfile,
+    {
+        submit: (data) => {
+            popupProfile.setBtnContent('Сохранение...');
+            getApi
+                .editProfileData(data)
+                .then((data) => {
+                    profileInfo.setUserInfo(data);
+                    popupProfile.close();
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .finally(() => {
+                    popupProfile.setBtnContent('Сохранить');
+                });
+        },
+    },
+    {
+        clearValidity: (input) => {
+            resetValidation(input, constant.profileForm, constant.popupSelectors.popupProfile);
+        },
+    }
+);
 
+//изменить имена на валидные
+//  удалить старые константы const_old
+// удалить файл spec.js
 
-// добавление новой карточки(мои ляпы..) 
-const popupMesto = new PopupWithForm(constant.popupSelectors.popupAddCard,{
-    submit: (data) => {
-        popupMesto.textContent = "Сохранение...";
-        getApi.pushCard(data)
-            .then((data) => {
-                newCard.createNewCard(data, data.owner._id);
-                popupMesto.close();
-            })
-            .catch((err) => { console.log(err); })
-            .finally(() => {
-                popupMesto.textContent = "Сохранить";
-            });}
+const popupMesto = new PopupWithForm(
+    constant.popupSelectors.popupAddCard,
+    {
+        submit: (data) => {
+            popupMesto.setBtnContent('Сохранение...');
+            getApi
+                .pushCard(data)
+                .then((data) => {
+                    newCard.addItem(data, data.owner._id);
+                    popupMesto.close();
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .finally(() => {
+                    popupMesto.setBtnContent('Сохранить');
+                });
+        },
+    },
+    {
+        clearValidity: (input) => {
+            resetValidation(input, constant.cardForm, constant.popupSelectors.popupAddCard);
+        },
+    }
+);
 
-},
-{
-  clearValidity: (input) => {
-    resetValidation(input, constant.cardForm, constant.popupSelectors.popupAddCard)
-  }});
+const popupWithImage = new PopupWithImage(constant.popupSelectors.popupImg);
+popupWithImage.setEventListeners();
 
-
-const  resetValidation = ((input, formAbout, form) => {
+const resetValidation = (input, formAbout, form) => {
     const errorElement = form._form.querySelector(`.${inputElement.id}-error`);
-    formAbout.hideInputError(input, errorElement)
-});
+    formAbout.hideInputError(input, errorElement);
+};

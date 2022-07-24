@@ -5,7 +5,6 @@ export default class PopupForDel {
         super(popupSelector);
         this._submit = delSubmit;
         this._form = this._popup.querySelector('.popup__delete-confirm')
-
     }
 
     open(id) {
@@ -25,6 +24,4 @@ export default class PopupForDel {
         super.close();
         this._popup.dataset.delId = null
     }
-
-  
 }
