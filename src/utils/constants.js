@@ -1,9 +1,9 @@
 export const profileForm = document.querySelector('.popup__form-profile');
 export const cardForm = document.querySelector('.popup__form-cards');
 export const avatarForm = document.querySelector('.popup__form-avatar');
-export const cardsContainer = document.querySelector('.cards');
-export const templateSelector = document.querySelector('.gallery__template');
-export const containerSelector = document.querySelector('.card');
+
+export const templateSelector = '#gallery__template';
+export const containerSelector = '.cards';
 
 export const cardData = {
     name: "",
@@ -28,6 +28,11 @@ export const userProfile = {
 };
 
 
+export const btn1 = document.querySelector('.profile__name-edit');
+export const btn2 = document.querySelector('.profile__avatar-edit-btn');
+export const btn3 = document.querySelector('.profile__add-button');
+
+
 export const links = {
     profile: '/users/me',
     avatar: '/users/me/avatar',
@@ -36,12 +41,12 @@ export const links = {
     cardDelete: '/cards/'
 };
 
-export const profileSelector = {
+export const ProfileSelectors = {
     profileName: ".profile__name-text", 
     profileAbout: ".profile__bio",      
     profileAvatar: '.profile__avatar-image'
  };
- 
+
 export const popupSelectors = {
     popupProfile: '.popup__profile',
     popupAvatar: '.popup__avatar-edit',
@@ -65,9 +70,9 @@ export const apiConfig = {
           authorization: "c1b9d872-823e-43ab-9724-10a589fee2c1",
           "Content-Type": "application/json",
       },
-      userId: "7a744b5fd03159f0028e76c6",
-      likes: "",
-      _id: "",
+    //   userId: "7a744b5fd03159f0028e76c6",
+    //   likes: "",
+    //   _id: "",
   };
 
   

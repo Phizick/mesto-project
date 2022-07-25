@@ -16,22 +16,22 @@ export default class FormValidator {
     }
 
     _showInputError (inputElement, errorMsg, errorElement) {
-        inputElement.classList.add(this._config.inputErrClass);
-        errorMsg.classList.add(this._config.errClass);
-        errorElement.textContent = errorMsg //??
+        inputElement.classList.add(this._config.inputErrorClass);
+        errorElement.classList.add(this._config.errorClass);
+        errorElement.textContent = errorMsg 
     }
 
-    _hideInputError (inputElement, errorElement) {
+    hideInputError (inputElement, errorElement) {
         this._hideInputErrorElement(errorElement);
-        this._hideInputElement(inputElement); //??
+        this._hideInputElement(inputElement); 
     }
 
     _checkInputValidity(inputElement) { 
         const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
         if (inputElement.validity.valid) {
-            this._hideInputError(inputElement, errorElement)
+            this.hideInputError(inputElement, errorElement)
         } else {
-            this.__showInputError(inputElement, inputElement.validationMsg, errorElement); 
+            this._showInputError(inputElement, inputElement.validationMsg, errorElement); 
         }
     }
 
@@ -50,14 +50,14 @@ export default class FormValidator {
     }
 
     _buttonCondition() {
-        if (!this._invalidInput) {
+        if (this._invalidInput) {
             this.enableBtns();
         } else {
-            this.disablebtns(); //???
+            this.disablebtns(); 
         }
     }
 
-    enableValidation() {  //вывести в отдельный метод "слушателей"??
+    enableValidation() {  
         this._inputList.forEach(inputElement => {
             inputElement.addEventListener("input", () => {
                 this._checkInputValidity(inputElement);

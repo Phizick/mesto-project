@@ -1,7 +1,3 @@
-
-
-
-
 export default class Api {
     constructor(data) {
         this._config = data.apiConfig;
@@ -23,11 +19,11 @@ export default class Api {
         .then (this._checkResponse);
     }
 
-    _pushData(links, method, jsonInfo) {
+    _pushData(links, method, data) {                
         return fetch(`${this._config.serverUrl}${links}`, {
             method: method,
             headers: this._config.headers,
-            body: JSON.stringify(jsonInfo)
+            body: JSON.stringify(data)
         })
         .then (this._checkResponse);
     }
@@ -60,7 +56,7 @@ export default class Api {
         return this._pushData(this._links.profile, 'PATCH', data);
     }
 
-    avatarEdit(data) {
+    avatarEdit(data) {            
         return this._pushData(this._links.avatar, 'PATCH', data);
     }
 

@@ -1,16 +1,12 @@
 import Popup from "./popup";
 
 export default class PopupForDel extends Popup{
-    constructor(popupSelector, {delSubmit}) {
+    constructor(popupSelector, {submit}) {
         super(popupSelector);
-        this._submit = delSubmit;
-        this._form = this._popup.querySelector('.popup__delete-confirm')
+        this._submit = submit;
+        this._form = this._popup.querySelector('.popup__form')
     }
-
-    open(id) {
-        super.open();
-        this._popup.dataset.delId = id
-    }
+  
 
     setEventListeners() {
         super.setEventListeners();
@@ -22,6 +18,11 @@ export default class PopupForDel extends Popup{
 
     close() {
         super.close();
-        this._popup.dataset.delId = null
+        this._popup.dataset.delId = ''
+    }
+
+    open(id) {
+        super.open();
+        this._popup.dataset.delId = id
     }
 }

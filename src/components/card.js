@@ -1,12 +1,12 @@
 
 
 export default class Card {
-    constructor(cardData, {handleCardClick}, {handleLikeClick}, {openDelPopup}, userId, templateSelector) {
-        this._name = cardData.name;
-        this._link = cardData.link;
-        this._id = cardData._id;
-        this._likes = cardData.likes;
-        this._owner = cardData.owner;
+    constructor({name, link, _id, likes, owner}, {handleCardClick}, {handleLikeClick}, {openDelPopup}, userId, templateSelector) {
+        this._name = name;
+        this._link = link;
+        this._id = _id;
+        this._likes = likes;
+        this._owner = owner;
         this._userId = userId;
         this._templateSelector = templateSelector;
         this._handleCardClick = handleCardClick;
@@ -16,7 +16,7 @@ export default class Card {
 
     _getElement() {
         return document
-            .querySelector(".gallery__template")
+            .querySelector(this._templateSelector)
             .content
             .querySelector(".card")
             .cloneNode(true);
@@ -35,20 +35,22 @@ export default class Card {
         this._cardTitle.textContent = this._name;
         this._card.dataset.id = this._id;
         this._cardLikeCount.textContent = this._likes.length;
-        this._likeStatus();
-        this._userId !== this._owner._id && delItem.remove();
+        this._likeStatus();     
+        this._userId !== this._owner._id && this._cardRemoveBtn.remove();       
         this.setEvtListeners();
         return this._card;
     }
 
-    _addedLike(data) {
-        this._cardLikeBtn.classList.add('.card__like-btn_active');
-        this.__cardLikeCount.textContent = data.likes.length;        
+    _addedLike(res) {
+        this._cardLikeBtn.classList.add('card__like-btn_active');
+        this._cardLikeCount.textContent = res.likes.length; 
+        this._card.dataset.like = true;      
     }
 
-    _removeLike(data) {
-        this._cardLikeBtn.classList.remove('.card__like-btn_active');
-        this.__cardLikeCount.textContent = data.likes.length; 
+    _removeLike(res) {
+        this._cardLikeBtn.classList.remove('card__like-btn_active');
+        this._cardLikeCount.textContent = res.likes.length;
+        this._card.dataset.like = false;
     }
 
 
@@ -66,10 +68,17 @@ export default class Card {
         })        
     }
 
-    _likeStatus() {        
-        this._likes.find((elem) => elem._id === this._userId) === undefined ? false : true;
-    }
+    // _likeStatus() {        
+    //     this._likes.find((elem) => elem._id === this._userId) === undefined ? false : true;
+    // }
 
-    
+    _likeStatus() {
+        if (this._likes.some(like => like._id === this._userId)) {
+            this._cardLikeBtn.classList.add('card__like-btn_active');
+            this._card.dataset.isLiked = true;
+        } else {
+            this._card.dataset.isLiked = false;
+        }
+    }   
 
 } 
