@@ -122,8 +122,8 @@ const addedCardPopup = new PopupWithForm(
 addedCardPopup.setEventListeners();
 
 const popupDelCard = new PopupForDel(constant.popupSelectors.popupDelete, {
-    submit: (id) => {
-        getApi.deleteCard(id)
+    submit: (id) => {        
+        getApi.deleteCard(id)        
             .then(() => {
                 document.querySelector(`.card[data-id="${id}"]`).remove();
                 popupDelCard.close()
