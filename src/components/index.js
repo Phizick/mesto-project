@@ -21,7 +21,7 @@ const formAvatar = new FormValidator(constant.validationConfig, constant.avatarF
 const formProfile = new FormValidator(constant.validationConfig, constant.profileForm);
 const formCard = new FormValidator(constant.validationConfig, constant.cardForm);
 const allForms = [formAvatar, formProfile, formCard];
-allForms.forEach((item) => item.enableValidation());
+allForms.forEach(item => item.enableValidation());
 
 const handleLikeClick = (card, id, creatingCard) => {
     if (card.dataset.like) {
@@ -102,7 +102,7 @@ const addedCardPopup = new PopupWithForm(
             getApi            
                 .pushCard(data)
                 .then((data) => {
-                    newCard.addItem(data, data.owner._id);
+                    newCard.renderItem(data, data.owner._id);
                     addedCardPopup.close();
                 })
                 .catch((err) => {
