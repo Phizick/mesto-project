@@ -1,4 +1,4 @@
-import Popup from "./popup";
+import Popup from "./Popup";
 
 export default class PopupForDel extends Popup{
     constructor(popupSelector, {submit}) {

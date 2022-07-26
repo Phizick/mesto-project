@@ -5,27 +5,6 @@ export const avatarForm = document.querySelector('.popup__form-avatar');
 export const templateSelector = '#gallery__template';
 export const containerSelector = '.cards';
 
-export const cardData = {
-    name: "",
-    link: "",
-    likes: "",
-    owner: "",
-    _id: "",
-    createdAt: "",
-    owner: {
-        name: "",
-        about: "",
-        avatar: "",
-        _id: "",
-    },
-};
-
-export const userProfile = {
-    name: "",
-    about: "",
-    avatar: "",
-    _id: "",
-};
 
 
 export const btn1 = document.querySelector('.profile__name-edit');

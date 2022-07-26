@@ -1,4 +1,4 @@
-import Popup from "./popup";
+import Popup from "./Popup";
 export default class PopupWithForm extends Popup {
     constructor(popupSelector, {submit}, {clearValidity}) {
         super(popupSelector);
@@ -32,7 +32,7 @@ export default class PopupWithForm extends Popup {
     close() {
         super
         .close();
-        this._form.reset();
+        this._form.reset();        
         this._popupInputList.forEach(item => {
             this._clearValidity(item);
         });

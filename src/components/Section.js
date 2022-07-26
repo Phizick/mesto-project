@@ -15,8 +15,8 @@ export default class Section {
         this._container.prepend(element);
       }
 
-    renderItem(data) {
-        this._prependItem(this._renderer(data));
+    renderItem(data, userId) {
+        this._prependItem(this._renderer(data, userId));
     }
 
     
