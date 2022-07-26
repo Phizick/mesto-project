@@ -28,7 +28,7 @@ Promise.all([userApi, cardsApi])
         newCard.renderItems(cards, user._id);
     })
     .catch((err) => {
-        console.log(err);
+        console.error(err);
     });
 
 
@@ -44,7 +44,7 @@ const popupAvatar = new PopupWithForm(
                     popupAvatar.close();
                 })
                 .catch((err) => {
-                    console.log(err);
+                    console.error(err);
                 })
                 .finally(() => {
                     popupAvatar.setBtnContent("Сохранить");
@@ -71,7 +71,7 @@ const popupProfile = new PopupWithForm(
                     popupProfile.close();
                 })
                 .catch((err) => {
-                    console.log(err);
+                    console.error(err);
                 })
                 .finally(() => {
                     popupProfile.setBtnContent("Сохранить");
@@ -95,7 +95,7 @@ const popupDelCard = new PopupForDel(constant.popupSelectors.popupDelete, {
                 popupDelCard.close();
             })
             .catch((err) => {
-                console.log(err);
+                console.error(err);
             });
     },
 });
@@ -145,7 +145,7 @@ const addedCardPopup = new PopupWithForm(
                     addedCardPopup.close();
                 })
                 .catch((err) => {
-                    console.log(err);
+                    console.error(err);
                 })
                 .finally(() => {
                     addedCardPopup.setBtnContent("Сохранить");
@@ -166,13 +166,13 @@ const handleLikeClick = (card, id, creatingCard) => {
             .then((res) => {
                 creatingCard._removeLike(res);
             })
-            .catch(err => {console.log(err)});
+            .catch(err => {console.error(err)});
     } else {
         getApi.likeCardAdd(id) 
             .then((res) => {
                 creatingCard._addedLike(res)
             })
-            .catch(err => {console.log(err)})
+            .catch(err => {console.error(err)})
     }
 }
 
