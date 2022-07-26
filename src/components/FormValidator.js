@@ -28,7 +28,7 @@ export default class FormValidator {
 
     _checkInputValidity(inputElement) {
         const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
-        console.log(errorElement)
+        
         if (inputElement.validity.valid) {
             this.hideInputError(inputElement, errorElement)
         } else {
@@ -47,14 +47,15 @@ export default class FormValidator {
     }
 
     _invalidInput() {
-        return this._inputList.some(inputElement => !inputElement.validity.valid);
+        return this._inputList.every(item => item.validity.valid);
+                
     }
 
-    _buttonCondition() {
-        if (this._invalidInput) {
+    _buttonCondition() {        
+        if (this._invalidInput()) {
             this.enableBtns();
         } else {
-            this.disablebtns(); 
+            this.disablebtns();
         }
     }
 
