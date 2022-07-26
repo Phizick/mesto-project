@@ -18,7 +18,8 @@ export default class FormValidator {
     _showInputError (inputElement, errorMsg, errorElement) {
         inputElement.classList.add(this._config.inputErrorClass);
         errorElement.classList.add(this._config.errorClass);
-        errorElement.textContent = errorMsg 
+        errorElement.textContent = errorMsg
+        console.log(inputElement)
     }
 
     hideInputError (inputElement, errorElement) {
@@ -26,12 +27,13 @@ export default class FormValidator {
         this._hideInputElement(inputElement); 
     }
 
-    _checkInputValidity(inputElement) { 
+    _checkInputValidity(inputElement) {
         const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
+        console.log(errorElement)
         if (inputElement.validity.valid) {
             this.hideInputError(inputElement, errorElement)
         } else {
-            this._showInputError(inputElement, inputElement.validationMsg, errorElement); 
+            this._showInputError(inputElement, inputElement.validationMessage, errorElement); 
         }
     }
 

@@ -1,7 +1,7 @@
 
 
 export default class Card {
-    constructor({name, link, _id, likes, owner}, {handleCardClick}, {handleLikeClick}, {openDelPopup}, userId, templateSelector) {
+    constructor({ name, link, _id, likes, owner}, {handleCardClick}, {handleLikeClick}, {openDelPopup}, userId, templateSelector) {
         this._name = name;
         this._link = link;
         this._id = _id;

@@ -30,7 +30,8 @@ export default class PopupWithForm extends Popup {
     }
 
     close() {
-        super.close();
+        super
+        .close();
         this._form.reset();
         this._popupInputList.forEach(item => {
             this._clearValidity(item);
@@ -40,8 +41,7 @@ export default class PopupWithForm extends Popup {
     setInputValues() {
         this._popupInputList.forEach((item) => {
             console.log(item.value)
-            // item.value = getData[item.id];
-            // console.log(getData)
+
         })
     }
 }
