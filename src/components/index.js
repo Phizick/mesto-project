@@ -75,12 +75,12 @@ const popupProfile = new PopupWithForm(
                 .editProfileData(data)
                 .then((data) => {
                     profileInfo.setUserInfo(data);
-                    popupProfile.close();
+                    popupProfile.close();                    
                 })
                 .catch((err) => {
                     console.log(err);
                 })
-                .finally(() => {
+                .finally(() => {                    
                     popupProfile.setBtnContent('Сохранить');
                 });
         },
@@ -102,32 +102,7 @@ const profileFormInputs = (name, about) => {
 }
 
 // 
-const addedCardPopup = new PopupWithForm(
-    constant.popupSelectors.popupAddCard,
-    {
-        submit: (data) => {
-            addedCardPopup.setBtnContent('Сохранение...');
-            getApi            
-                .pushCard(data)
-                .then((data) => {
-                    newCard.renderItem(data, data.owner._id);
-                    addedCardPopup.close();
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
-                .finally(() => {
-                    addedCardPopup.setBtnContent('Сохранить');
-                });
-        },
-    },
-    {
-        clearValidity: (input) => {
-            resetValidation(input, formCard, constant.cardForm);
-        },
-    }
-);
-addedCardPopup.setEventListeners();
+
 
 const popupDelCard = new PopupForDel(constant.popupSelectors.popupDelete, {
     submit: (id) => {        
@@ -179,6 +154,33 @@ constant.btn3.addEventListener('click', () => {
     addedCardPopup.open();
     formCard.disablebtns();
 })
+
+const addedCardPopup = new PopupWithForm(
+    constant.popupSelectors.popupAddCard,
+    {
+        submit: (data) => {
+            addedCardPopup.setBtnContent('Сохранение...');
+            getApi            
+                .pushCard(data)
+                .then((data) => {
+                    newCard.renderItem(data);
+                    addedCardPopup.close();
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .finally(() => {
+                    addedCardPopup.setBtnContent('Сохранить');
+                });
+        },
+    },
+    {
+        clearValidity: (input) => {
+            resetValidation(input, formCard, constant.cardForm);
+        },
+    }
+);
+addedCardPopup.setEventListeners();
 
 Promise.all([userApi, cardsApi])
     .then(([user, cards]) => {
