@@ -31,7 +31,7 @@ Promise.all([userApi, cardsApi])
         console.log(err);
     });
 
-// редактирование аватарки
+
 const popupAvatar = new PopupWithForm(
     constant.popupSelectors.popupAvatar,
     {
@@ -175,6 +175,10 @@ const handleLikeClick = (card, id, creatingCard) => {
             .catch(err => {console.log(err)})
     }
 }
+
+
+
+
 
 const resetValidation = (input, formAbout, form) => {
     const errorElement = form.querySelector(`.${input.id}-error`);
