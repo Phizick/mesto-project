@@ -166,8 +166,7 @@ constant.btn1.addEventListener('click', () => {
     popupProfile.open();
     popupProfile.setInputValues(profileInfo.getUserInfo());
     formProfile.enableBtns();
-    const { name, about } = profileInfo.getUserInfo();
-    profileFormInputs( name, about)
+    
 
 });
 

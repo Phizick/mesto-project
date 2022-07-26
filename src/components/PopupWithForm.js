@@ -38,10 +38,13 @@ export default class PopupWithForm extends Popup {
         });
     }
 
-    setInputValues() {
+    setInputValues(data) {        
         this._popupInputList.forEach((item) => {
-            console.log(item.value)
-
+           if (item.name === 'name') {
+            item.value = data.name
+           } else {
+            item.value = data.about
+           }
         })
     }
 
