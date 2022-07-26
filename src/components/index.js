@@ -161,7 +161,7 @@ const addedCardPopup = new PopupWithForm(
 addedCardPopup.setEventListeners();
 
 const handleLikeClick = (card, id, creatingCard) => {
-    if (card.dataset.like) {
+    if (card.dataset.like === 'liked') {
         getApi.likeCardRemove(id)
             .then((res) => {
                 creatingCard._removeLike(res);
@@ -173,7 +173,7 @@ const handleLikeClick = (card, id, creatingCard) => {
                 creatingCard._addedLike(res)
             })
             .catch(err => {console.error(err)})
-    }
+    }    
 }
 
 
