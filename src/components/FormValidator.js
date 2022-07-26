@@ -18,8 +18,7 @@ export default class FormValidator {
     _showInputError (inputElement, errorMsg, errorElement) {
         inputElement.classList.add(this._config.inputErrorClass);
         errorElement.classList.add(this._config.errorClass);
-        errorElement.textContent = errorMsg
-        console.log(inputElement)
+        errorElement.textContent = errorMsg        
     }
 
     hideInputError (inputElement, errorElement) {

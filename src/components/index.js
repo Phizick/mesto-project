@@ -93,6 +93,14 @@ const popupProfile = new PopupWithForm(
 );
 popupProfile.setEventListeners();
 
+const profileFormInputs = (name, about) => {
+    const profName = document.querySelector(constant.ProfileSelectors.profileName);
+    const profBio = document.querySelector(constant.ProfileSelectors.profileAbout);
+    console.log(profName)
+    profName.textContent = name;
+    profBio.value = about;
+}
+
 // 
 const addedCardPopup = new PopupWithForm(
     constant.popupSelectors.popupAddCard,
@@ -158,6 +166,9 @@ constant.btn1.addEventListener('click', () => {
     popupProfile.open();
     popupProfile.setInputValues(profileInfo.getUserInfo());
     formProfile.enableBtns();
+    const { name, about } = profileInfo.getUserInfo();
+    profileFormInputs( name, about)
+
 });
 
 constant.btn2.addEventListener('click', () => {
