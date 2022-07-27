@@ -7,6 +7,7 @@ export default class PopupWithForm extends Popup {
         this._submitBtn = this._popup.querySelector('.popup__save-button');
         this._popupInputList = this._popup.querySelectorAll('.popup__input');
         this._clearFormValidity = clearFormValidity;
+        this._formSubmitDefaultTextContent = this._submitBtn.textContent
     }
 
     _getFormInputValues() {
@@ -46,6 +47,11 @@ export default class PopupWithForm extends Popup {
             item.value = data.about
            }
         })
+    }
+
+    _setFormSubmitBtnState(state) {
+        this._submitBtn.disabled = state;
+        this._submitBtn.textContent = state ? 'Сохранение...' : this._formSubmitDefaultTextContent;
     }
 
   
