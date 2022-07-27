@@ -13,15 +13,15 @@ export default class Userinfo {
         }
     }
 
-    setUserInfo = ({name, about}) => {
-        this._name = name;
-        this._about = about;
+    setUserInfo = (userData) => {
+        this._name = userData.name;
+        this._about = userData.about;
         this._profileUserName.textContent = this._name;
         this._profileUserAbout.textContent = this._about;
     }
 
-    setUserAvatar = ({avatar}) => {
-        this._avatar = avatar;
+    setUserAvatar = (userData) => {
+        this._avatar = userData.avatar;
         this._profileUserAvatar.src = this._avatar;
     }
 }

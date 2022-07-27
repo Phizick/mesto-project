@@ -1,7 +1,7 @@
 export default class Api {
-    constructor(data) {
-        this._config = data.apiConfig;
-        this._links = data.links;
+    constructor(apiData) {
+        this._config = apiData.apiConfig;
+        this._links = apiData.apiLinks;
     }
 
     _checkResponse(res) {
@@ -31,7 +31,7 @@ export default class Api {
     }
 
     loadUserProfileData() {
-        return this._getApiData(this._links.profile, "GET", "");
+        return this._getApiData(this._links.userProfile, "GET", "");
     }
 
     deleteCard(id) {
@@ -51,10 +51,10 @@ export default class Api {
     }
 
     editProfileData(data) {
-        return this._setApiData(this._links.profile, "PATCH", data);
+        return this._setApiData(this._links.userProfile, "PATCH", data);
     }
 
     userAvatarEdit(avatarData) {
-        return this._setApiData(this._links.avatar, "PATCH", avatarData);
+        return this._setApiData(this._links.userAvatar, "PATCH", avatarData);
     }
 }
