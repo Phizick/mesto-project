@@ -96,7 +96,7 @@ const popupProfileEdit = new PopupWithForm(
                 .then((data) => {
                     userProfileInfo.setUserInfo(data);
                     popupProfileEdit.close();                   
-                })
+                })                
                 .catch((err) => {
                     console.error(err);
                 })
