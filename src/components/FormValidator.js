@@ -7,12 +7,12 @@ export default class FormValidator {
     }
 
     _hideInputErrorElement (errorElement) {
-        errorElement.classList.remove(this._config.errClass);
+        errorElement.classList.remove(this._config.errorVisibilityClass);
         errorElement.textContent = "";
     }
 
     _hideInputElement (inputElement) {
-        inputElement.classList.remove(this._config.errClass);
+        inputElement.classList.remove(this._config.inputErrorClass);
     }
 
     _showFormInputError (inputElement, errorMsg, errorElement) {
