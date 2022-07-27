@@ -18,7 +18,7 @@ const formEditAvatar = new FormValidator(constants.validationConfig, constants.a
 const formEditProfile = new FormValidator(constants.validationConfig, constants.profileEditForm);
 const formEditCard = new FormValidator(constants.validationConfig, constants.cardEditForm);
 const allFormsGroup = [formEditAvatar, formEditProfile, formEditCard];
-allFormsGroup.forEach(form => form.enableValidation());
+allFormsGroup.forEach((form) => form.enableValidation());
 
 Promise.all([userProfileApi, cardsGalleryApi])
     .then(([user, cards]) => {
@@ -30,6 +30,34 @@ Promise.all([userProfileApi, cardsGalleryApi])
         console.error(err);
     });
 
+const newCard = new Section(
+    {
+        renderer: (item, userId) => {
+            const renderedCard = new Card(
+                item,
+                {
+                    handleCardZoomClick: (name, link) => {
+                        popupOpenImgPreview.open(name, link);
+                    },
+                },
+                {
+                    handleCardLikeClick: (card, id) => {
+                        handleCardLikeClick(card, id, renderedCard);
+                    },
+                },
+                {
+                    openCardDeletingPopup: (id) => {
+                        popupDeleteCardConfirm.open(id);
+                    },
+                },
+                userId,
+                constants.cardTemplateSelector
+            );
+            return renderedCard.createNewCard();
+        },
+    },
+    constants.cardContainerSelector
+);
 
 const popupAvatarEdit = new PopupWithForm(
     constants.popupSelectors.popupAvatarEditSelector,
@@ -40,7 +68,7 @@ const popupAvatarEdit = new PopupWithForm(
                 .userAvatarEdit(avatarData)
                 .then((avatarData) => {
                     userProfileInfo.setUserAvatar(avatarData);
-                    popupAvatarEdit.close();
+                    popupAvatarEdit.close();                    
                 })
                 .catch((err) => {
                     console.error(err);
@@ -67,7 +95,7 @@ const popupProfileEdit = new PopupWithForm(
                 .editProfileData(data)
                 .then((data) => {
                     userProfileInfo.setUserInfo(data);
-                    popupProfileEdit.close();
+                    popupProfileEdit.close();                   
                 })
                 .catch((err) => {
                     console.error(err);
@@ -91,7 +119,7 @@ const popupDeleteCardConfirm = new PopupWithDelete(constants.popupSelectors.popu
             .deleteCard(id)
             .then(() => {
                 document.querySelector(`.card[data-id="${id}"]`).remove();
-                popupDeleteCardConfirm.close();
+                popupDeleteCardConfirm.close();                
             })
             .catch((err) => {
                 console.error(err);
@@ -103,35 +131,6 @@ popupDeleteCardConfirm.setEventListeners();
 const popupOpenImgPreview = new PopupWithImage(constants.popupSelectors.popupOpenedImgSelector);
 popupOpenImgPreview.setEventListeners();
 
-const newCard = new Section(
-    {
-        renderer: (item, userId) => {
-            const creatingCard = new Card(
-                item,
-                {
-                    handleCardZoomClick: (name, link) => {
-                        popupOpenImgPreview .open(name, link);
-                    },
-                },
-                {
-                    handleCardLikeClick: (card, id) => {
-                        handleCardLikeClick(card, id, creatingCard);
-                    },
-                },
-                {
-                    openCardDeletingPopup: (id) => {
-                        popupDeleteCardConfirm.open(id);
-                    },
-                },
-                userId,
-                constants.cardTemplateSelector
-            );
-            return creatingCard.createNewCard();
-        },
-    },
-    constants.cardContainerSelector
-);
-
 const popupAddedNewCard = new PopupWithForm(
     constants.popupSelectors.popupAddCardSelector,
     {
@@ -141,7 +140,7 @@ const popupAddedNewCard = new PopupWithForm(
                 .setNewCard(cardData)
                 .then((cardData) => {
                     newCard.renderNewItem(cardData);
-                    popupAddedNewCard.close();
+                    popupAddedNewCard.close();                    
                 })
                 .catch((err) => {
                     console.error(err);
@@ -160,22 +159,26 @@ const popupAddedNewCard = new PopupWithForm(
 popupAddedNewCard.setPopupEventListeners();
 
 const handleCardLikeClick = (card, id, creatingCard) => {
-    if (card.dataset.like === 'liked') {
+    if (card.dataset.like === "liked") {
         getApi
             .cardLikeRemove(id)
             .then((res) => {
                 creatingCard._removeCardLike(res);
             })
-            .catch(err => {console.error(err)});
+            .catch((err) => {
+                console.error(err);
+            });
     } else {
         getApi
-            .cardLikeAdd(id) 
+            .cardLikeAdd(id)
             .then((res) => {
-                creatingCard._addedCardLike(res)
+                creatingCard._addedCardLike(res);
             })
-            .catch(err => {console.error(err)})
-    }    
-}
+            .catch((err) => {
+                console.error(err);
+            });
+    }
+};
 
 const resetFormValidation = (input, form, formSelector) => {
     const errorElement = formSelector.querySelector(`.${input.id}-error`);
@@ -197,3 +200,5 @@ constants.galleryAddCardBtn.addEventListener("click", () => {
     popupAddedNewCard.open();
     formEditCard.disableFormSubmitBtns();
 });
+
+

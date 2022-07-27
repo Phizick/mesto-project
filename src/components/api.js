@@ -8,7 +8,7 @@ export default class Api {
         if (res.status === 200) {
             return res.json();
         }
-        return Promise.reject(new Error(`Error ${res.status}`));
+        return Promise.reject(new Error(`Ошибка сервера: ${res.status}`));
     }
 
     _getApiData(links, method, id) {
