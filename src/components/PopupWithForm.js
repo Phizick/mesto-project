@@ -1,15 +1,15 @@
 import Popup from "./Popup";
 export default class PopupWithForm extends Popup {
-    constructor(popupSelector, {submit}, {clearValidity}) {
+    constructor(popupSelector, {submit}, {clearFormValidity}) {
         super(popupSelector);
         this._submit = submit;
         this._form = this._popup.querySelector('.popup__form');
         this._submitBtn = this._popup.querySelector('.popup__save-button');
         this._popupInputList = this._popup.querySelectorAll('.popup__input');
-        this._clearValidity = clearValidity;
+        this._clearFormValidity = clearFormValidity;
     }
 
-    _getInputValues() {
+    _getFormInputValues() {
         this._formValues = {};
         this._popupInputList.forEach(item => {
             this._formValues[item.name] = item.value;
@@ -17,15 +17,15 @@ export default class PopupWithForm extends Popup {
         return this._formValues
     }
 
-    setEventListeners() {
+    setPopupEventListeners() {
         super.setEventListeners();
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            this._submit(this._getInputValues());
+            this._submit(this._getFormInputValues());
         });
     }
 
-    setBtnContent(content) {
+    setFormSubmitBtnContent(content) {
         this._submitBtn.textContent = content;
     }
 
@@ -34,11 +34,11 @@ export default class PopupWithForm extends Popup {
         .close();
         this._form.reset();        
         this._popupInputList.forEach(item => {
-            this._clearValidity(item);
+            this._clearFormValidity(item);
         });
     }
 
-    setInputValues(data) {        
+    setFormInputValues(data) {        
         this._popupInputList.forEach((item) => {
            if (item.name === 'name') {
             item.value = data.name

@@ -1,15 +1,13 @@
-export const profileForm = document.querySelector('.popup__form-profile');
-export const cardForm = document.querySelector('.popup__form-cards');
-export const avatarForm = document.querySelector('.popup__form-avatar');
+export const profileEditForm = document.querySelector('.popup__form-profile');
+export const cardEditForm = document.querySelector('.popup__form-cards');
+export const avatarEditForm = document.querySelector('.popup__form-avatar');
 
-export const templateSelector = '#gallery__template';
+export const cardTemplateSelector = '#gallery__template';
 export const containerSelector = '.cards';
 
-
-
-export const btn1 = document.querySelector('.profile__name-edit');
-export const btn2 = document.querySelector('.profile__avatar-edit-btn');
-export const btn3 = document.querySelector('.profile__add-button');
+export const profileNameEditBtn = document.querySelector('.profile__name-edit');
+export const userAvatarEditBtn = document.querySelector('.profile__avatar-edit-btn');
+export const galleryAddCardBtn = document.querySelector('.profile__add-button');
 
 
 export const links = {
@@ -27,11 +25,11 @@ export const ProfileSelectors = {
  };
 
 export const popupSelectors = {
-    popupProfile: '.popup__profile',
-    popupAvatar: '.popup__avatar-edit',
-    popupAddCard: '.popup__img',
+    popupProfileEditClass: '.popup__profile',
+    popupAvatarEditClass: '.popup__avatar-edit',
+    popupAddCardClass: '.popup__img',
     popupImg: '.popup__img-opened',
-    popupDelete: '.popup__delete-confirm'
+    popupDeleteConfirmClass: '.popup__delete-confirm'
 };
 
 export const validationConfig = {
