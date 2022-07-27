@@ -8,7 +8,7 @@ import Userinfo from "./Userinfo";
 import Card from "./Card";
 import * as constant from "../utils/constants";
 import Section from "./Section";
-import PopupForDel from "./PopupForDel";
+import PopupWithDelete from "./PopupWithDelete";
 
 const getApi = new Api(constant);
 const userProfileApi = getApi.loadUserProfileData();
@@ -24,7 +24,7 @@ Promise.all([userProfileApi, cardsGalleryApi])
     .then(([user, cards]) => {
         userProfileInfo.setUserInfo(user);
         userProfileInfo.setUserAvatar(user);
-        newCard.renderItems(cards, user._id);
+        newCard.renderDefaultItems(cards, user._id);
     })
     .catch((err) => {
         console.error(err);
@@ -34,12 +34,12 @@ Promise.all([userProfileApi, cardsGalleryApi])
 const popupAvatarEdit = new PopupWithForm(
     constant.popupSelectors.popupAvatarEditClass,
     {
-        submit: (data) => {
+        submit: (avatarData) => {
             popupAvatarEdit.setFormSubmitBtnContent("Сохранение...");
             getApi
-                .userAvatarEdit(data)
-                .then((data) => {
-                    profileInfo.setUserAvatar(data);
+                .userAvatarEdit(avatarData)
+                .then((avatarData) => {
+                    userProfileInfo.setUserAvatar(avatarData);
                     popupAvatarEdit.close();
                 })
                 .catch((err) => {
@@ -51,8 +51,8 @@ const popupAvatarEdit = new PopupWithForm(
         },
     },
     {
-        clearFormValidity: (input) => {
-            resetFormValidation(input, formEditAvatar, constant.avatarEditForm);
+        clearFormValidity: (formInput) => {
+            resetFormValidation(formInput, formEditAvatar, constant.avatarEditForm);
         },
     }
 );
@@ -64,7 +64,7 @@ const popupProfileEdit = new PopupWithForm(
         submit: (data) => {
             popupProfileEdit.setFormSubmitBtnContent("Сохранение...");
             getApi
-                .userProfileEdit(data)
+                .editProfileData(data)
                 .then((data) => {
                     userProfileInfo.setUserInfo(data);
                     popupProfileEdit.close();
@@ -85,7 +85,7 @@ const popupProfileEdit = new PopupWithForm(
 );
 popupProfileEdit.setPopupEventListeners();
 
-const popupDeleteCardConfirm = new PopupForDel(constant.popupSelectors.popupDeleteConfirmClass, {
+const popupDeleteCardConfirm = new PopupWithDelete(constant.popupSelectors.popupDeleteConfirmClass, {
     submit: (id) => {
         getApi
             .deleteCard(id)
@@ -135,12 +135,12 @@ const newCard = new Section(
 const popupAddedNewCard = new PopupWithForm(
     constant.popupSelectors.popupAddCardClass,
     {
-        submit: (data) => {
+        submit: (cardData) => {
             popupAddedNewCard.setFormSubmitBtnContent("Сохранение...");
             getApi
-                .setNewCard(data)
-                .then((data) => {
-                    newCard.renderItem(data, data.owner._id);
+                .setNewCard(cardData)
+                .then((cardData) => {
+                    newCard.renderNewItem(cardData);
                     popupAddedNewCard.close();
                 })
                 .catch((err) => {
@@ -152,8 +152,8 @@ const popupAddedNewCard = new PopupWithForm(
         },
     },
     {
-        clearFormValidity: (input) => {
-            resetFormValidation(input, formEditCard, constant.cardEditForm);
+        clearFormValidity: (formInput) => {
+            resetFormValidation(formInput, formEditCard, constant.cardEditForm);
         },
     }
 );

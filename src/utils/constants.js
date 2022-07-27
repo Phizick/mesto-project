@@ -19,9 +19,9 @@ export const links = {
 };
 
 export const ProfileSelectors = {
-    profileName: ".profile__name-text", 
-    profileAbout: ".profile__bio",      
-    profileAvatar: '.profile__avatar-image'
+    profileUserName: ".profile__name-text", 
+    profileUserAbout: ".profile__bio",      
+    profileUserAvatar: '.profile__avatar-image'
  };
 
 export const popupSelectors = {

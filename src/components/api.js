@@ -46,15 +46,15 @@ export default class Api {
         return this._getApiData(this._links.cardLike, "DELETE", id);
     }
 
-    setNewCard(data) {
-        return this._setApiData(this._links.cards, "POST", data);
+    setNewCard(cardData) {
+        return this._setApiData(this._links.cards, "POST", cardData);
     }
 
     editProfileData(data) {
         return this._setApiData(this._links.profile, "PATCH", data);
     }
 
-    userAvatarEdit(data) {
-        return this._setApiData(this._links.avatar, "PATCH", data);
+    userAvatarEdit(avatarData) {
+        return this._setApiData(this._links.avatar, "PATCH", avatarData);
     }
 }
