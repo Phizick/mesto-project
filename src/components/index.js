@@ -90,19 +90,19 @@ const popupProfileEdit = new PopupWithForm(
     constants.popupSelectors.popupProfileEditSelector,
     {
         submit: (data) => {
-            popupProfileEdit.setFormSubmitBtnContent("Сохранение...");
+            // popupProfileEdit.setFormSubmitBtnContent("Сохранение...");
             getApi
                 .editProfileData(data)
                 .then((data) => {
                     userProfileInfo.setUserInfo(data);
-                    popupProfileEdit.close();                   
+                    // popupProfileEdit.close();                   
                 })                
                 .catch((err) => {
                     console.error(err);
                 })
-                .finally(() => {
-                    popupProfileEdit.setFormSubmitBtnContent("Сохранить");
-                });
+                // .finally(() => {
+                //     popupProfileEdit.setFormSubmitBtnContent("Сохранить");
+                // });
         },
     },
     {
