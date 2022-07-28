@@ -63,18 +63,17 @@ const popupAvatarEdit = new PopupWithForm(
     constants.popupSelectors.popupAvatarEditSelector,
     {
         submit: (avatarData) => {
-            popupAvatarEdit.setFormSubmitBtnContent("Сохранение...");
+            popupAvatarEdit.contentLoadingProcessingBtnTextContent();
             getApi
                 .userAvatarEdit(avatarData)
                 .then((avatarData) => {
-                    userProfileInfo.setUserAvatar(avatarData);
-                    popupAvatarEdit.close();                    
+                    userProfileInfo.setUserAvatar(avatarData);                                        
                 })
                 .catch((err) => {
                     console.error(err);
                 })
                 .finally(() => {
-                    popupAvatarEdit.setFormSubmitBtnContent("Сохранить");
+                    popupAvatarEdit.contentLoadCompleteBtnTextContent();
                 });
         },
     },
@@ -90,19 +89,18 @@ const popupProfileEdit = new PopupWithForm(
     constants.popupSelectors.popupProfileEditSelector,
     {
         submit: (data) => {
-            // popupProfileEdit.setFormSubmitBtnContent("Сохранение...");
+            popupProfileEdit.contentLoadingProcessingBtnTextContent()
             getApi
                 .editProfileData(data)
                 .then((data) => {
-                    userProfileInfo.setUserInfo(data);
-                    // popupProfileEdit.close();                   
+                    userProfileInfo.setUserInfo(data);                                       
                 })                
                 .catch((err) => {
                     console.error(err);
                 })
-                // .finally(() => {
-                //     popupProfileEdit.setFormSubmitBtnContent("Сохранить");
-                // });
+                .finally(() => {
+                    popupProfileEdit.contentLoadCompleteBtnTextContent()
+                });
         },
     },
     {
@@ -135,18 +133,17 @@ const popupAddedNewCard = new PopupWithForm(
     constants.popupSelectors.popupAddCardSelector,
     {
         submit: (cardData) => {
-            popupAddedNewCard.setFormSubmitBtnContent("Сохранение...");
+            popupAddedNewCard.contentLoadingProcessingBtnTextContent();
             getApi
                 .setNewCard(cardData)
                 .then((cardData) => {
-                    newCard.renderNewItem(cardData);
-                    popupAddedNewCard.close();                    
+                    newCard.renderNewItem(cardData);                                        
                 })
                 .catch((err) => {
                     console.error(err);
                 })
                 .finally(() => {
-                    popupAddedNewCard.setFormSubmitBtnContent("Сохранить");
+                    popupAddedNewCard.contentLoadCompleteBtnTextContent;
                 });
         },
     },

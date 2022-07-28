@@ -18,13 +18,18 @@ export default class PopupWithForm extends Popup {
         return this._formValues
     }
 
-    // setPopupEventListeners() {
-    //     super.setEventListeners();
-    //     this._form.addEventListener('submit', (evt) => {
-    //         evt.preventDefault();
-    //         this._submit(this._getFormInputValues());       
-    //     });
-    // }
+    setPopupEventListeners() {
+        super.setEventListeners();
+        this._form.addEventListener('submit', (evt) => {
+           this._submitFormActions(evt);
+        });
+    }
+
+    _submitFormActions(evt) {
+        evt.preventDefault();
+        this._submit(this._getFormInputValues());
+        this.close();
+    }
 
     setFormSubmitBtnContent(content) {
         this._submitBtn.textContent = content;
@@ -48,32 +53,15 @@ export default class PopupWithForm extends Popup {
            }
         })
     }
-    _setFormSubmitBtnState(state) {        
-        this._submitBtn.disabled = state;
-        this._submitBtn.textContent = state ? 'Сохранение...' : this._formSubmitDefaultTextContent;
-    }
 
-
-    _approveSubmit(evt) { 
-        evt.preventDefault();
-        // this._submit.then(() => this.close());
-        // const a = this._getFormInputValues();
-        // this._setFormSubmitBtnState(true);
+    contentLoadingProcessingBtnTextContent() {
         this.setFormSubmitBtnContent("Сохранение...");
-        this._submit(this._getFormInputValues())
-            .then(() => this.close())
-            .finally(() => {
-                this._setFormSubmitBtnState(false)
-                this.setFormSubmitBtnContent("Сохраненить");
-            })    
     }
 
-
-
-    setPopupEventListeners() {
-        super.setEventListeners();
-        this._form.addEventListener('submit', this._approveSubmit)
+    contentLoadCompleteBtnTextContent() {
+        this.setFormSubmitBtnContent("Сохраннить");
     }
+   
 
   
 }
