@@ -61,22 +61,15 @@ const newCard = new Section(
 
 const popupAvatarEdit = new PopupWithForm(
     constants.popupSelectors.popupAvatarEditSelector,
-    {
-        submit: (avatarData) => {
-            popupAvatarEdit.contentLoadingProcessingBtnTextContent();
-            getApi
-                .userAvatarEdit(avatarData)
-                .then((avatarData) => {
-                    userProfileInfo.setUserAvatar(avatarData);                                        
-                })
-                .catch((err) => {
-                    console.error(err);
-                })
-                .finally(() => {
-                    popupAvatarEdit.contentLoadCompleteBtnTextContent();
-                });
-        },
-    },
+    (avatarData) =>
+        getApi
+            .userAvatarEdit(avatarData)
+            .then((avatarData) => {
+                userProfileInfo.setUserAvatar(avatarData);
+            })
+            .catch((err) => {
+                console.error(err);
+            }),
     {
         clearFormValidity: (formInput) => {
             resetFormValidation(formInput, formEditAvatar, constants.avatarEditForm);
@@ -87,25 +80,19 @@ popupAvatarEdit.setPopupEventListeners();
 
 const popupProfileEdit = new PopupWithForm(
     constants.popupSelectors.popupProfileEditSelector,
+    (data) =>
+        getApi
+            .editProfileData(data)
+            .then((data) => {
+                userProfileInfo.setUserInfo(data);
+            })
+            .catch((err) => {
+                console.error(err);
+            }),
+
     {
-        submit: (data) => {
-            popupProfileEdit.contentLoadingProcessingBtnTextContent()
-            getApi
-                .editProfileData(data)
-                .then((data) => {
-                    userProfileInfo.setUserInfo(data);                                       
-                })                
-                .catch((err) => {
-                    console.error(err);
-                })
-                .finally(() => {
-                    popupProfileEdit.contentLoadCompleteBtnTextContent()
-                });
-        },
-    },
-    {
-        clearFormValidity: (input) => {
-            resetFormValidation(input, formEditProfile, constants.profileEditForm);
+        clearFormValidity: (formInput) => {
+            resetFormValidation(formInput, formEditProfile, constants.profileEditForm);
         },
     }
 );
@@ -117,7 +104,7 @@ const popupDeleteCardConfirm = new PopupWithDelete(constants.popupSelectors.popu
             .deleteCard(id)
             .then(() => {
                 document.querySelector(`.card[data-id="${id}"]`).remove();
-                popupDeleteCardConfirm.close();                
+                popupDeleteCardConfirm.close();
             })
             .catch((err) => {
                 console.error(err);
@@ -131,22 +118,16 @@ popupOpenImgPreview.setEventListeners();
 
 const popupAddedNewCard = new PopupWithForm(
     constants.popupSelectors.popupAddCardSelector,
-    {
-        submit: (cardData) => {
-            popupAddedNewCard.contentLoadingProcessingBtnTextContent();
-            getApi
-                .setNewCard(cardData)
-                .then((cardData) => {
-                    newCard.renderNewItem(cardData);                                        
-                })
-                .catch((err) => {
-                    console.error(err);
-                })
-                .finally(() => {
-                    popupAddedNewCard.contentLoadCompleteBtnTextContent;
-                });
-        },
-    },
+    (cardData) =>
+        getApi
+            .setNewCard(cardData)
+            .then((cardData) => {
+                newCard.renderNewItem(cardData);
+            })
+            .catch((err) => {
+                console.error(err);
+            }),
+
     {
         clearFormValidity: (formInput) => {
             resetFormValidation(formInput, formEditCard, constants.cardEditForm);
@@ -197,5 +178,3 @@ constants.galleryAddCardBtn.addEventListener("click", () => {
     popupAddedNewCard.open();
     formEditCard.disableFormSubmitBtns();
 });
-
-
