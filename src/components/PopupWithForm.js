@@ -5,8 +5,7 @@ constructor(popupSelector, submit) {
         this._submit = submit;
         this._form = this._popup.querySelector('.popup__form');
         this._submitBtn = this._popup.querySelector('.popup__save-button');
-        this._popupInputList = this._popup.querySelectorAll('.popup__input');
-        // this._clearFormValidity = clearFormValidity;       
+        this._popupInputList = this._popup.querySelectorAll('.popup__input');            
         this._submitState = this._submitState.bind(this);
         this._setButtonState = this._setButtonState.bind(this);
         this._formSubmitDefaultTextContent = this._submitBtn.textContent;
@@ -17,17 +16,15 @@ constructor(popupSelector, submit) {
         this._submitBtn.textContent = btnState ? 'Сохранение...' : this._formSubmitDefaultTextContent;
       }
 
-      _submitState(evt) {
+    _submitState(evt) {
         evt.preventDefault();   
-    
-        this._setButtonState(false);
-    
+        this._setButtonState(false);    
         this._submit(this._getFormInputValues())
           .then(() => this.close())
           .finally(() => {
             this._setButtonState(true);
           });
-      }
+    }
 
     _getFormInputValues() {
         this._formValues = {};
@@ -40,20 +37,12 @@ constructor(popupSelector, submit) {
     setPopupEventListeners() {
         super.setEventListeners();
         this._form.addEventListener('submit', this._submitState);
-    }
-
-
-    setFormSubmitBtnContent(content) {
-        this._submitBtn.textContent = content;
-    }
+    } 
 
     close() {
         super
         .close();
         this._form.reset();        
-        this._popupInputList.forEach(item => {
-            this._clearFormValidity(item);
-        });
     }
 
     setFormInputValues(data) {        
@@ -65,15 +54,5 @@ constructor(popupSelector, submit) {
            }
         })
     }
-
-    contentLoadingProcessingBtnTextContent() {
-        this.setFormSubmitBtnContent("Сохранение...");
-    }
-
-    contentLoadCompleteBtnTextContent() {
-        this.setFormSubmitBtnContent("Сохраннить");
-    }
-   
-
   
 }

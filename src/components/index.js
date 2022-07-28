@@ -69,12 +69,7 @@ const popupAvatarEdit = new PopupWithForm(
             })
             .catch((err) => {
                 console.error(err);
-            }),
-    {
-        clearFormValidity: (formInput) => {
-            resetFormValidation(formInput, formEditAvatar, constants.avatarEditForm);
-        },
-    }
+            })    
 );
 popupAvatarEdit.setPopupEventListeners();
 
@@ -88,23 +83,17 @@ const popupProfileEdit = new PopupWithForm(
             })
             .catch((err) => {
                 console.error(err);
-            }),
-
-    {
-        clearFormValidity: (formInput) => {
-            resetFormValidation(formInput, formEditProfile, constants.profileEditForm);
-        },
-    }
+            }) 
 );
 popupProfileEdit.setPopupEventListeners();
 
-const popupDeleteCardConfirm = new PopupWithDelete(constants.popupSelectors.popupDeleteConfirmSelector, {
-    submit: (id) => {
+const popupDeleteCardConfirm = new PopupWithDelete(constants.popupSelectors.popupDeleteConfirmSelector, 
+    {
+    submit: (cardId) => {
         getApi
-            .deleteCard(id)
+            .deleteCard(cardId)
             .then(() => {
-                document.querySelector(`.card[data-id="${id}"]`).remove();
-                popupDeleteCardConfirm.close();
+                document.querySelector(`.card[data-id="${cardId}"]`).remove();                
             })
             .catch((err) => {
                 console.error(err);
@@ -126,13 +115,7 @@ const popupAddedNewCard = new PopupWithForm(
             })
             .catch((err) => {
                 console.error(err);
-            }),
-
-    {
-        clearFormValidity: (formInput) => {
-            resetFormValidation(formInput, formEditCard, constants.cardEditForm);
-        },
-    }
+            })  
 );
 popupAddedNewCard.setPopupEventListeners();
 
@@ -158,23 +141,18 @@ const handleCardLikeClick = (card, id, creatingCard) => {
     }
 };
 
-const resetFormValidation = (input, form, formSelector) => {
-    const errorElement = formSelector.querySelector(`.${input.id}-error`);
-    form.hideFormInputError(input, errorElement);
-};
-
 constants.profileNameEditBtn.addEventListener("click", () => {
     popupProfileEdit.open();
     popupProfileEdit.setFormInputValues(userProfileInfo.getUserInfo());
-    formEditProfile.enableFormSubmitBtns();
+    formEditProfile.resetValidation();
 });
 
 constants.userAvatarEditBtn.addEventListener("click", () => {
     popupAvatarEdit.open();
-    formEditAvatar.disableFormSubmitBtns();
+    formEditAvatar.resetValidation();
 });
 
 constants.galleryAddCardBtn.addEventListener("click", () => {
     popupAddedNewCard.open();
-    formEditCard.disableFormSubmitBtns();
+    formEditCard.resetValidation();
 });

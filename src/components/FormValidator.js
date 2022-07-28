@@ -76,4 +76,12 @@ export default class FormValidator {
         });
         this._buttonCondition();
     }
+
+    resetValidation() {
+        this._buttonCondition();        
+        this._inputList.forEach((item) => {
+            const errorElement = this._form.querySelector(`.${item.id}-error`);
+            this.hideFormInputError(item, errorElement)
+        })
+    }
 }
