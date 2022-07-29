@@ -1,8 +1,15 @@
 import Popup from "./Popup";
+/**
+ * класс попапа с формами.
+ * @constructor
+ * @param {string} popupSelector - селектор класса разметки нужного попапа в DOM-дереве
+ * @param {function} submit - колбэк функции отправки формы 
+ */
 export default class PopupWithForm extends Popup {
     constructor(popupSelector, submit) {
         super(popupSelector);
         this._submit = submit;
+        console.log(typeof submit)
         this._form = this._popup.querySelector(".popup__form");
         this._submitBtn = this._popup.querySelector(".popup__save-button");
         this._popupInputList = this._popup.querySelectorAll(".popup__input");

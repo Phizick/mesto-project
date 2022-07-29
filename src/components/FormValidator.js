@@ -1,6 +1,13 @@
+/**
+ * класс для валидации полей всех форм. Отвечает за валидацию самих полей, состояние кнопок и отображение ошибок
+ * @constructor
+ * @param {object} validationConfig - обьект, хранящий селекторы и классы формы, кнопок, полей ввода и видимости ошибок
+ * @param {object} form - обьект формы для валидации
+ */
+
 export default class FormValidator {
     constructor(validationConfig, form) {
-        this._config = validationConfig;
+        this._config = validationConfig;        
         this._form = form;
         this._inputList =  Array.from(this._form.querySelectorAll(this._config.inputSelector));
         this._submitBTn = this._form.querySelector(this._config.submitButtonSelector);
