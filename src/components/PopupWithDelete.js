@@ -1,8 +1,14 @@
 import Popup from "./Popup";
+/**
+ * Конструктор попапа подтверждения удаления карточки из DOM
+ * @constructor
+ * @param {string} popupSelector - селектор класса разметки попапа в DOM
+ * @param {function} submit - колбэк функции подтверждения удаления карточки
+ */
 
 export default class PopupWithDelete extends Popup{
     constructor(popupSelector, {submit}) {
-        super(popupSelector);
+        super(popupSelector);        
         this._submit = submit;
         this._form = this._popup.querySelector('.popup__form')
     }  

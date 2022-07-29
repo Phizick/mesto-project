@@ -1,3 +1,9 @@
+/**
+ * конструктор для создания дефолтного попапа
+ * @constructor 
+ * @param {string} popupSelector - селектор класса разметки нужного попапа в DOM-дереве
+ */
+
 export default class Popup {
     constructor(popupSelector) {
         this._popup = document.querySelector(popupSelector);
@@ -16,11 +22,11 @@ export default class Popup {
 
     _handleEscClose = (evt) => {
         evt.keyCode == 27 && this.close();
-    };
+    }
 
     _handleOverlayClose = (evt) => {
         evt.target.classList.contains("popup") && this.close();
-    };
+    }
 
     setEventListeners() {
         this._closeBtn.addEventListener("click", () => {

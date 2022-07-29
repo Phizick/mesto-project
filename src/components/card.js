@@ -47,17 +47,9 @@ export default class Card {
     }
 
     setCardEvtListeners() {
-        this._cardLikeBtn.addEventListener("click", () => {
-            this._handleCardLikeClick(this._card, this._id);
-        });
-
-        this._cardRemoveBtn.addEventListener("click", () => {
-            this._cardDeletingPopup(this._id);
-        });
-
-        this._cardImage.addEventListener("click", () => {
-            this._handleCardClick(this._name, this._link);
-        });
+        this._cardLikeBtn.addEventListener("click", () => {this._handleCardLikeClick(this._card, this._id)});
+        this._cardRemoveBtn.addEventListener("click", () => {this._cardDeletingPopup(this._id)});
+        this._cardImage.addEventListener("click", () => {this._handleCardClick(this._name, this._link)});
     }
 
     _isLiked() {

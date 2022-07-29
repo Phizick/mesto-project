@@ -75,11 +75,11 @@ popupAvatarEdit.setPopupEventListeners();
 
 const popupProfileEdit = new PopupWithForm(
     constants.popupSelectors.popupProfileEditSelector,
-    (data) =>
+    (profileData) =>
         getApi
-            .editProfileData(data)
-            .then((data) => {
-                userProfileInfo.setUserInfo(data);
+            .editProfileData(profileData)
+            .then((profileData) => {
+                userProfileInfo.setUserInfo(profileData);
             })
             .catch((err) => {
                 console.error(err);

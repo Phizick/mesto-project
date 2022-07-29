@@ -15,5 +15,4 @@ export default class PopupWithImage extends Popup {
         this._imageOpened.src = this._link;
         this._imageOpened.alt = this._name;
     }
-
 }

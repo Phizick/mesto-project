@@ -7,7 +7,6 @@ export const config = {
         galleryLikeStatus: "gallery__grid-like_active",
         galleryDelButton: ".gallery__delete-img-button",
         galleryLikeCountClass: ".gallery__grid-like-count",
-    },
-    
+    },   
   
 }
