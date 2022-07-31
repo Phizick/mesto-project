@@ -17,4 +17,11 @@ window.addEventListener('unhandledrejection', (evt) => {
     console.log('необработанная ошибка Promise')
     console.log(evt)
     console.log(evt.reason)
-})
+})  
+
+Promise.race([
+    request(),
+    new Promise((_, reject) => setTimeout(reject, 4000)),
+]).then((data) => {
+
+}).catch((err) => console.error(err))
