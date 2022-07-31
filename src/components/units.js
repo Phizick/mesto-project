@@ -12,3 +12,9 @@ export const errorHandler = (err, element, input) => {
     err.json().then(err => console.error(err.message))
 }
 }
+
+window.addEventListener('unhandledrejection', (evt) => {
+    console.log('необработанная ошибка Promise')
+    console.log(evt)
+    console.log(evt.reason)
+})
