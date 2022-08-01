@@ -9,6 +9,7 @@ import Card from "./Card";
 import * as constants from "../utils/constants";
 import Section from "./Section";
 import PopupWithDelete from "./PopupWithDelete";
+import Buttons from "./Buttons";
 
 const getApi = new Api(constants);
 const userProfileApi = getApi.loadUserProfileData();
@@ -141,18 +142,27 @@ const handleCardLikeClick = (card, id, creatingCard) => {
     }
 };
 
-constants.profileNameEditBtn.addEventListener("click", () => {
-    popupProfileEdit.open();
-    popupProfileEdit.setFormInputValues(userProfileInfo.getUserInfo());
-    formEditProfile.resetValidation();
-});
+const profileBTnEdit = new Buttons(constants.profileNameEditBtn, popupProfileEdit, formEditProfile)
+profileBTnEdit._setBtnEventListeners();
 
-constants.userAvatarEditBtn.addEventListener("click", () => {
-    popupAvatarEdit.open();
-    formEditAvatar.resetValidation();
-});
+const avatarBtnEdit = new Buttons(constants.userAvatarEditBtn, popupAvatarEdit, formEditAvatar);
+avatarBtnEdit._setBtnEventListeners()
 
-constants.galleryAddCardBtn.addEventListener("click", () => {
-    popupAddedNewCard.open();
-    formEditCard.resetValidation();
-});
+const cardBtnEdit = new Buttons(constants.galleryAddCardBtn, popupAddedNewCard, formEditCard);
+cardBtnEdit._setBtnEventListeners()
+
+// constants.profileNameEditBtn.addEventListener("click", () => {
+//     popupProfileEdit.open();
+//     popupProfileEdit.setFormInputValues(userProfileInfo.getUserInfo());
+//     formEditProfile.resetValidation();
+// });
+
+// constants.userAvatarEditBtn.addEventListener("click", () => {
+//     popupAvatarEdit.open();
+//     formEditAvatar.resetValidation();
+// });
+
+// constants.galleryAddCardBtn.addEventListener("click", () => {
+//     popupAddedNewCard.open();
+//     formEditCard.resetValidation();
+// });

@@ -17,7 +17,10 @@ module.exports = {
         port: 8080,
         open: true
     },
-    module: {
+    experiments: {
+        topLevelAwait: true
+      },
+    module: {        
         rules: [
             {
             test: /\.js$/,
