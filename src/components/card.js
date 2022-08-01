@@ -1,15 +1,27 @@
+/**
+ * конструктор новой карточки с функционалом
+ * @constructor
+ * @param {object} cardData - обьект с собственными параметрами карточки. содержит имя(name),ссылку на изображение(link), _id(id)
+ * likes(массив с кол-вом лайков), owner(данные об авторе карточки(пользователе, который ее добавил))
+ * @param {function} handleCardZoomClick - коллбэк функции, открывающей изображение в полном размере по клику
+ * @param {function} handleCardLikeClick - коллбэк функции, обрабатывающей лайки к карточкам
+ * @param {function} openCardDeletingPopup - коллбэк функции, запрашивающей подтверждение удаления карточки с изображением
+ * @param {string} userId - уникальный id пользователя, добавившего карточку
+ * @param {string} cardTemplateSelector - селектор темлейта для отрисовки карточек в DOM-дереве
+ */
+
 export default class Card {
-    constructor({ name, link, _id, likes, owner }, { handleCardZoomClick }, { handleCardLikeClick }, { openCardDeletingPopup }, userId, cardTemplateSelector) {
-        this._name = name;
-        this._link = link;
-        this._id = _id;
-        this._likes = likes;
-        this._owner = owner;
+    constructor(cardData, { handleCardZoomClick }, { handleCardLikeClick }, { openCardDeletingPopup }, userId, cardTemplateSelector) {
+        this._name = cardData.name;
+        this._link = cardData.link;
+        this._id = cardData._id;
+        this._likes = cardData.likes;
+        this._owner = cardData.owner;
         this._userId = userId;
         this._templateSelector = cardTemplateSelector;
         this._handleCardClick = handleCardZoomClick;
         this._handleCardLikeClick = handleCardLikeClick;
-        this._cardDeletingPopup = openCardDeletingPopup;
+        this._cardDeletingPopup = openCardDeletingPopup;        
     }
 
     _getElement() {

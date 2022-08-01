@@ -9,7 +9,7 @@ import Popup from "./Popup";
 export default class PopupWithDelete extends Popup{
     constructor(popupSelector, {submit}) {
         super(popupSelector);        
-        this._submit = submit;
+        this._submit = submit;        
         this._form = this._popup.querySelector('.popup__form')
     }  
 

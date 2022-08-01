@@ -50,15 +50,4 @@ export default class PopupWithForm extends Popup {
         this._form.reset();
     }
 
-    // setFormInputValues() {
-    //     const a = document.querySelector('.profile__name-text') 
-    //     const b = document.querySelector('.profile__bio')
-    //     this._popupInputList.forEach((inputListItem) => {
-    //         if (inputListItem.name === "name") {
-    //             inputListItem.value = a.textContent;
-    //         } else {
-    //             inputListItem.value =b.textContent;
-    //         }
-    //     });
-    // }
 }

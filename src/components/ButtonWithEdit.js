@@ -16,12 +16,12 @@ export default class ButtonWithEdit{
     setBtnEventListeners() {
         this._buttonSelector.addEventListener("click", () => {
             this._popupSelector.open();
-            this.setFormInputValues();
+            this._setFormInputValues();
             this._form.resetValidation();
         });
     }
 
-    setFormInputValues() {        
+    _setFormInputValues() {        
         const profileNameTextContainer = document.querySelector(".profile__name-text");
         const profileAboutTextContainer = document.querySelector(".profile__bio");
         this._form._inputList.forEach((inputListItem) => {

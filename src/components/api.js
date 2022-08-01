@@ -1,3 +1,10 @@
+/**
+ * класс для обработки запросов к серверу
+ * @constructor
+ * @param {object} apiData - содержит два обьекта: apiConfig (токен для авторизации сервера и url, а так же заголовки для запросов)
+ * apiLinks ( пути от корневого каталога сервера к нужным страницам)
+ */
+
 export default class Api {
     constructor(apiData) {
         this._config = apiData.apiConfig;
