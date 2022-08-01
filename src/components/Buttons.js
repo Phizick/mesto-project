@@ -2,9 +2,7 @@ export default class Buttons {
     constructor(buttonSelector, popupSelector, form) {
         this._buttonSelector = buttonSelector;
         this._form = form;
-        this._popupSelector = popupSelector;
-       
-              
+        this._popupSelector = popupSelector;             
     }
 
     setBtnEventListeners() {

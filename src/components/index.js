@@ -151,9 +151,6 @@ const handleCardLikeClick = (card, id, creatingCard) => {
             });
     }
 };
-export const userInfo = userProfileInfo.getUserInfo();
-
-
 
 const profileBTnEdit = new Buttons(constants.profileNameEditBtn, popupProfileEdit, formEditProfile)
 profileBTnEdit.setBtnEventListeners()
