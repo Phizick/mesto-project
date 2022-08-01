@@ -9,7 +9,7 @@ import Card from "./Card";
 import * as constants from "../utils/constants";
 import Section from "./Section";
 import PopupWithDelete from "./PopupWithDelete";
-import Buttons from "./Buttons";
+import ButtonWithEdit from "./ButtonWithEdit";
 
 const getApi = new Api(constants);
 const userProfileApi = getApi.loadUserProfileData();
@@ -21,6 +21,16 @@ const formEditCard = new FormValidator(constants.validationConfig, constants.car
 
 const allFormsGroup = [formEditAvatar, formEditProfile, formEditCard];
 allFormsGroup.forEach((form) => form.enableValidation());
+
+const profileBTnEdit = new ButtonWithEdit(constants.profileNameEditBtn, popupProfileEdit, formEditProfile);
+const avatarBtnEdit = new ButtonWithEdit(constants.userAvatarEditBtn, popupAvatarEdit, formEditAvatar);
+const cardBtnEdit = new ButtonWithEdit(constants.galleryAddCardBtn, popupAddedNewCard, formEditCard);
+
+const allEditBtnsGroup = [profileBTnEdit, avatarBtnEdit, cardBtnEdit];
+allEditBtnsGroup.forEach((btn) => btn.setBtnEventListeners());
+
+const popupOpenImgPreview = new PopupWithImage(constants.popupSelectors.popupOpenedImgSelector);
+popupOpenImgPreview.setEventListeners();
 
 Promise.all([userProfileApi, cardsGalleryApi])
     .then(([user, cards]) => {
@@ -73,15 +83,7 @@ const popupAvatarEdit = new PopupWithForm(
                 console.error(err);
             })    
 );
-popupAvatarEdit.setPopupEventListeners();
-function setFormStorage() {
-    const userInputName = document.getElementById('userName-input');
-    const userInputAbout = document.getElementById('userAbout-input')
-    const a = JSON.stringify(userInputName.value)
-    const b = JSON.stringify(userInputAbout.value)
-    localStorage.setItem('name', a)
-    localStorage.setItem('about', b)
-}
+
 const popupProfileEdit = new PopupWithForm(
     constants.popupSelectors.popupProfileEditSelector,
     (profileData) =>
@@ -94,9 +96,6 @@ const popupProfileEdit = new PopupWithForm(
                 console.error(err);
             }) 
 );
-popupProfileEdit.setPopupEventListeners();
-
-
 
 const popupDeleteCardConfirm = new PopupWithDelete(constants.popupSelectors.popupDeleteConfirmSelector, 
     {
@@ -113,9 +112,6 @@ const popupDeleteCardConfirm = new PopupWithDelete(constants.popupSelectors.popu
 });
 popupDeleteCardConfirm.setEventListeners();
 
-const popupOpenImgPreview = new PopupWithImage(constants.popupSelectors.popupOpenedImgSelector);
-popupOpenImgPreview.setEventListeners();
-
 const popupAddedNewCard = new PopupWithForm(
     constants.popupSelectors.popupAddCardSelector,
     (cardData) =>
@@ -128,7 +124,6 @@ const popupAddedNewCard = new PopupWithForm(
                 console.error(err);
             })  
 );
-popupAddedNewCard.setPopupEventListeners();
 
 const handleCardLikeClick = (card, id, creatingCard) => {
     if (card.dataset.like === "liked") {
@@ -152,29 +147,5 @@ const handleCardLikeClick = (card, id, creatingCard) => {
     }
 };
 
-const profileBTnEdit = new Buttons(constants.profileNameEditBtn, popupProfileEdit, formEditProfile)
-profileBTnEdit.setBtnEventListeners()
-
-const avatarBtnEdit = new Buttons(constants.userAvatarEditBtn, popupAvatarEdit, formEditAvatar);
-avatarBtnEdit.setBtnEventListeners()
-
-const cardBtnEdit = new Buttons(constants.galleryAddCardBtn, popupAddedNewCard, formEditCard);
-cardBtnEdit.setBtnEventListeners()
-
-
-
-// constants.profileNameEditBtn.addEventListener("click", () => {
-//     popupProfileEdit.open();
-//     popupProfileEdit.setFormInputValues(userProfileInfo.getUserInfo());
-//     formEditProfile.resetValidation();
-// });
-
-// constants.userAvatarEditBtn.addEventListener("click", () => {
-//     popupAvatarEdit.open();
-//     formEditAvatar.resetValidation();
-// });
-
-// constants.galleryAddCardBtn.addEventListener("click", () => {
-//     popupAddedNewCard.open();
-//     formEditCard.resetValidation();
-// });
+const allAddContentPopupsGroup = [popupAvatarEdit, popupAddedNewCard, popupProfileEdit];
+allAddContentPopupsGroup.forEach((popup) => popup.setPopupEventListeners());
