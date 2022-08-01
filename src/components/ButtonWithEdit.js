@@ -1,3 +1,11 @@
+/**
+ * конструктор поведения всех кнопок редактирования информации на странице
+ * @constructor
+ * @param {object} buttonSelector - селектор кнопки редактирования
+ * @param {object} popupSelector - селектор вызываемого попапа редактирования
+ * @param {object} form - форма попапа редактирования
+ */
+
 export default class ButtonWithEdit{
     constructor(buttonSelector, popupSelector, form) {
         this._buttonSelector = buttonSelector;
@@ -13,7 +21,7 @@ export default class ButtonWithEdit{
         });
     }
 
-    setFormInputValues() {
+    setFormInputValues() {        
         const profileNameTextContainer = document.querySelector(".profile__name-text");
         const profileAboutTextContainer = document.querySelector(".profile__bio");
         this._form._inputList.forEach((inputListItem) => {

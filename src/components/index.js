@@ -22,12 +22,7 @@ const formEditCard = new FormValidator(constants.validationConfig, constants.car
 const allFormsGroup = [formEditAvatar, formEditProfile, formEditCard];
 allFormsGroup.forEach((form) => form.enableValidation());
 
-const profileBTnEdit = new ButtonWithEdit(constants.profileNameEditBtn, popupProfileEdit, formEditProfile);
-const avatarBtnEdit = new ButtonWithEdit(constants.userAvatarEditBtn, popupAvatarEdit, formEditAvatar);
-const cardBtnEdit = new ButtonWithEdit(constants.galleryAddCardBtn, popupAddedNewCard, formEditCard);
 
-const allEditBtnsGroup = [profileBTnEdit, avatarBtnEdit, cardBtnEdit];
-allEditBtnsGroup.forEach((btn) => btn.setBtnEventListeners());
 
 const popupOpenImgPreview = new PopupWithImage(constants.popupSelectors.popupOpenedImgSelector);
 popupOpenImgPreview.setEventListeners();
@@ -149,3 +144,10 @@ const handleCardLikeClick = (card, id, creatingCard) => {
 
 const allAddContentPopupsGroup = [popupAvatarEdit, popupAddedNewCard, popupProfileEdit];
 allAddContentPopupsGroup.forEach((popup) => popup.setPopupEventListeners());
+
+const profileBTnEdit = new ButtonWithEdit(constants.profileNameEditBtn, popupProfileEdit, formEditProfile);
+const avatarBtnEdit = new ButtonWithEdit(constants.userAvatarEditBtn, popupAvatarEdit, formEditAvatar);
+const cardBtnEdit = new ButtonWithEdit(constants.galleryAddCardBtn, popupAddedNewCard, formEditCard);
+
+const allEditBtnsGroup = [profileBTnEdit, avatarBtnEdit, cardBtnEdit];
+allEditBtnsGroup.forEach((btn) => btn.setBtnEventListeners());
