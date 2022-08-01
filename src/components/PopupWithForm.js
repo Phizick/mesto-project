@@ -19,7 +19,7 @@ export default class PopupWithForm extends Popup {
 
     _setButtonState(btnState) {
         this._submitBtn.enabled = btnState;
-        this._submitBtn.textContent = btnState ? "Сохранение..." : this._formSubmitDefaultTextContent;
+        this._submitBtn.textContent = btnState ? this._formSubmitDefaultTextContent : 'Сохранение...';
     }
 
     _formSubmitState(evt) {

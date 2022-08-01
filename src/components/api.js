@@ -22,7 +22,8 @@ export default class Api {
         return fetch(`${this._config.serverUrl}${links}${id}`, {
             method: method,
             headers: this._config.headers,
-        }).then(this._checkResponse);
+        }).then(this._checkResponse)
+        .catch((err) => console.error(err))
     }
 
     _setApiData(links, method, data) {
@@ -30,7 +31,8 @@ export default class Api {
             method: method,
             headers: this._config.headers,
             body: JSON.stringify(data),
-        }).then(this._checkResponse);
+        }).then(this._checkResponse)
+        .catch((err) => console.error(err))
     }
 
     loadCardsData() {

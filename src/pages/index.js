@@ -57,12 +57,12 @@ const newCard = new Section(
                 },
                 userId,
                 constants.cardTemplateSelector
-            );
+            )            
             return renderedCard.createNewCard();
         },
     },
     constants.cardContainerSelector
-);
+)
 
 const popupAvatarEdit = new PopupWithForm(
     constants.popupSelectors.popupAvatarEditSelector,
