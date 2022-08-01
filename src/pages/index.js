@@ -1,15 +1,15 @@
 import "../pages/index.css";
 
-import Api from "./Api";
-import FormValidator from "./FormValidator";
-import PopupWithForm from "./PopupWithForm";
-import PopupWithImage from "./PopupWithImage";
-import Userinfo from "./Userinfo";
-import Card from "./Card";
+import Api from "../components/Api";
+import FormValidator from "../components/FormValidator";
+import PopupWithForm from "../components/PopupWithForm";
+import PopupWithImage from "../components/PopupWithImage";
+import Userinfo from "../components/Userinfo";
+import Card from "../components/Card";
 import * as constants from "../utils/constants";
-import Section from "./Section";
-import PopupWithDelete from "./PopupWithDelete";
-import ButtonWithEdit from "./ButtonWithEdit";
+import Section from "../components/Section";
+import PopupWithDelete from "../components/PopupWithDelete";
+import ButtonWithEdit from "../components/ButtonWithEdit";
 
 const getApi = new Api(constants);
 const userProfileApi = getApi.loadUserProfileData();

@@ -1,6 +1,11 @@
+/**
+ * конструктор 
+ * @constructor
+ * @param {object} userDataValues - обьект, содержащий селекторы полей информации о пользователе (имя, био и аватар)
+ */
 
 export default class Userinfo {
-    constructor(userDataValues) {
+    constructor(userDataValues) {        
         this._profileUserName =  document.querySelector(userDataValues.profileUserName);
         this._profileUserAbout =  document.querySelector(userDataValues.profileUserAbout);
         this._profileUserAvatar = document.querySelector(userDataValues.profileUserAvatar);

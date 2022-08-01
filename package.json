@@ -30,14 +30,12 @@
     "eslint": "^8.18.0",
     "gh-pages": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
+    "jsdoc": "^3.6.11",
     "mini-css-extract-plugin": "^2.6.1",
     "postcss": "^8.4.14",
     "postcss-loader": "^7.0.0",
     "webpack": "^5.73.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.9.2"
-  },
-  "dependencies": {
-    "jsdoc": "^3.6.11"
   }
 }
