@@ -18,6 +18,7 @@ const userProfileInfo = new Userinfo(constants.profileSelectors);
 const formEditAvatar = new FormValidator(constants.validationConfig, constants.avatarEditForm);
 const formEditProfile = new FormValidator(constants.validationConfig, constants.profileEditForm);
 const formEditCard = new FormValidator(constants.validationConfig, constants.cardEditForm);
+
 const allFormsGroup = [formEditAvatar, formEditProfile, formEditCard];
 allFormsGroup.forEach((form) => form.enableValidation());
 
@@ -73,20 +74,29 @@ const popupAvatarEdit = new PopupWithForm(
             })    
 );
 popupAvatarEdit.setPopupEventListeners();
-
+function setFormStorage() {
+    const userInputName = document.getElementById('userName-input');
+    const userInputAbout = document.getElementById('userAbout-input')
+    const a = JSON.stringify(userInputName.value)
+    const b = JSON.stringify(userInputAbout.value)
+    localStorage.setItem('name', a)
+    localStorage.setItem('about', b)
+}
 const popupProfileEdit = new PopupWithForm(
     constants.popupSelectors.popupProfileEditSelector,
     (profileData) =>
         getApi
             .editProfileData(profileData)
             .then((profileData) => {
-                userProfileInfo.setUserInfo(profileData);
+                userProfileInfo.setUserInfo(profileData);              
             })
             .catch((err) => {
                 console.error(err);
             }) 
 );
 popupProfileEdit.setPopupEventListeners();
+
+
 
 const popupDeleteCardConfirm = new PopupWithDelete(constants.popupSelectors.popupDeleteConfirmSelector, 
     {
@@ -141,15 +151,20 @@ const handleCardLikeClick = (card, id, creatingCard) => {
             });
     }
 };
+export const userInfo = userProfileInfo.getUserInfo();
+
+
 
 const profileBTnEdit = new Buttons(constants.profileNameEditBtn, popupProfileEdit, formEditProfile)
-profileBTnEdit._setBtnEventListeners();
+profileBTnEdit.setBtnEventListeners()
 
 const avatarBtnEdit = new Buttons(constants.userAvatarEditBtn, popupAvatarEdit, formEditAvatar);
-avatarBtnEdit._setBtnEventListeners()
+avatarBtnEdit.setBtnEventListeners()
 
 const cardBtnEdit = new Buttons(constants.galleryAddCardBtn, popupAddedNewCard, formEditCard);
-cardBtnEdit._setBtnEventListeners()
+cardBtnEdit.setBtnEventListeners()
+
+
 
 // constants.profileNameEditBtn.addEventListener("click", () => {
 //     popupProfileEdit.open();

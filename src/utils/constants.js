@@ -40,6 +40,8 @@ export const validationConfig = {
     inputErrorClass: "popup__input-type-error",
     errorVisibilityClass: "popup__input-error_active",
   };
+
+
   
 export const apiConfig = {
       serverUrl: "https://nomoreparties.co/v1/plus-cohort-12",

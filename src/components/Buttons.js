@@ -1,32 +1,29 @@
-// import userProfileInfo from './index'
 export default class Buttons {
     constructor(buttonSelector, popupSelector, form) {
         this._buttonSelector = buttonSelector;
         this._form = form;
-        this._popupSelector = popupSelector;       
+        this._popupSelector = popupSelector;
+       
+              
     }
 
-    _setBtnEventListeners() {
+    setBtnEventListeners() {
         this._buttonSelector.addEventListener('click', () => {
             this._popupSelector.open();
-            this._popupSelector.setFormInputValues(userProfileInfo.getUserInfo());
+            this.userinfotext()                     
             this._form.resetValidation();
         })
     }
+
+    userinfotext() {
+            const userInputName = document.getElementById('userName-input');
+            const userInputAbout = document.getElementById('userAbout-input')
+            const a = document.querySelector('.profile__name-text') 
+            const b = document.querySelector('.profile__bio')  
+            userInputName.value = a.textContent
+            userInputAbout.value = b.textContent
+
+    }
+
 }
 
-// constants.profileNameEditBtn.addEventListener("click", () => {
-//     popupProfileEdit.open();
-//     popupProfileEdit.setFormInputValues(userProfileInfo.getUserInfo());
-//     formEditProfile.resetValidation();
-// });
-
-// constants.userAvatarEditBtn.addEventListener("click", () => {
-//     popupAvatarEdit.open();
-//     formEditAvatar.resetValidation();
-// });
-
-// constants.galleryAddCardBtn.addEventListener("click", () => {
-//     popupAddedNewCard.open();
-//     formEditCard.resetValidation();
-// });

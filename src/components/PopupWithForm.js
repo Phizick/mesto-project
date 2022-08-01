@@ -8,8 +8,7 @@ import Popup from "./Popup";
 export default class PopupWithForm extends Popup {
     constructor(popupSelector, submit) {
         super(popupSelector);
-        this._submit = submit;
-        console.log(typeof submit)
+        this._submit = submit;        
         this._form = this._popup.querySelector(".popup__form");
         this._submitBtn = this._popup.querySelector(".popup__save-button");
         this._popupInputList = this._popup.querySelectorAll(".popup__input");
@@ -51,13 +50,15 @@ export default class PopupWithForm extends Popup {
         this._form.reset();
     }
 
-    setFormInputValues(data) {
-        this._popupInputList.forEach((inputListItem) => {
-            if (inputListItem.name === "name") {
-                inputListItem.value = data.name;
-            } else {
-                inputListItem.value = data.about;
-            }
-        });
-    }
+    // setFormInputValues() {
+    //     const a = document.querySelector('.profile__name-text') 
+    //     const b = document.querySelector('.profile__bio')
+    //     this._popupInputList.forEach((inputListItem) => {
+    //         if (inputListItem.name === "name") {
+    //             inputListItem.value = a.textContent;
+    //         } else {
+    //             inputListItem.value =b.textContent;
+    //         }
+    //     });
+    // }
 }
