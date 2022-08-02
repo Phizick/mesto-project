@@ -3,7 +3,7 @@ export const errorHandler = (err, form) => {
     if (!err.json) {
         if (form !== "default") {
             const errorElementGroup = Array.from(form.querySelectorAll(constants.validationConfig.inputErrorClass));
-            errorElementGroup[errorElementGroup.length - 1].textContent = "это место сломалось - несите новое";
+            errorElementGroup[errorElementGroup.length - 1].textContent = "что-то пошло не так";
             errorElementGroup[errorElementGroup.length - 1].classList.add(constants.validationConfig.errorVisibilityClass);
             return Promise.reject(err);
         } else {
