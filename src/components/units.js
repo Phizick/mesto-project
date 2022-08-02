@@ -13,9 +13,15 @@ export const errorHandler = (err, form, input) => {
 }
 }
 
-window.addEventListener('unhandledrejection', (evt) => {
-    console.error('необработанная ошибка Promise:' + evt.reason)    
-})  
+function enableGlobalPromiseErrorsListener() {
+    window.addEventListener('unhandledrejection', (evt) => {
+        console.error('необработанная ошибка Promise:' + evt.reason)    
+    }) 
+}
+
+enableGlobalPromiseErrorsListener()
+
+ 
 
 Promise.race([
     request(),
