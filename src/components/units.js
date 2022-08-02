@@ -1,12 +1,12 @@
-export const errorHandler = (err, element, input) => {
+export const errorHandler = (err, form, input) => {
     if (!err.json) {
-    if (!element === 'console') {
-        const errorElement = element.querySelector(`.${input.id}-error`);
-        errorElement[0].textContent = 'это место сломалось - несите новое';
-        errorElement[0].classList.add(constant.validationConfig.errorClass);
+    if (form !== 'default') {
+        const errorElement = Array.from(form.querySelectorAll(`.${input.id}-error`));
+        errorElement[errorElement.length - 1].textContent = 'это место сломалось - несите новое';
+        errorElement[errorElement.length - 1].classList.add(constant.validationConfig.errorClass);
         return Promise.reject(err);
     } else {
-        console.error('все очень плохо, совсем');
+        console.error('error');
     } 
 } else {
     err.json().then(err => console.error(err.message))
@@ -14,9 +14,7 @@ export const errorHandler = (err, element, input) => {
 }
 
 window.addEventListener('unhandledrejection', (evt) => {
-    console.log('необработанная ошибка Promise')
-    console.log(evt)
-    console.log(evt.reason)
+    console.error('необработанная ошибка Promise:' + evt.reason)    
 })  
 
 Promise.race([

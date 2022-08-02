@@ -21,7 +21,7 @@ export default class Card {
         this._templateSelector = cardTemplateSelector;
         this._handleCardClick = handleCardZoomClick;
         this._handleCardLikeClick = handleCardLikeClick;
-        this._cardDeletingPopup = openCardDeletingPopup;        
+        this._cardDeletingPopup = openCardDeletingPopup;      
     }
 
     _getElement() {
