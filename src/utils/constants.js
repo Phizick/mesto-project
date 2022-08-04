@@ -7,7 +7,7 @@ export const profileNameEditBtn = document.querySelector('.profile__name-edit');
 export const userAvatarEditBtn = document.querySelector('.profile__avatar-edit-btn');
 export const galleryAddCardBtn = document.querySelector('.profile__add-button');
 
-export const apiLinks = {
+export const apiRoutes = {
     userProfile: '/users/me',
     userAvatar: '/users/me/avatar',
     cards: '/cards',

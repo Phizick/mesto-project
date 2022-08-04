@@ -8,7 +8,7 @@
 export default class Api {
     constructor(apiData) {
         this._config = apiData.apiConfig;
-        this._links = apiData.apiLinks;
+        this._routes = apiData.apiRoutes;
     }
 
     _checkResponse(res) {
@@ -18,16 +18,16 @@ export default class Api {
         return Promise.reject(new Error(`Ошибка сервера: ${res.status}`));
     }
 
-    _getApiData(links, method, id) {
-        return fetch(`${this._config.serverUrl}${links}${id}`, {
+    _getApiData(routes, method, id) {
+        return fetch(`${this._config.serverUrl}${routes}${id}`, {
             method: method,
             headers: this._config.headers,
         }).then(this._checkResponse)
         .catch((err) => console.error(err))
     }
 
-    _setApiData(links, method, data) {
-        return fetch(`${this._config.serverUrl}${links}`, {
+    _setApiData(routes, method, data) {
+        return fetch(`${this._config.serverUrl}${routes}`, {
             method: method,
             headers: this._config.headers,
             body: JSON.stringify(data),
@@ -36,34 +36,34 @@ export default class Api {
     }
 
     loadCardsData() {
-        return this._getApiData(this._links.cards, "GET", "");
+        return this._getApiData(this._routes.cards, "GET", "");
     }
 
     loadUserProfileData() {
-        return this._getApiData(this._links.userProfile, "GET", "");
+        return this._getApiData(this._routes.userProfile, "GET", "");
     }
 
     deleteCard(id) {
-        return this._getApiData(this._links.cardDelete, "DELETE", id);
+        return this._getApiData(this._routes.cardDelete, "DELETE", id);
     }
 
     cardLikeAdd(id) {
-        return this._getApiData(this._links.cardLike, "PUT", id);
+        return this._getApiData(this._routes.cardLike, "PUT", id);
     }
 
     cardLikeRemove(id) {
-        return this._getApiData(this._links.cardLike, "DELETE", id);
+        return this._getApiData(this._routes.cardLike, "DELETE", id);
     }
 
     setNewCard(cardData) {
-        return this._setApiData(this._links.cards, "POST", cardData);
+        return this._setApiData(this._routes.cards, "POST", cardData);
     }
 
     editProfileData(data) {
-        return this._setApiData(this._links.userProfile, "PATCH", data);
+        return this._setApiData(this._routes.userProfile, "PATCH", data);
     }
 
     userAvatarEdit(avatarData) {
-        return this._setApiData(this._links.userAvatar, "PATCH", avatarData);
+        return this._setApiData(this._routes.userAvatar, "PATCH", avatarData);
     }
 }

@@ -10,9 +10,9 @@ import * as constants from "../utils/constants";
 import Section from "../components/Section";
 import PopupWithDelete from "../components/PopupWithDelete";
 import ButtonWithEdit from "../components/ButtonWithEdit";
-import { errorHandler } from "../components/units";
+import { errorHandler, handleCardLikeClick } from "../utils/units";
 
-const getApi = new Api(constants);
+export const getApi = new Api(constants);
 const userProfileApi = getApi.loadUserProfileData();
 const cardsGalleryApi = getApi.loadCardsData();
 const userProfileInfo = new Userinfo(constants.profileSelectors);
@@ -108,24 +108,6 @@ const popupAddedNewCard = new PopupWithForm(
             })
             .catch((err) => errorHandler(err, constants.cardEditForm))  
 );
-
-const handleCardLikeClick = (card, id, creatingCard) => {
-    if (card.dataset.like === "liked") {
-        getApi
-            .cardLikeRemove(id)
-            .then((res) => {
-                creatingCard._removeCardLike(res);
-            })
-            .catch((err) => errorHandler(err, 'default'));
-    } else {
-        getApi
-            .cardLikeAdd(id)
-            .then((res) => {
-                creatingCard._addedCardLike(res);
-            })
-            .catch((err) => errorHandler(err, 'default'));
-    }
-};
 
 const allAddContentPopupsGroup = [popupAvatarEdit, popupAddedNewCard, popupProfileEdit];
 allAddContentPopupsGroup.forEach((popup) => popup.setPopupEventListeners());

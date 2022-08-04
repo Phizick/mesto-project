@@ -1,4 +1,6 @@
-import * as constants from "../utils/constants";
+import * as constants from "./constants";
+import { getApi } from "../pages";
+
 export const errorHandler = (err, form) => {
     if (!err.json) {
         if (form !== "default") {
@@ -21,6 +23,24 @@ function enableGlobalPromiseErrorsListener() {
 }
 
 enableGlobalPromiseErrorsListener();
+
+export const handleCardLikeClick = (card, id, creatingCard) => {
+    if (card.dataset.like === "liked") {
+        getApi
+            .cardLikeRemove(id)
+            .then((res) => {
+                creatingCard._removeCardLike(res);
+            })
+            .catch((err) => errorHandler(err, 'default'));
+    } else {
+        getApi
+            .cardLikeAdd(id)
+            .then((res) => {
+                creatingCard._addedCardLike(res);
+            })
+            .catch((err) => errorHandler(err, 'default'));
+    }
+};
 
 // Promise.race([
 //     request(),
