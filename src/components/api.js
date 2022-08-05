@@ -18,16 +18,16 @@ export default class Api {
         return Promise.reject(new Error(`Ошибка сервера: ${res.status}`));
     }
 
-    _getApiData(routes, method, id) {
-        return fetch(`${this._config.serverUrl}${routes}${id}`, {
+    async _getApiData(routes, method, id) {
+        return await fetch(`${this._config.serverUrl}${routes}${id}`, {
             method: method,
             headers: this._config.headers,
         }).then(this._checkResponse)
         .catch((err) => console.error(err))
     }
 
-    _setApiData(routes, method, data) {
-        return fetch(`${this._config.serverUrl}${routes}`, {
+    async _setApiData(routes, method, data) {
+        return await fetch(`${this._config.serverUrl}${routes}`, {
             method: method,
             headers: this._config.headers,
             body: JSON.stringify(data),

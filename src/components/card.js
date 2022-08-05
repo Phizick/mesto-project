@@ -7,7 +7,7 @@
  * @param {function} handleCardLikeClick - коллбэк функции, обрабатывающей лайки к карточкам
  * @param {function} openCardDeletingPopup - коллбэк функции, запрашивающей подтверждение удаления карточки с изображением
  * @param {string} userId - уникальный id пользователя, добавившего карточку
- * @param {string} cardTemplateSelector - селектор темлейта для отрисовки карточек в DOM-дереве
+ * @param {string} cardTemplateSelector - селектор темплейта для отрисовки карточек в DOM-дереве
  */
 
 export default class Card {
@@ -46,13 +46,13 @@ export default class Card {
         return this._card;
     }
 
-    _addedCardLike(res) {
+    addedCardLike(res) {
         this._cardLikeBtn.classList.add("card__like-btn_active");
         this._cardLikeCount.textContent = res.likes.length;
         this._card.dataset.like = "liked";
     }
 
-    _removeCardLike(res) {
+    removeCardLike(res) {
         this._cardLikeBtn.classList.remove("card__like-btn_active");
         this._cardLikeCount.textContent = res.likes.length;
         this._card.dataset.like = "disliked";

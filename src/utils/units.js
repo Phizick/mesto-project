@@ -9,7 +9,7 @@ export const errorHandler = (err, form) => {
             errorElementGroup[errorElementGroup.length - 1].classList.add(constants.validationConfig.errorVisibilityClass);
             return Promise.reject(err);
         } else {
-            console.error("что-то пошло не так");
+            console.error("ошибка");
         }
     } else {
         err.json().then((err) => console.error(err.message));
@@ -29,14 +29,14 @@ export const handleCardLikeClick = (card, id, creatingCard) => {
         getApi
             .cardLikeRemove(id)
             .then((res) => {
-                creatingCard._removeCardLike(res);
+                creatingCard.removeCardLike(res);
             })
             .catch((err) => errorHandler(err, 'default'));
     } else {
         getApi
             .cardLikeAdd(id)
             .then((res) => {
-                creatingCard._addedCardLike(res);
+                creatingCard.addedCardLike(res);
             })
             .catch((err) => errorHandler(err, 'default'));
     }
