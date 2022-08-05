@@ -42,9 +42,4 @@ export const handleCardLikeClick = (card, id, creatingCard) => {
     }
 };
 
-// Promise.race([
-//     request(),
-//     new Promise((_, reject) => setTimeout(reject, 4000)),
-// ]).then((data) => {
 
-// }).catch((err) => console.error(err))
