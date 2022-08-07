@@ -61,7 +61,7 @@ const cardContainer = new Section(
         },
     },
     constants.cardContainerSelector
-)
+);
 
 const popupAvatarEdit = new PopupWithForm(
     constants.popupSelectors.popupAvatarEditSelector,
