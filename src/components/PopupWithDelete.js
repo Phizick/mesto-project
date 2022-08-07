@@ -24,8 +24,6 @@ export default class PopupWithDelete extends Popup{
     close() {
         super.close();
         this._popup.dataset.delId = ''
-        
-
     }
 
     open(id) {
@@ -33,9 +31,7 @@ export default class PopupWithDelete extends Popup{
         this._popup.dataset.delId = id              
     }
 
-      delcard() {
+    delcard() {
         document.querySelector(`.card[data-id="${this._popup.dataset.delId}"]`).remove()
-    }
- 
-  
+    } 
 }
