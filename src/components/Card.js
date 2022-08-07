@@ -67,4 +67,8 @@ export default class Card {
     _isLiked() {
         this._likes.some((like) => like._id === this._userId) && this._cardLikeBtn.classList.add("card__like-btn_active");
     }
+
+    deleteCard(cardId) {
+        document.querySelector(`.card[data-id="${cardId}"]`).remove();
+    }
 }

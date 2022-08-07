@@ -30,11 +30,11 @@ Promise.all([userProfileApi, cardsGalleryApi])
     .then(([user, cards]) => {
         userProfileInfo.setUserInfo(user);
         userProfileInfo.setUserAvatar(user);
-        newCard.renderDefaultItems(cards, user._id);
+        cardContainer.renderDefaultItems(cards, user._id);
     })
     .catch((err) => errorHandler(err, 'default'));
 
-const newCard = new Section(
+const cardContainer = new Section(
     {
         renderer: (cardData, userId) => {
             const renderedCard = new Card(
@@ -69,7 +69,7 @@ const popupAvatarEdit = new PopupWithForm(
         getApi
             .userAvatarEdit(avatarData)
             .then((avatarData) => {
-                userProfileInfo.setUserAvatar(avatarData);
+                userProfileInfo.setUserAvatar(avatarData);                
             })
             .catch((err) => errorHandler(err, constants.avatarEditForm))    
 );
@@ -80,7 +80,7 @@ const popupProfileEdit = new PopupWithForm(
         getApi
             .editProfileData(profileData)
             .then((profileData) => {
-                userProfileInfo.setUserInfo(profileData);              
+                userProfileInfo.setUserInfo(profileData);                                            
             })
             .catch((err) => errorHandler(err, constants.profileEditForm)) 
 );
@@ -91,8 +91,9 @@ const popupDeleteCardConfirm = new PopupWithDelete(constants.popupSelectors.popu
         getApi
             .deleteCard(cardId)
             .then(() => {
-                document.querySelector(`.card[data-id="${cardId}"]`).remove();                
+                deleteCard(cardId)                                       
             })
+            .then(() => popupDeleteCardConfirm.close())
             .catch((err) => errorHandler(err, 'default'));
     },
 });
@@ -104,7 +105,7 @@ const popupAddedNewCard = new PopupWithForm(
         getApi
             .setNewCard(cardData)
             .then((cardData) => {
-                newCard.renderNewItem(cardData);
+                cardContainer.renderNewItem(cardData);                
             })
             .catch((err) => errorHandler(err, constants.cardEditForm))  
 );

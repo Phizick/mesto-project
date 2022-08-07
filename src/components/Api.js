@@ -22,8 +22,7 @@ export default class Api {
         return await fetch(`${this._config.serverUrl}${routes}${id}`, {
             method: method,
             headers: this._config.headers,
-        }).then(this._checkResponse)
-        .catch((err) => console.error(err))
+        }).then(this._checkResponse)        
     }
 
     async _setApiData(routes, method, data) {
@@ -31,8 +30,7 @@ export default class Api {
             method: method,
             headers: this._config.headers,
             body: JSON.stringify(data),
-        }).then(this._checkResponse)
-        .catch((err) => console.error(err))
+        }).then(this._checkResponse)        
     }
 
     loadCardsData() {

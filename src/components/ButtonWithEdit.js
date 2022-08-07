@@ -2,20 +2,20 @@
  * конструктор поведения всех кнопок редактирования информации на странице
  * @constructor
  * @param {object} buttonSelector - селектор кнопки редактирования
- * @param {object} popupSelector - селектор вызываемого попапа редактирования
+ * @param {object} popup - селектор вызываемого попапа редактирования
  * @param {object} form - форма попапа редактирования
  */
 
 export default class ButtonWithEdit{
-    constructor(buttonSelector, popupSelector, form) {
+    constructor(buttonSelector, popup, form) {
         this._buttonSelector = buttonSelector;
         this._form = form;
-        this._popupSelector = popupSelector;
+        this._popup = popup;
     }
 
     setBtnEventListeners() {
         this._buttonSelector.addEventListener("click", () => {
-            this._popupSelector.open();
+            this._popup.open();
             this._setFormInputValues();
             this._form.resetValidation();
         });
