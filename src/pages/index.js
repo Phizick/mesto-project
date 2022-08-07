@@ -90,16 +90,9 @@ const popupDeleteCardConfirm = new PopupWithDelete(constants.popupSelectors.popu
     submit: (cardId) => {
         getApi
             .deleteCard(cardId)
-            .then(() => popupDeleteCardConfirm.delcard())
-          
-            .then(() => {  
-                popupDeleteCardConfirm.close()               
-                                              
-            })
-            
-            .catch((err) => errorHandler(err, 'default'));
-            
-        
+            .then(() => popupDeleteCardConfirm.delcard())          
+            .then(() => popupDeleteCardConfirm.close())            
+            .catch((err) => errorHandler(err, 'default'));       
     },   
    
 });
