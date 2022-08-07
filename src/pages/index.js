@@ -15,7 +15,7 @@ import { errorHandler, handleCardLikeClick } from "../utils/units";
 export const getApi = new Api(constants);
 const userProfileApi = getApi.loadUserProfileData();
 const cardsGalleryApi = getApi.loadCardsData();
-const userProfileInfo = new Userinfo(constants.profileSelectors);
+export const userProfileInfo = new Userinfo(constants.profileSelectors);
 const formEditAvatar = new FormValidator(constants.validationConfig, constants.avatarEditForm);
 const formEditProfile = new FormValidator(constants.validationConfig, constants.profileEditForm);
 const formEditCard = new FormValidator(constants.validationConfig, constants.cardEditForm);
@@ -90,11 +90,10 @@ const popupDeleteCardConfirm = new PopupWithDelete(constants.popupSelectors.popu
     submit: (cardId) => {
         getApi
             .deleteCard(cardId)
-            .then(() => popupDeleteCardConfirm.delcard())          
+            .then(() => popupDeleteCardConfirm.delcard())                    
             .then(() => popupDeleteCardConfirm.close())            
             .catch((err) => errorHandler(err, 'default'));       
-    },   
-   
+    },  
 });
 popupDeleteCardConfirm.setEventListeners();
 
@@ -103,8 +102,8 @@ const popupAddedNewCard = new PopupWithForm(
     (cardData) =>
         getApi
             .setNewCard(cardData)
-            .then((cardData) => {
-                cardContainer.renderNewItem(cardData);                
+            .then((cardData) => {               
+                cardContainer.renderNewItem(cardData, cardData.owner._id);                
             })
             .catch((err) => errorHandler(err, constants.cardEditForm))  
 );
@@ -116,5 +115,8 @@ const profileBtnEdit = new ButtonWithEdit(constants.profileNameEditBtn, popupPro
 const avatarBtnEdit = new ButtonWithEdit(constants.userAvatarEditBtn, popupAvatarEdit, formEditAvatar);
 const cardBtnEdit = new ButtonWithEdit(constants.galleryAddCardBtn, popupAddedNewCard, formEditCard);
 
-const allEditBtnsGroup = [profileBtnEdit, avatarBtnEdit, cardBtnEdit];
+const allEditBtnsGroup = [ profileBtnEdit, avatarBtnEdit, cardBtnEdit];
 allEditBtnsGroup.forEach((btn) => btn.setBtnEventListeners());
+
+
+

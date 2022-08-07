@@ -17,21 +17,25 @@ export default class PopupWithDelete extends Popup{
         super.setEventListeners();
         this._form.addEventListener("submit", (evt) => {
             evt.preventDefault();
-            this._submit(this._popup.dataset.delId)                   
+            this._submit(this._popup.dataset.delId)                           
         });
     }
 
     close() {
         super.close();
         this._popup.dataset.delId = ''
+        
+
     }
 
     open(id) {
         super.open();
-        this._popup.dataset.delId = id
+        this._popup.dataset.delId = id              
     }
- 
-    delcard() {
+
+      delcard() {
         document.querySelector(`.card[data-id="${this._popup.dataset.delId}"]`).remove()
     }
+ 
+  
 }

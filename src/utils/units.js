@@ -24,22 +24,20 @@ function enableGlobalPromiseErrorsListener() {
 
 enableGlobalPromiseErrorsListener();
 
-export const handleCardLikeClick = (card, id, creatingCard) => {
+export const handleCardLikeClick = (card, id, renderedCard) => {
     if (card.dataset.like === "liked") {
         getApi
             .cardLikeRemove(id)
             .then((res) => {
-                creatingCard.removeCardLike(res);
+                renderedCard.removeCardLike(res);
             })
             .catch((err) => errorHandler(err, 'default'));
     } else {
         getApi
             .cardLikeAdd(id)
             .then((res) => {
-                creatingCard.addedCardLike(res);
+                renderedCard.addedCardLike(res);
             })
             .catch((err) => errorHandler(err, 'default'));
     }
 };
-
-
