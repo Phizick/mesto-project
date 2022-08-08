@@ -84,6 +84,9 @@ const popupProfileEdit = new PopupWithForm(
             })
             .catch((err) => errorHandler(err, constants.profileEditForm)) 
 );
+constants.profileNameEditBtn.addEventListener('click', () => {
+    popupProfileEdit.setFormInputValues(userProfileInfo.getUserInfo())
+})
 
 const popupDeleteCardConfirm = new PopupWithDelete(constants.popupSelectors.popupDeleteConfirmSelector, 
     {
@@ -113,9 +116,7 @@ const popupAddedNewCard = new PopupWithForm(
 const allAddContentPopupsGroup = [popupAvatarEdit, popupAddedNewCard, popupProfileEdit];
 allAddContentPopupsGroup.forEach((popup) => popup.setPopupEventListeners());
 
-constants.profileNameEditBtn.addEventListener('click', () => {
-    popupProfileEdit.setFormInputValues(userProfileInfo.getUserInfo())
-})
+
 
 const profileBtnEdit = new ButtonWithEdit(constants.profileNameEditBtn, popupProfileEdit, formEditProfile);
 const avatarBtnEdit = new ButtonWithEdit(constants.userAvatarEditBtn, popupAvatarEdit, formEditAvatar);

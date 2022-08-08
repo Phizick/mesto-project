@@ -16,13 +16,14 @@ export const errorHandler = (err, form) => {
     }
 };
 
-function enableGlobalPromiseErrorsListener() {
-    window.addEventListener("unhandledrejection", (evt) => {
-        console.error("необработанная ошибка Promise:" + evt.reason);
-    });
-}
+window.addEventListener("unhandledrejection", (evt) => {
+    console.error("необработанная ошибка Promise:" + evt.reason);
+});
 
-enableGlobalPromiseErrorsListener();
+window.addEventListener('error', (evt) => {
+    log.textContent = `${log.textContent}${evt.type}:${evt.message}\n`;
+    console.log(evt)
+})
 
 export const handleCardLikeClick = (card, id, renderedCard) => {
     if (card.dataset.like === "liked") {
