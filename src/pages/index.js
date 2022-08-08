@@ -15,7 +15,7 @@ import { errorHandler, handleCardLikeClick } from "../utils/units";
 export const getApi = new Api(constants);
 const userProfileApi = getApi.loadUserProfileData();
 const cardsGalleryApi = getApi.loadCardsData();
-export const userProfileInfo = new Userinfo(constants.profileSelectors);
+const userProfileInfo = new Userinfo(constants.profileSelectors);
 const formEditAvatar = new FormValidator(constants.validationConfig, constants.avatarEditForm);
 const formEditProfile = new FormValidator(constants.validationConfig, constants.profileEditForm);
 const formEditCard = new FormValidator(constants.validationConfig, constants.cardEditForm);
@@ -117,8 +117,7 @@ const profileBtnEdit = new ButtonWithEdit(constants.profileNameEditBtn, popupPro
 const avatarBtnEdit = new ButtonWithEdit(constants.userAvatarEditBtn, popupAvatarEdit, formEditAvatar);
 const cardBtnEdit = new ButtonWithEdit(constants.galleryAddCardBtn, popupAddedNewCard, formEditCard);
 
-const allEditBtnsGroup = [ profileBtnEdit, avatarBtnEdit, cardBtnEdit];
+const allEditBtnsGroup = [profileBtnEdit, avatarBtnEdit, cardBtnEdit];
 allEditBtnsGroup.forEach((btn) => btn.setBtnEventListeners());
 
-
-
+formEditProfile._setProfileFormInputValues(userProfileInfo.getUserInfo())

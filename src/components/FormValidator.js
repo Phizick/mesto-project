@@ -91,4 +91,18 @@
             this._hideFormInputError(item, errorElement);
         });
     }
+
+    _setProfileFormInputValues(data) {
+        // const { name, about } = userProfileInfo.getUserInfo()
+        // this._form._inputList.forEach((inputListItem) => {
+        //     if (inputListItem.id === "userName-input") {
+        //         inputListItem.value = name;
+        //     } else if (inputListItem.id === 'userAbout-input') {
+        //         inputListItem.value = about;
+        //     }
+        // });
+        this._inputList.forEach((input) => {
+            input.value = data[input.name];
+          });
+    } 
 }
