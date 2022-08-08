@@ -51,7 +51,8 @@ const cardContainer = new Section(
                 },
                 {
                     openCardDeletingPopup: (id) => {
-                        popupDeleteCardConfirm.open(id);
+                        // popupDeleteCardConfirm.open(id);
+                        openCardDeletingPopup(id, renderedCard);
                     },
                 },
                 userId,
@@ -74,6 +75,10 @@ const popupAvatarEdit = new PopupWithForm(
             .catch((err) => errorHandler(err, constants.avatarEditForm))    
 );
 
+function openCardDeletingPopup(id, renderedCard) {
+    popupDeleteCardConfirm.open(id, renderedCard)
+}
+
 const popupProfileEdit = new PopupWithForm(
     constants.popupSelectors.popupProfileEditSelector,
     (profileData) =>
@@ -87,14 +92,14 @@ const popupProfileEdit = new PopupWithForm(
 
 const popupDeleteCardConfirm = new PopupWithDelete(constants.popupSelectors.popupDeleteConfirmSelector, 
     {
-    submit: (cardId) => {
+    submit: (cardId, renderedCard) => {
         getApi
             .deleteCard(cardId)
-            .then(() => {
-                popupDeleteCardConfirm.delcard()                    
+            .then(() => { 
+                renderedCard.deleteCard()                
                 popupDeleteCardConfirm.close()
             })            
-            .catch((err) => errorHandler(err, 'default'));       
+            .catch((err) => errorHandler(err, 'default'));                 
     },  
 });
 popupDeleteCardConfirm.setEventListeners();
