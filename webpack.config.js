@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); 
 
 module.exports = {
-    entry: { main: './src/components/index.js'},
+    entry: { main: './src/pages/index.js'},
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'main.js',
@@ -17,7 +17,10 @@ module.exports = {
         port: 8080,
         open: true
     },
-    module: {
+    experiments: {
+        topLevelAwait: true
+      },
+    module: {        
         rules: [
             {
             test: /\.js$/,
