@@ -19,7 +19,5 @@ export default class ButtonWithEdit{
             this._popup.open();           
             this._form.resetValidation();
         });
-    }
-
-   
+    }   
 }
