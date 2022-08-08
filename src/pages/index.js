@@ -110,9 +110,6 @@ const popupAddedNewCard = new PopupWithForm(
             .catch((err) => errorHandler(err, constants.cardEditForm))  
 );
 
-
-// popupProfileEdit.setFormInputValues(userProfileInfo.getUserInfo())
-
 const allAddContentPopupsGroup = [popupAvatarEdit, popupAddedNewCard, popupProfileEdit];
 allAddContentPopupsGroup.forEach((popup) => popup.setPopupEventListeners());
 
