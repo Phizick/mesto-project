@@ -110,8 +110,15 @@ const popupAddedNewCard = new PopupWithForm(
             .catch((err) => errorHandler(err, constants.cardEditForm))  
 );
 
+
+// popupProfileEdit.setFormInputValues(userProfileInfo.getUserInfo())
+
 const allAddContentPopupsGroup = [popupAvatarEdit, popupAddedNewCard, popupProfileEdit];
 allAddContentPopupsGroup.forEach((popup) => popup.setPopupEventListeners());
+
+constants.profileNameEditBtn.addEventListener('click', () => {
+    popupProfileEdit.setFormInputValues(userProfileInfo.getUserInfo())
+})
 
 const profileBtnEdit = new ButtonWithEdit(constants.profileNameEditBtn, popupProfileEdit, formEditProfile);
 const avatarBtnEdit = new ButtonWithEdit(constants.userAvatarEditBtn, popupAvatarEdit, formEditAvatar);
@@ -120,4 +127,4 @@ const cardBtnEdit = new ButtonWithEdit(constants.galleryAddCardBtn, popupAddedNe
 const allEditBtnsGroup = [profileBtnEdit, avatarBtnEdit, cardBtnEdit];
 allEditBtnsGroup.forEach((btn) => btn.setBtnEventListeners());
 
-formEditProfile._setProfileFormInputValues(userProfileInfo.getUserInfo())
+
