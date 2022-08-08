@@ -51,8 +51,7 @@ const cardContainer = new Section(
                 },
                 {
                     openCardDeletingPopup: (id) => {
-                        // popupDeleteCardConfirm.open(id);
-                        openCardDeletingPopup(id, renderedCard);
+                        popupDeleteCardConfirm.open(id, renderedCard)
                     },
                 },
                 userId,
@@ -74,10 +73,6 @@ const popupAvatarEdit = new PopupWithForm(
             })
             .catch((err) => errorHandler(err, constants.avatarEditForm))    
 );
-
-function openCardDeletingPopup(id, renderedCard) {
-    popupDeleteCardConfirm.open(id, renderedCard)
-}
 
 const popupProfileEdit = new PopupWithForm(
     constants.popupSelectors.popupProfileEditSelector,
