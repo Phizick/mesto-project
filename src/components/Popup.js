@@ -22,7 +22,7 @@ export default class Popup {
     }
 
     _handleEscClose = (evt) => {
-        evt.keyCode == this._escKeyCode && this.close();
+        evt.keyCode === this._escKeyCode && this.close();
     }
 
     _handleOverlayClose = (evt) => {

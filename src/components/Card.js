@@ -12,11 +12,7 @@
 
 export default class Card {
     constructor(cardData, { handleCardZoomClick }, { handleCardLikeClick }, { openCardDeletingPopup }, userId, cardTemplateSelector) {
-        this._name = cardData.name;
-        this._link = cardData.link;
-        this._id = cardData._id;
-        this._likes = cardData.likes;
-        this._owner = cardData.owner;
+        ({name: this._name, link: this._link, _id: this._id, likes: this._likes, owner: this._owner} = cardData);
         this._userId = userId;
         this._templateSelector = cardTemplateSelector;
         this._handleCardClick = handleCardZoomClick;

@@ -7,8 +7,7 @@
 
 export default class Api {
     constructor(apiData) {
-        this._config = apiData.apiConfig;
-        this._routes = apiData.apiRoutes;
+        ({apiConfig: this._config, apiRoutes: this._routes} = apiData);
     }
 
     _checkResponse(res) {
